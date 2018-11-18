@@ -1,5 +1,5 @@
 {
-  "name": "Chrome Extension Webpack",
+  "name": "Tabs Later",
   "options_page": "options.html",
   "background": {
     "page": "background.html"
