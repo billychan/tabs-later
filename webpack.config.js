@@ -1,3 +1,4 @@
+/* eslint-disable  */
 var webpack = require("webpack"),
     path = require("path"),
     fileSystem = require("fs"),
@@ -20,9 +21,9 @@ if (fileSystem.existsSync(secretsPath)) {
 
 var options = {
   entry: {
-    popup: path.join(__dirname, "src", "js", "popup.js"),
-    options: path.join(__dirname, "src", "js", "options.js"),
-    background: path.join(__dirname, "src", "js", "background.js")
+    popup: path.join(__dirname, "src", "js", "pages", "popup", "popup.js"),
+    options: path.join(__dirname, "src", "js", "pages", "options", "options.js"),
+    background: path.join(__dirname, "src", "js", "pages", "background", "background.js")
   },
   output: {
     path: path.join(__dirname, "build"),
@@ -31,8 +32,8 @@ var options = {
   module: {
     rules: [
       {
-        test: /\.css$/,
-        loader: "style-loader!css-loader",
+        test: /\.scss$/,
+        loader: "style-loader!css-loader!sass-loader",
         exclude: /node_modules/
       },
       {
@@ -53,7 +54,11 @@ var options = {
     ]
   },
   resolve: {
-    alias: alias,
+    modules: [
+      'node_modules',
+      path.resolve('./src/js'),
+    ],
+    alias,
     extensions: fileExtensions.map(extension => ("." + extension)).concat([".jsx", ".js", ".css"])
   },
   plugins: [
@@ -75,17 +80,17 @@ var options = {
       }
     }]),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, "src", "popup.html"),
+      template: path.join(__dirname, "src", "js", "pages", "popup", "popup.html"),
       filename: "popup.html",
       chunks: ["popup"]
     }),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, "src", "options.html"),
+      template: path.join(__dirname, "src", "js", "pages", "options", "options.html"),
       filename: "options.html",
       chunks: ["options"]
     }),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, "src", "background.html"),
+      template: path.join(__dirname, "src", "js", "pages", "background", "background.html"),
       filename: "background.html",
       chunks: ["background"]
     }),
@@ -94,7 +99,7 @@ var options = {
 };
 
 if (env.NODE_ENV === "development") {
-  options.devtool = "cheap-module-eval-source-map";
+  options.devtool = "cheap-source-map";
 }
 
 module.exports = options;
