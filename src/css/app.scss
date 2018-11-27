@@ -7,11 +7,12 @@ body {
 #app-container {
   width: 400px;
   height: 100%;
-  padding: 5px 5px 20px;
+  padding: 5px 5px 10px;
 }
 
 section.tabs-container {
   max-height: 450px;
+  padding-bottom: 20px;
   overflow-x: auto;
   overflow-y: scroll;
   &::-webkit-scrollbar {
