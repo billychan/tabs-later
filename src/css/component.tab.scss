@@ -1,0 +1,28 @@
+li.tab {
+  list-style: none;
+  height: 24px;
+  padding: 8px 0 0 2px;
+  &:hover {
+    background: #eee;
+  }
+  .tab-checkbox {
+    padding-top: 2px;
+  }
+  .tab-favicon {
+    margin-left: 8px;
+    img {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  .tab-title {
+    margin-left: 8px;
+    width: 90%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    a {
+      text-decoration: none;
+    }
+  }
+}
