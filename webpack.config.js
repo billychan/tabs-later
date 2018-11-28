@@ -37,6 +37,10 @@ var options = {
         exclude: /node_modules/
       },
       {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'
+      },
+      {
         test: new RegExp('\.(' + fileExtensions.join('|') + ')$'),
         loader: "file-loader?name=[name].[ext]",
         exclude: /node_modules/
@@ -50,13 +54,20 @@ var options = {
         test: /\.(js|jsx)$/,
         loader: "babel-loader",
         exclude: /node_modules/
-      }
+      },
+      {
+        test: /\.(ttf|eot|dtd|svg|woff(2)?)(\?[a-z0-9=.]+)?$/,
+        loader: 'file-loader',
+        options: {
+          name: 'assets/fonts/[name].[ext]'
+        }
+      },
     ]
   },
   resolve: {
     modules: [
       'node_modules',
-      path.resolve('./src/js'),
+      path.resolve('./src/js')
     ],
     alias,
     extensions: fileExtensions.map(extension => ("." + extension)).concat([".jsx", ".js", ".css"])
@@ -68,17 +79,22 @@ var options = {
     new webpack.DefinePlugin({
       "process.env.NODE_ENV": JSON.stringify(env.NODE_ENV)
     }),
-    new CopyWebpackPlugin([{
-      from: "src/manifest.json",
-      transform: function (content, path) {
-        // generates the manifest file using the package.json informations
-        return Buffer.from(JSON.stringify({
-          description: process.env.npm_package_description,
-          version: process.env.npm_package_version,
-          ...JSON.parse(content.toString())
-        }))
+    new CopyWebpackPlugin([
+      {
+        from: "src/manifest.json",
+        transform: function (content, path) {
+          // generates the manifest file using the package.json informations
+          return Buffer.from(JSON.stringify({
+            description: process.env.npm_package_description,
+            version: process.env.npm_package_version,
+            ...JSON.parse(content.toString())
+          }))
+        }
+      },
+      {
+        from: 'src/img/*'
       }
-    }]),
+    ]),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "src", "js", "pages", "popup", "popup.html"),
       filename: "popup.html",

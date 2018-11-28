@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { cold } from 'react-hot-loader';
 import { getAllTabs } from 'services/TabServices';
-import TabsList from '../components/TabsList';
+import BrowserTabsList from '../components/BrowserTabsList';
 
-const TabsContainer = () => {
+const BrowserTabsContainer = () => {
   const [tabs, setTabs] = useState([]);
 
   useEffect(() => {
@@ -12,12 +12,9 @@ const TabsContainer = () => {
 
   return (
     <section className="tabs-container">
-      <header>
-        <h3>Tabs</h3>
-      </header>
-      <TabsList tabs={tabs} />
+      <BrowserTabsList tabs={tabs} />
     </section>
   )
 }
 
-export default cold(TabsContainer);
+export default cold(BrowserTabsContainer);

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Checkbox } from "@blueprintjs/core";
 
-export default function Tab({ tab }) {
+export default function BrowserTab({ tab }) {
   const [isChecked, setIsChecked] = useState(false);
 
   function handleChange({ checked }) {

@@ -1,7 +1,7 @@
 li.tab {
   list-style: none;
-  height: 24px;
-  padding: 8px 0 0 2px;
+  height: 28px;
+  padding: 4px 6px;
   &:hover {
     background: #eee;
   }
@@ -9,7 +9,6 @@ li.tab {
     padding-top: 2px;
   }
   .tab-favicon {
-    margin-left: 8px;
     img {
       width: 20px;
       height: 20px;

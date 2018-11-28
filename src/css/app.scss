@@ -4,17 +4,16 @@ body {
   margin: 0;
 }
 
-#app-container {
+#root {
   width: 400px;
-  height: 100%;
-  padding: 5px 5px 10px;
+  height: 550px;
+  padding: 5px 5px 20px;
 }
 
-section.tabs-container {
-  max-height: 450px;
-  padding-bottom: 20px;
+section.app-container {
   overflow-x: auto;
   overflow-y: scroll;
+  height: 100%;
   &::-webkit-scrollbar {
     -webkit-appearance: none;
     width: 3px;
@@ -31,6 +30,6 @@ section.tabs-container {
 }
 
 ul.tabs-list {
-  padding: 0 5px;
+  padding: 0;
   margin: 0;
 }

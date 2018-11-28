@@ -1,12 +1,12 @@
 import React from "react";
-import Tab from './Tab';
+import BrowserTab from './BrowserTab';
 
-export default function TabsList({ tabs }) {
+export default function BrowserTabsList({ tabs }) {
   return (
     <ul className="tabs-list">
       {
         tabs.map((tab, index) => {
-          return <Tab tab={tab} key={index} />
+          return <BrowserTab tab={tab} key={index} />
         })
       }
     </ul>

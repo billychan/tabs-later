@@ -1,10 +1,9 @@
 import React from "react";
 import { render } from "react-dom";
-import TabsContainer from "../../containers/TabsContainer";
-import './popup.scss';
+import App from "../../containers/App";
 
 /* eslint-disable no-undef */
 render(
-  <TabsContainer />,
-  document.getElementById("app-container")
+  <App />,
+  document.getElementById("root")
 );
