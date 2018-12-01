@@ -62,6 +62,13 @@ var options = {
           name: 'assets/fonts/[name].[ext]'
         }
       },
+      {
+        test: /\.(jpg|jpeg|gif|png|ico)$/,
+        loader: 'file-loader',
+        options: {
+          name: 'assets/img/[name].[ext]'
+        }
+      }
     ]
   },
   resolve: {
