@@ -1,15 +1,11 @@
-import React from "react";
-import { render } from "react-dom";
-import App from "../../containers/App";
-import { setConfig } from 'react-hot-loader';
+import React from 'react';
+import { render } from 'react-dom';
+import configureStore from '../../configureStore'
+import Root from '../../Root'
 
-setConfig({
-  // set this flag to support SFC if patch is not landed
-  pureSFC: true
-});
+const store = configureStore()
 
-/* eslint-disable no-undef */
 render(
-  <App />,
-  document.getElementById("root")
+  <Root store={store}/>,
+  document.getElementById('root')
 );

@@ -3,12 +3,8 @@ import { cold } from 'react-hot-loader';
 import { Tab, Tabs } from "@blueprintjs/core";
 
 import { FocusStyleManager } from "@blueprintjs/core";
-import BrowserTabsContainer from './BrowserTabsContainer';
-import SavedListsContainer from './SavedListsContainer';
-
-import '@blueprintjs/core/lib/css/blueprint';
-import '@blueprintjs/icons/lib/css/blueprint-icons';
-import '../../css/main.scss';
+import BrowserTabsContainer from '../containers/BrowserTabsContainer';
+import SavedListsContainer from '../containers/SavedListsContainer';
 
 const App = () => {
   const [currentTabId, setCurrentTabId] = useState('browserTabs');
