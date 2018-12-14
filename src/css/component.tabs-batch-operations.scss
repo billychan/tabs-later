@@ -1,0 +1,11 @@
+.tabs-batch-operations {
+  padding: 0 6px 6px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  .operation-select-all {
+    margin-top: 3px;
+  }
+  .operation-search {
+    width: 200px;
+  }
+}

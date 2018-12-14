@@ -7,5 +7,7 @@ module.exports = {
   },
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    // save hassel on custom resolver rules which eslint can't read
+    "import/no-unresolved": [0]
   }
 };
