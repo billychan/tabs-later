@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { cold } from 'react-hot-loader';
-import { Tab, Tabs } from "@blueprintjs/core";
+import { Tab as UiTab, Tabs as UiTabs } from "@blueprintjs/core";
 
 import { FocusStyleManager } from "@blueprintjs/core";
-import BrowserTabsContainer from '../containers/BrowserTabsContainer';
+import TabsContainer from '../containers/TabsContainer';
 import SavedListsContainer from '../containers/SavedListsContainer';
 
 const App = () => {
@@ -15,14 +15,14 @@ const App = () => {
 
   return (
     <section className="app-container">
-      <Tabs id="app-tabs"
+      <UiTabs id="app-tabs"
         onChange={setCurrentTabId}
         selectedTabId={currentTabId}
         renderActiveTabPanelOnly
       >
-        <Tab id="browserTabs" title="Current" panel={<BrowserTabsContainer />} />
-        <Tab id="savedLists" title="Saved" panel={<SavedListsContainer />} />
-      </Tabs>
+        <UiTab id="browserTabs" title="Current" panel={<TabsContainer />} />
+        <UiTab id="savedLists" title="Saved" panel={<SavedListsContainer />} />
+      </UiTabs>
     </section>
   )
 }

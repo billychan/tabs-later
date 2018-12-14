@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { cold } from 'react-hot-loader';
 import { getAllTabs } from 'services/TabServices';
-import BrowserTabsList from '../components/BrowserTabsList';
+import TabsList from '../components/TabsList';
 import TabsBatchOperations from '../components/TabsBatchOperations';
 
-const BrowserTabsContainer = () => {
+const TabsContainer = () => {
   const [tabs, setTabs] = useState([]);
 
   useEffect(() => {
@@ -14,9 +14,9 @@ const BrowserTabsContainer = () => {
   return (
     <section className="tabs-container">
       <TabsBatchOperations />
-      <BrowserTabsList tabs={tabs} />
+      <TabsList tabs={tabs} />
     </section>
   )
 }
 
-export default cold(BrowserTabsContainer);
+export default cold(TabsContainer);

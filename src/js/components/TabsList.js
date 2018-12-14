@@ -1,19 +1,21 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import BrowserTab from './BrowserTab';
+import Tab from './Tab';
 
-export default function BrowserTabsList({ tabs }) {
+const TabsList = ({ tabs }) => {
   return (
     <ul className="tabs-list">
       {
         tabs.map((tab) =>
-          (<BrowserTab {...tab} key={tab.id} />)
+          (<Tab {...tab} key={tab.id} />)
         )
       }
     </ul>
   )
 }
 
-BrowserTabsList.propTypes = {
+TabsList.propTypes = {
   tabs: PropTypes.arrayOf(PropTypes.object).isRequired
 }
+
+export default TabsList

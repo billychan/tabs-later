@@ -6,7 +6,7 @@ import '../../img/placeholder.ico';
 
 const faviconPlaceholderUrl = '/assets/img/placeholder.ico';
 
-export default function BrowserTab({ isSelected, favIconUrl, title, url }) {
+export default function Tab({ isSelected, favIconUrl, title, url }) {
   return (
     <li className="tab flex-container">
       <Checkbox className="tab-checkbox" defaultChecked={isSelected} />
@@ -19,13 +19,13 @@ export default function BrowserTab({ isSelected, favIconUrl, title, url }) {
   )
 }
 
-BrowserTab.propTypes = {
+Tab.propTypes = {
   isSelected: PropTypes.bool,
   favIconUrl: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
 }
 
-BrowserTab.defaultProps = {
+Tab.defaultProps = {
   isSelected: false
 }
