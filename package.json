@@ -6,12 +6,13 @@
   "scripts": {
     "build": "node utils/build.js",
     "start": "node utils/webserver.js",
-    "eslint": "node ./node_modules/.bin/"
+    "eslint": "node ./node_modules/.bin/eslint"
   },
   "dependencies": {
     "@blueprintjs/core": "^3.9.0",
     "@blueprintjs/icons": "^3.3.0",
     "node-sass": "^4.10.0",
+    "normalizr": "^3.3.0",
     "prop-types": "^15.6.2",
     "react": "^16.7.0-alpha.0",
     "react-dom": "^16.7.0-alpha.0",

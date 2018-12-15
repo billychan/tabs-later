@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from 'prop-types';
+import React from "react"
+import PropTypes from 'prop-types'
 import { Provider } from 'react-redux'
-import App from "./components/App";
+import App from "./components/App"
 
 import '@blueprintjs/core/lib/css/blueprint';
 import '@blueprintjs/icons/lib/css/blueprint-icons';

@@ -1,22 +1,44 @@
-import React, { useState, useEffect } from "react";
-import { cold } from 'react-hot-loader';
-import { getAllTabs } from 'services/TabServices';
+import React, { useEffect, Component } from "react";
+// import { cold } from 'react-hot-loader';
+// import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
+import * as actions from '../actions'
+import { getAllTabs } from '../reducers';
+
 import TabsList from '../components/TabsList';
 import TabsBatchOperations from '../components/TabsBatchOperations';
 
-const TabsContainer = () => {
-  const [tabs, setTabs] = useState([]);
+// const TabsContainer = ({ tabs }) => {
+//   useEffect(fetchAllTabs)
+// }
 
-  useEffect(() => {
-    getAllTabs().then(newTabs => { setTabs(newTabs) })
-  }, [])
+class TabsContainer extends Component {
+  componentDidMount() {
+    const { fetchAllTabs } = this.props
+    fetchAllTabs()
+  }
 
-  return (
-    <section className="tabs-container">
-      <TabsBatchOperations />
-      <TabsList tabs={tabs} />
-    </section>
-  )
+  render() {
+    const { tabs } = this.props
+    return (
+      <section className="tabs-container">
+        <TabsBatchOperations />
+        <TabsList tabs={tabs} />
+      </section>
+    )
+  }
 }
 
-export default cold(TabsContainer);
+const mapStateToProps = (state) => ({
+  tabs: getAllTabs(state)
+})
+
+// TabsContainer.propTypes = {
+//   tabs: PropTypes.arrayOf(PropTypes.object).isRequired
+// }
+
+export default connect(
+  mapStateToProps,
+  actions
+)(TabsContainer)

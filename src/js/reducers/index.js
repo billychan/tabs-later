@@ -1,3 +1,13 @@
-const reducer = (state, action) => state
+import { combineReducers } from 'redux'
+import byId, { getTabById } from './byId'
+import allIds from './allIds'
 
-export default reducer
+const tabsApp = combineReducers({
+  byId,
+  allIds
+})
+
+export default tabsApp
+
+export const getAllTabs = (state) =>
+  state.allIds.map(id => getTabById(state.byId, id))

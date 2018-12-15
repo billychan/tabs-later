@@ -33,7 +33,7 @@ const TabsBatchOperations = () => {
         onChange={({ target }) => setQuery(target.value)}
         placeholder="Search"
         rightElement={MaybeDeleteButton}
-        small={true}
+        small
         value={query}
       />
     </section>

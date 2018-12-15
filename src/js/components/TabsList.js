@@ -2,8 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 import Tab from './Tab';
 
-const TabsList = ({ tabs }) => {
-  return (
+const TabsList = ({ tabs }) => (
     <ul className="tabs-list">
       {
         tabs.map((tab) =>
@@ -12,7 +11,6 @@ const TabsList = ({ tabs }) => {
       }
     </ul>
   )
-}
 
 TabsList.propTypes = {
   tabs: PropTypes.arrayOf(PropTypes.object).isRequired
