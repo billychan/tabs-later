@@ -12,7 +12,6 @@ module.exports = {
     "import/no-unresolved": [0],
     // For quicker start at begnining
     "react/fobid-prop-types": [0],
-    "react/prop-types": [0]
   },
   env: {
     browser: true

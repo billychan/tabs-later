@@ -6,10 +6,21 @@ import '../../img/placeholder.ico';
 
 const faviconPlaceholderUrl = '/assets/img/placeholder.ico';
 
-export default function Tab({ isSelected, favIconUrl, title, url }) {
+export default function Tab({
+  checked,
+  favIconUrl,
+  id,
+  title,
+  url,
+  onChange
+}) {
   return (
     <li className="tab flex-container">
-      <Checkbox className="tab-checkbox" defaultChecked={isSelected} />
+      <Checkbox
+        className="tab-checkbox"
+        checked={checked}
+        onChange={({ target }) => onChange(id, target.checked)}
+      />
       <span className="tab-favicon">
         <img src={favIconUrl || faviconPlaceholderUrl} alt={title} /></span>
       <span className="tab-title">
@@ -20,12 +31,14 @@ export default function Tab({ isSelected, favIconUrl, title, url }) {
 }
 
 Tab.propTypes = {
-  isSelected: PropTypes.bool,
+  checked: PropTypes.bool,
   favIconUrl: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   url: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired
 }
 
 Tab.defaultProps = {
-  isSelected: false
+  checked: false
 }

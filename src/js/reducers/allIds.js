@@ -3,7 +3,6 @@ import {
 } from '../actions/actionTypes'
 
 const allIds =(state=[], action) => {
-  console.log('action', action);
   switch (action.type) {
     case FETCH_TABS_SUCCESS:
       return [

@@ -1,7 +1,9 @@
 import { normalize } from 'normalizr'
 import {
   FETCH_TABS_REQUEST,
-  FETCH_TABS_SUCCESS
+  FETCH_TABS_SUCCESS,
+  TAB_CHECKED,
+  TAB_UNCHECKED
 } from './actionTypes'
 import { arrayOfTabs } from './schema'
 
@@ -23,3 +25,9 @@ export const fetchAllTabs = () => (dispatch) => {
     })
   })
 }
+
+export const checkTab = (tabId, checked) => (
+  checked ?
+    { type: TAB_CHECKED, payload: { tabId } } :
+    { type: TAB_UNCHECKED, payload: { tabId } }
+)

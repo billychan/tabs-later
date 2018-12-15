@@ -1,6 +1,7 @@
 import {
-  FETCH_TABS_SUCCESS
+  FETCH_TABS_SUCCESS, TAB_CHECKED, TAB_UNCHECKED
 } from '../actions/actionTypes'
+import tab from './tab'
 
 const byId = (state={}, action) => {
   switch (action.type) {
@@ -9,6 +10,14 @@ const byId = (state={}, action) => {
         ...state,
         ...action.payload.tabs.entities.tab
       }
+    case TAB_UNCHECKED:
+    case TAB_CHECKED: {
+      const { tabId } = action.payload
+      return {
+        ...state,
+        [tabId]: tab(state[tabId], action)
+      }
+    }
     default:
       return state
   }
@@ -16,9 +25,4 @@ const byId = (state={}, action) => {
 
 export default byId
 
-// export const getTabById = (state={}, id) => state[id]
-export const getTabById = (state={}, id) => {
-  const res = state[id]
-  console.log(res)
-  return res
-}
+export const getTabById = (state={}, id) => state[id]

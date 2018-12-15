@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { cold } from 'react-hot-loader';
-import { Tab as UiTab, Tabs as UiTabs } from "@blueprintjs/core";
+import { Tab as UiTab, Tabs as UiTabs, FocusStyleManager } from "@blueprintjs/core";
 
-import { FocusStyleManager } from "@blueprintjs/core";
 import TabsContainer from '../containers/TabsContainer';
 import SavedListsContainer from '../containers/SavedListsContainer';
 

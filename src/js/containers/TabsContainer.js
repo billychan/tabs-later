@@ -1,17 +1,13 @@
-import React, { useEffect, Component } from "react";
-// import { cold } from 'react-hot-loader';
-// import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import * as actions from '../actions'
 import { getAllTabs } from '../reducers';
 
-import TabsList from '../components/TabsList';
+// import TabsList from '../components/TabsList';
+import Tab from '../components/Tab';
 import TabsBatchOperations from '../components/TabsBatchOperations';
-
-// const TabsContainer = ({ tabs }) => {
-//   useEffect(fetchAllTabs)
-// }
 
 class TabsContainer extends Component {
   componentDidMount() {
@@ -20,11 +16,21 @@ class TabsContainer extends Component {
   }
 
   render() {
-    const { tabs } = this.props
+    const { tabs, checkTab } = this.props
     return (
       <section className="tabs-container">
         <TabsBatchOperations />
-        <TabsList tabs={tabs} />
+        <ul className="tabs-list">
+          {
+            tabs.map((tab) =>
+              <Tab
+                {...tab}
+                key={tab.id}
+                onChange={(tabId, checked) => checkTab(tabId, checked)}
+              />
+            )
+          }
+        </ul>
       </section>
     )
   }
@@ -34,9 +40,11 @@ const mapStateToProps = (state) => ({
   tabs: getAllTabs(state)
 })
 
-// TabsContainer.propTypes = {
-//   tabs: PropTypes.arrayOf(PropTypes.object).isRequired
-// }
+TabsContainer.propTypes = {
+  tabs: PropTypes.arrayOf(PropTypes.object).isRequired,
+  fetchAllTabs: PropTypes.func.isRequired,
+  checkTab: PropTypes.func.isRequired
+}
 
 export default connect(
   mapStateToProps,
