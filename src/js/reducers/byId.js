@@ -1,5 +1,5 @@
 import {
-  FETCH_TABS_SUCCESS, TAB_CHECKED, TAB_UNCHECKED
+  FETCH_TABS_SUCCESS, TAB_CHECKED_TOGGLE 
 } from '../actions/actionTypes'
 import tab from './tab'
 
@@ -10,8 +10,7 @@ const byId = (state={}, action) => {
         ...state,
         ...action.payload.tabs.entities.tab
       }
-    case TAB_UNCHECKED:
-    case TAB_CHECKED: {
+    case TAB_CHECKED_TOGGLE: {
       const { tabId } = action.payload
       return {
         ...state,
