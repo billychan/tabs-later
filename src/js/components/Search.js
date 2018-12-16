@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import {
   Button,
-  Checkbox,
   Colors,
   Icon,
   InputGroup,
 } from "@blueprintjs/core";
 import { cold } from 'react-hot-loader'
 
-const TabsBatchOperations = () => {
+const Search= () => {
   const [query, setQuery] = useState('')
   const DeleteIcon =
     <Icon
@@ -24,20 +23,17 @@ const TabsBatchOperations = () => {
     />
   const MaybeDeleteButton = query ? DeleteButton : null
   return (
-    <section className="tabs-batch-operations">
-      <Checkbox className="operation-select-all" />
-      <InputGroup
-        large={false}
-        className="operation-search"
-        leftIcon="search"
-        onChange={({ target }) => setQuery(target.value)}
-        placeholder="Search"
-        rightElement={MaybeDeleteButton}
-        small
-        value={query}
-      />
-    </section>
+    <InputGroup
+      large={false}
+      className="operation-search"
+      leftIcon="search"
+      onChange={({ target }) => setQuery(target.value)}
+      placeholder="Search"
+      rightElement={MaybeDeleteButton}
+      small
+      value={query}
+    />
   )
 }
 
-export default cold(TabsBatchOperations)
+export default cold(Search)

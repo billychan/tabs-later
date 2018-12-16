@@ -1,7 +1,8 @@
 import {
-  FETCH_TABS_SUCCESS, TAB_CHECKED_TOGGLE 
+  FETCH_TABS_SUCCESS,
+  TAB_CHECKED_TOGGLE
 } from '../actions/actionTypes'
-import tab from './tab'
+import tabReducer from './tabReducer'
 
 const byId = (state={}, action) => {
   switch (action.type) {
@@ -14,7 +15,7 @@ const byId = (state={}, action) => {
       const { tabId } = action.payload
       return {
         ...state,
-        [tabId]: tab(state[tabId], action)
+        [tabId]: tabReducer(state[tabId], action)
       }
     }
     default:

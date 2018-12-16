@@ -28,3 +28,7 @@ export const fetchAllTabs = () => (dispatch) => {
 export const checkTab = (tabId, checked) => (
   { type: TAB_CHECKED_TOGGLE, payload: { tabId, checked } }
 )
+
+export const checkTabs = (tabIds, checked) => (dispatch) => {
+  tabIds.forEach(tabId => dispatch(checkTab(tabId, checked)))
+}

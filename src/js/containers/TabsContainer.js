@@ -5,9 +5,8 @@ import { connect } from 'react-redux';
 import * as actions from '../actions'
 import { getAllTabs } from '../reducers';
 
-// import TabsList from '../components/TabsList';
 import Tab from '../components/Tab';
-import TabsBatchOperations from '../components/TabsBatchOperations';
+import TabsBatchOperations from './TabsBatchOperations';
 
 class TabsContainer extends Component {
   componentDidMount() {
