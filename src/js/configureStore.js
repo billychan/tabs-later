@@ -3,10 +3,7 @@ import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 import reducer from './reducers'
 
-const preloadedData = {
-  byId: {},
-  allIds: []
-}
+const preloadedData = {}
 
 const configureStore = () => {
   const middleware = [thunk]
