@@ -6,6 +6,13 @@ import '../../img/placeholder.ico';
 
 const faviconPlaceholderUrl = '/assets/img/placeholder.ico';
 
+const handleImageError = (event) => {
+  const img = event.target
+  img.src = faviconPlaceholderUrl
+  return true
+}
+
+/* eslint-disable jsx-a11y/alt-text */
 export default function Tab({
   checked,
   favIconUrl,
@@ -22,7 +29,8 @@ export default function Tab({
         onChange={({ target }) => onChange(id, target.checked)}
       />
       <span className="tab-favicon">
-        <img src={favIconUrl || faviconPlaceholderUrl} alt={title} /></span>
+        <img src={favIconUrl} onError={handleImageError} />
+      </span>
       <span className="tab-title">
         <a href={url} alt={title}>{title}</a>
       </span>
