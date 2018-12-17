@@ -6,10 +6,7 @@ import {
 const allIds = (state=[], action) => {
   switch (action.type) {
     case FETCH_TABS_SUCCESS:
-      return [
-        ...state,
-        ...action.payload.tabs.result
-      ]
+      return action.payload.tabs.result
     default:
       return state
   }

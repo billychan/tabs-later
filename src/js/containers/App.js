@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { cold } from 'react-hot-loader';
 import { Tab as UiTab, Tabs as UiTabs, FocusStyleManager } from "@blueprintjs/core";
+import * as actions from '../actions'
 
-import TabsContainer from '../containers/TabsContainer';
-import SavedListsContainer from '../containers/SavedListsContainer';
+import TabsContainer from './TabsContainer';
+import SavedListsContainer from './SavedListsContainer';
 
-const App = () => {
+const App = ({ fetchAllTabs }) => {
   const [currentTabId, setCurrentTabId] = useState('browserTabs');
 
   useEffect(() => {
+    fetchAllTabs()
     FocusStyleManager.onlyShowFocusOnTabs();
   }, [])
 
@@ -26,4 +30,13 @@ const App = () => {
   )
 }
 
-export default cold(App);
+App.propTypes = {
+  fetchAllTabs: PropTypes.func.isRequired
+}
+
+const mapStateToProps = () => {}
+
+export default connect(
+  mapStateToProps,
+  actions
+)(cold(App))

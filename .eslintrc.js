@@ -11,7 +11,7 @@ module.exports = {
     // save hassel on custom resolver rules which eslint can't read
     "import/no-unresolved": [0],
     // For quicker start at begnining
-    "react/fobid-prop-types": [0],
+    "react/forbid-prop-types": [0],
   },
   env: {
     browser: true

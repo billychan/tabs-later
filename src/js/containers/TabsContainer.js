@@ -10,8 +10,6 @@ import TabsBatchOperations from './TabsBatchOperations';
 
 class TabsContainer extends Component {
   componentDidMount() {
-    const { fetchAllTabs } = this.props
-    fetchAllTabs()
   }
 
   render() {
