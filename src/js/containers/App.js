@@ -34,9 +34,7 @@ App.propTypes = {
   fetchAllTabs: PropTypes.func.isRequired
 }
 
-const mapStateToProps = () => {}
-
 export default connect(
-  mapStateToProps,
+  () => ({}),
   actions
 )(cold(App))
