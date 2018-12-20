@@ -6,11 +6,11 @@ import * as actions from '../actions'
 import { getAllTabs } from '../reducers';
 
 import Tab from '../components/Tab';
-import TabsBatchOperations from './TabsBatchOperations';
+import TabsBulkOperations from './TabsBulkOperations';
 
 const TabsContainer = ({ tabs, checkTab }) => (
     <section className="tabs-container">
-      <TabsBatchOperations />
+      <TabsBulkOperations />
       <ul className="tabs-list">
         {
           tabs.map((tab) =>

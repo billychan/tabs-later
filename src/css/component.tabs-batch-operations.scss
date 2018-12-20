@@ -2,10 +2,12 @@
   padding: 0 6px 6px;
   border-bottom: 1px solid #ddd;
   display: flex;
+  align-items: center;
   .operation-select-all {
-    margin-top: 3px;
+    margin-bottom: 0;
   }
   .operation-search {
     width: 200px;
+    margin-right: 10px;
   }
 }

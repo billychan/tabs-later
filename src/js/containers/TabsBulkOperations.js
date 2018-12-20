@@ -7,18 +7,20 @@ import { getAllTabIds, getCheckedStatus } from '../reducers'
 
 import Search from '../components/Search';
 import BulkCheck from '../components/BulkCheck';
+import BulkAddToList from '../components/BulkAddToList';
 
-const TabsBatchOperations = ({ tabIds, checkTabs, checkedStatus }) => (
+const TabsBulkOperations = ({ tabIds, checkTabs, checkedStatus }) => (
     <section className="tabs-batch-operations">
       <BulkCheck
         checkedStatus={checkedStatus}
         onChange={(checked) => checkTabs(tabIds, checked)}
       />
       <Search />
+      <BulkAddToList />
     </section>
   )
   
-TabsBatchOperations.propTypes = {
+TabsBulkOperations.propTypes = {
   tabIds: PropTypes.arrayOf(PropTypes.number).isRequired,
   checkTabs: PropTypes.func.isRequired,
   checkedStatus: PropTypes.number.isRequired
@@ -32,4 +34,4 @@ const mapStateToProps = (state) => ({
 export default connect(
   mapStateToProps,
   actions
-)(TabsBatchOperations)
+)(TabsBulkOperations)
