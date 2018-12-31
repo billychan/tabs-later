@@ -10,7 +10,8 @@ import { cold } from 'react-hot-loader'
 const SearchIcon =
   <Icon
     icon='search'
-    style={{ color: Colors.GRAY4 }}
+    iconSize='12'
+    style={{ color: Colors.GRAY4, margin: '6px 0 0 6px' }}
   />
 const DeleteIcon =
   <Icon
@@ -34,7 +35,7 @@ const Search= () => {
       className="operation-search"
       leftIcon={SearchIcon}
       onChange={({ target }) => setQuery(target.value)}
-      placeholder="Search"
+      placeholder=""
       rightElement={MaybeDeleteButton}
       small
       value={query}
