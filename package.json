@@ -11,6 +11,7 @@
   "dependencies": {
     "@blueprintjs/core": "^3.9.0",
     "@blueprintjs/icons": "^3.3.0",
+    "classnames": "^2.2.6",
     "node-sass": "^4.10.0",
     "normalizr": "^3.3.0",
     "prop-types": "^15.6.2",

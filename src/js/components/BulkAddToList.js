@@ -1,34 +1,49 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import {
-  Card,
   Classes,
   Button,
+  PanelStack,
   Popover
 } from "@blueprintjs/core";
 
-const Content = () =>
-  <div className='popover-content'>
-    <p className="text-center">Add To List</p>
-    <Card className="bottom-10" />
-    <section style={{display: 'flex', justifyContent: 'space-between'}}>
-      <Button text='New List' />
-      <Button text='Cancel' className={Classes.POPOVER_DISMISS} />
+const NewListPannel = () =>
+  <p>Add New List</p>
+
+const AddToListPannel = ({ openPanel }) =>
+  <div className="add-to-list-panel">
+    <section className='main-section'>
+      content
+    </section>
+    <section className='actions'>
+      <Button text='New List' onClick={() => {
+        openPanel({
+          component: NewListPannel,
+          title: 'New List'
+        })
+      }} />
+      <Button text='Cancel' className={classNames(Classes.POPOVER_DISMISS, 'cancle')} />
       <Button text='Done' intent="primary"/>
     </section>
   </div>
 
-const BulkAddToList = ({ onClick }) =>
+AddToListPannel.propTypes = {
+  openPanel: PropTypes.func.isRequired
+}
+
+const BulkAddToList = () =>
   <Popover>
     <Button
       icon='add-to-artifact'
       minimal
     />
-    <Content />
+    <div className="add-to-list-box">
+      <PanelStack
+        initialPanel={{ component: AddToListPannel, title: 'Add To List' }}
+        className='add-to-list-content'
+      />
+    </div>
   </Popover>
-
-BulkAddToList.propTypes = {
-  onClick: PropTypes.func.isRequired,
-}
 
 export default BulkAddToList

@@ -12,7 +12,24 @@
   }
 }
 
-.popover-content {
-  width: 300px;
+.add-to-list-box {
   padding: 20px;
+  > * {
+    width: 300px;
+    height: 300px;
+  }
+  .add-to-list-panel {
+    .main-section {
+      height: 230px;
+      padding: 10px 0;
+    }
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      .cancle {
+        margin-left: auto;
+        margin-right: 10px;
+      }
+    }
+  }
 }
