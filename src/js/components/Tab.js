@@ -1,16 +1,16 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Checkbox } from "@blueprintjs/core";
+import { Checkbox } from '@blueprintjs/core';
 import '../../img/placeholder.ico';
 
 const faviconPlaceholderUrl = '/assets/img/placeholder.ico';
 
 const handleImageError = (event) => {
-  const img = event.target
-  img.src = faviconPlaceholderUrl
-  return true
-}
+  const img = event.target;
+  img.src = faviconPlaceholderUrl;
+  return true;
+};
 
 /* eslint-disable jsx-a11y/alt-text */
 export default function Tab({
@@ -19,7 +19,7 @@ export default function Tab({
   id,
   title,
   url,
-  onChange
+  onChange,
 }) {
   return (
     <li className="tab flex-container">
@@ -35,7 +35,7 @@ export default function Tab({
         <a href={url} alt={title}>{title}</a>
       </span>
     </li>
-  )
+  );
 }
 
 Tab.propTypes = {
@@ -44,9 +44,9 @@ Tab.propTypes = {
   title: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   url: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired
-}
+  onChange: PropTypes.func.isRequired,
+};
 
 Tab.defaultProps = {
-  checked: false
-}
+  checked: false,
+};

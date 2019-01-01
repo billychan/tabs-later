@@ -1,17 +1,17 @@
 import {
-  TAB_CHECKED_TOGGLE
-} from '../actions/actionTypes'
+  TAB_CHECKED_TOGGLE,
+} from '../actions/actionTypes';
 
-const tab = (state={}, action) => {
+const tab = (state = {}, action) => {
   switch (action.type) {
     case TAB_CHECKED_TOGGLE:
       return {
         ...state,
-        checked: action.payload.checked
-      } 
+        checked: action.payload.checked,
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default tab
+export default tab;

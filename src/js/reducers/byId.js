@@ -1,28 +1,28 @@
 import {
   FETCH_TABS_SUCCESS,
-  TAB_CHECKED_TOGGLE
-} from '../actions/actionTypes'
-import tabReducer from './tabReducer'
+  TAB_CHECKED_TOGGLE,
+} from '../actions/actionTypes';
+import tabReducer from './tabReducer';
 
-const byId = (state={}, action) => {
+const byId = (state = {}, action) => {
   switch (action.type) {
     case FETCH_TABS_SUCCESS:
       return {
         ...state,
-        ...action.payload.tabs.entities.tab
-      }
+        ...action.payload.tabs.entities.tab,
+      };
     case TAB_CHECKED_TOGGLE: {
-      const { tabId } = action.payload
+      const { tabId } = action.payload;
       return {
         ...state,
-        [tabId]: tabReducer(state[tabId], action)
-      }
+        [tabId]: tabReducer(state[tabId], action),
+      };
     }
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default byId
+export default byId;
 
-export const getTabById = (state={}, id) => state[id]
+export const getTabById = (state = {}, id) => state[id];

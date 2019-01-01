@@ -1,24 +1,24 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Checkbox } from "@blueprintjs/core";
+import { Checkbox } from '@blueprintjs/core';
 
 const BulkCheck = ({ onChange, checkedStatus }) => {
-  let indeterminate; 
+  let indeterminate;
   let checked;
 
   switch (checkedStatus) {
     case 2:
-      checked = true
-      indeterminate = false
-    break
+      checked = true;
+      indeterminate = false;
+      break;
     case 1:
-      checked = false
-      indeterminate = true
-    break
+      checked = false;
+      indeterminate = true;
+      break;
     case 0:
     default:
-      checked = false
-      indeterminate = false
+      checked = false;
+      indeterminate = false;
   }
 
   return (
@@ -28,12 +28,12 @@ const BulkCheck = ({ onChange, checkedStatus }) => {
       checked={checked}
       indeterminate={indeterminate}
     />
-  )
-}
+  );
+};
 
 BulkCheck.propTypes = {
   onChange: PropTypes.func.isRequired,
-  checkedStatus: PropTypes.oneOf([0, 1, 2]).isRequired
-}
+  checkedStatus: PropTypes.oneOf([0, 1, 2]).isRequired,
+};
 
-export default BulkCheck
+export default BulkCheck;

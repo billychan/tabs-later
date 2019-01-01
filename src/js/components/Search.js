@@ -1,34 +1,37 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Button,
   Colors,
   Icon,
   InputGroup,
-} from "@blueprintjs/core";
-import { cold } from 'react-hot-loader'
+} from '@blueprintjs/core';
+import { cold } from 'react-hot-loader';
 
-const SearchIcon =
+const SearchIcon = (
   <Icon
-    icon='search'
-    iconSize='12'
+    icon="search"
+    iconSize="12"
     style={{ color: Colors.GRAY4, margin: '6px 0 0 6px' }}
   />
-const DeleteIcon =
+);
+const DeleteIcon = (
   <Icon
-    icon='delete'
-    iconSize='12'
+    icon="delete"
+    iconSize="12"
     style={{ color: Colors.GRAY4 }}
   />
+);
 
-const Search= () => {
-  const [query, setQuery] = useState('')
-  const DeleteButton =
+const Search = () => {
+  const [query, setQuery] = useState('');
+  const DeleteButton = (
     <Button
       icon={DeleteIcon}
       onClick={() => setQuery('')}
       minimal
     />
-  const MaybeDeleteButton = query ? DeleteButton : null
+  );
+  const MaybeDeleteButton = query ? DeleteButton : null;
   return (
     <InputGroup
       large={false}
@@ -40,7 +43,7 @@ const Search= () => {
       small
       value={query}
     />
-  )
-}
+  );
+};
 
-export default cold(Search)
+export default cold(Search);

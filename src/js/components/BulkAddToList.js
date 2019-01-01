@@ -1,15 +1,15 @@
-import React from "react";
+import React from 'react';
 import {
   Button,
   PanelStack,
-  Popover
-} from "@blueprintjs/core";
+  Popover,
+} from '@blueprintjs/core';
 import AddToListPanel from './AddToListPanel';
 
-const BulkAddToList = () =>
+const BulkAddToList = () => (
   <Popover>
     <Button
-      icon='add-to-artifact'
+      icon="add-to-artifact"
       minimal
     />
     <div className="add-to-list-box">
@@ -18,5 +18,6 @@ const BulkAddToList = () =>
       />
     </div>
   </Popover>
+);
 
-export default BulkAddToList
+export default BulkAddToList;

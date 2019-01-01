@@ -1,19 +1,19 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
 import {
   FETCH_TABS_SUCCESS,
-} from '../actions/actionTypes'
+} from '../actions/actionTypes';
 
-const allIds = (state=[], action) => {
+const allIds = (state = [], action) => {
   switch (action.type) {
     case FETCH_TABS_SUCCESS:
-      return action.payload.tabs.result
+      return action.payload.tabs.result;
     default:
-      return state
+      return state;
   }
-}
+};
 
 const ids = combineReducers({
-  allIds
-})
+  allIds,
+});
 
-export default ids
+export default ids;
