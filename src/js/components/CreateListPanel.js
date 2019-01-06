@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '@blueprintjs/core';
 
-const NewListPanel = ({ closePanel }) => (
+const CreateListPanel = ({ closePanel }) => (
   <div className="panel-content">
     <section className="main-section">
       content
@@ -14,8 +14,8 @@ const NewListPanel = ({ closePanel }) => (
   </div>
 );
 
-NewListPanel.propTypes = {
+CreateListPanel.propTypes = {
   closePanel: PropTypes.func.isRequired,
 };
 
-export default NewListPanel;
+export default CreateListPanel;
