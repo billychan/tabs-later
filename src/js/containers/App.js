@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { cold } from 'react-hot-loader';
 import { Tab as UiTab, Tabs as UiTabs, FocusStyleManager } from '@blueprintjs/core';
-import * as actions from '../actions';
+import * as actions from '../features/tabs/actions';
 
 import TabsContainer from './TabsContainer';
 import SavedListsContainer from './SavedListsContainer';

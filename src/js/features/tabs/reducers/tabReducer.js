@@ -1,6 +1,6 @@
 import {
   TAB_CHECKED_TOGGLE,
-} from '../../actions/actionTypes';
+} from '../actionTypes';
 
 const tab = (state = {}, action) => {
   switch (action.type) {

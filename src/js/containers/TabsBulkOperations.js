@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import * as actions from '../actions';
-import { getAllTabIds, getCheckedStatus } from '../reducers/tabs';
+import * as actions from '../features/tabs/actions';
+import { getAllTabIds, getCheckedStatus } from '../features/tabs/reducers';
 
 import Search from '../components/Search';
 import BulkCheck from '../components/BulkCheck';

@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import * as actions from '../actions';
-import { getAllTabs } from '../reducers/tabs';
+import * as actions from '../features/tabs/actions';
+import { getAllTabs } from '../features/tabs/reducers';
 
 import Tab from '../components/Tab';
 import TabsBulkOperations from './TabsBulkOperations';

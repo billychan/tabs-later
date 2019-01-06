@@ -1,7 +1,7 @@
 import {
   FETCH_TABS_SUCCESS,
   TAB_CHECKED_TOGGLE,
-} from '../../actions/actionTypes';
+} from '../actionTypes';
 import tabReducer from './tabReducer';
 
 const byId = (state = {}, action) => {
