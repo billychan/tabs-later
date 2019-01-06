@@ -1,11 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '@blueprintjs/core';
+import { Classes, Button } from '@blueprintjs/core';
 
 const CreateListPanel = ({ closePanel }) => (
   <div className="panel-content">
-    <section className="main-section">
-      content
+    <section className="main-section create-list-section">
+      <input
+        type="text"
+        className={Classes.INPUT}
+        placeholder="Enter List Name..."
+        name="list-name"
+      />
     </section>
     <section className="actions">
       <Button text="Back" onClick={closePanel} className="secondary-btn" />
