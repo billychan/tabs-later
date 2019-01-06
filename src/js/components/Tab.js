@@ -40,7 +40,7 @@ export default function Tab({
 
 Tab.propTypes = {
   checked: PropTypes.bool,
-  favIconUrl: PropTypes.string.isRequired,
+  favIconUrl: PropTypes.string,
   title: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   url: PropTypes.string.isRequired,
@@ -49,4 +49,5 @@ Tab.propTypes = {
 
 Tab.defaultProps = {
   checked: false,
+  favIconUrl: faviconPlaceholderUrl,
 };

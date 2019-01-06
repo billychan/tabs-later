@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import * as actions from '../actions';
-import { getAllTabIds, getCheckedStatus } from '../reducers';
+import { getAllTabIds, getCheckedStatus } from '../reducers/tabs';
 
 import Search from '../components/Search';
 import BulkCheck from '../components/BulkCheck';
@@ -27,8 +27,8 @@ TabsBulkOperations.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  tabIds: getAllTabIds(state),
-  checkedStatus: getCheckedStatus(state),
+  tabIds: getAllTabIds(state.tabs),
+  checkedStatus: getCheckedStatus(state.tabs),
 });
 
 export default connect(
