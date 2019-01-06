@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import tabs from './features/tabs/reducers';
+import tabs from './features/tabs/reducers/tabsReducers';
 
 const appReducer = combineReducers({
   tabs,

@@ -1,7 +1,7 @@
 import {
   FETCH_TABS_SUCCESS,
   TAB_CHECKED_TOGGLE,
-} from '../actionTypes';
+} from '../tabsActionTypes';
 import tabReducer from './tabReducer';
 
 const byId = (state = {}, action) => {
@@ -24,5 +24,3 @@ const byId = (state = {}, action) => {
 };
 
 export default byId;
-
-export const getTabById = (state = {}, id) => state[id];

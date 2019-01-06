@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import * as actions from '../features/tabs/actions';
-import { getAllTabs } from '../features/tabs/reducers';
+import * as tabsActions from '../features/tabs/tabsActions';
+import { getAllTabs } from '../features/tabs/tabsSelectors';
 
 import Tab from '../components/Tab';
 import TabsBulkOperations from './TabsBulkOperations';
@@ -36,5 +36,5 @@ TabsContainer.propTypes = {
 
 export default connect(
   mapStateToProps,
-  actions,
+  tabsActions,
 )(TabsContainer);

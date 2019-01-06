@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { cold } from 'react-hot-loader';
 import { Tab as UiTab, Tabs as UiTabs, FocusStyleManager } from '@blueprintjs/core';
-import * as actions from '../features/tabs/actions';
+import * as tabsActions from '../features/tabs/tabsActions';
 
 import TabsContainer from './TabsContainer';
 import SavedListsContainer from './SavedListsContainer';
@@ -37,5 +37,5 @@ App.propTypes = {
 
 export default connect(
   () => ({}),
-  actions,
+  tabsActions,
 )(cold(App));

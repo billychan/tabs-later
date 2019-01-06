@@ -3,8 +3,8 @@ import {
   FETCH_TABS_REQUEST,
   FETCH_TABS_SUCCESS,
   TAB_CHECKED_TOGGLE,
-} from '../actionTypes';
-import { arrayOfTabs } from './schema';
+} from './tabsActionTypes';
+import { arrayOfTabs } from './tabsSchema';
 
 const getAllTabsFromBrowser = () => (new Promise(resolve => window.chrome.tabs.query({
   currentWindow: true,

@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import {
   FETCH_TABS_SUCCESS,
-} from '../actionTypes';
+} from '../tabsActionTypes';
 
 const allIds = (state = [], action) => {
   switch (action.type) {

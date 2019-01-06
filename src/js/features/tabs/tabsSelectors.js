@@ -1,13 +1,4 @@
-import { combineReducers } from 'redux';
-import byId, { getTabById } from './byId';
-import ids from './ids';
-
-const tabs = combineReducers({
-  byId,
-  ids,
-});
-
-export default tabs;
+const getTabById = (state = {}, id) => state[id];
 
 export const getAllTabs = state => state.ids.allIds.map(id => getTabById(state.byId, id));
 
