@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import byId from './byId';
-import ids from './ids';
+import byId from './reducers/byId';
+import ids from './reducers/ids';
 
 const tabs = combineReducers({
   byId,

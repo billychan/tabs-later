@@ -5,7 +5,7 @@ import {
   Classes,
   Button,
 } from '@blueprintjs/core';
-import CreateListPanel from './CreateListPanel';
+import CreateListPanel from '../containers/CreateListPanel';
 
 const AddToListPanel = ({ openPanel }) => (
   <div className="panel-content">

@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
-import appReducer from './appReducer';
+import rootReducer from './rootReducer';
 
 const preloadedData = {};
 
@@ -16,7 +16,7 @@ const configureStore = () => {
   }
 
   const store = createStore(
-    appReducer,
+    rootReducer,
     preloadedData,
     composeEnhancers(
       applyMiddleware(...middleware),
