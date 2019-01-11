@@ -1,10 +1,9 @@
-const getTabById = (state = {}, id) => state[id];
+import { getAllItems } from 'common/selectors';
 
-export const getAllTabs = state => state.ids.allIds.map(id => getTabById(state.byId, id));
+// export const getAllTabIds = state => state.ids.allIds;
 
-export const getAllTabIds = state => state.ids.allIds;
 
-const getCheckedTabs = state => getAllTabs(state).filter(tab => tab.checked);
+const getCheckedTabs = state => getAllItems(state).filter(tab => tab.checked);
 
 export const getCheckedStatus = (state) => {
   const allTabsCount = state.ids.allIds.length;

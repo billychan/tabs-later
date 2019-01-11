@@ -1,8 +1,9 @@
+import { combineReducers } from 'redux';
 import {
   CREATE_LIST,
 } from '../listsActionTypes';
 
-const ids = (state = [], action) => {
+const allIds = (state = [], action) => {
   switch (action.type) {
     case CREATE_LIST:
       return [
@@ -13,5 +14,9 @@ const ids = (state = [], action) => {
       return state;
   }
 };
+
+const ids = combineReducers({
+  allIds,
+});
 
 export default ids;

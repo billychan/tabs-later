@@ -4,7 +4,7 @@ import {
   PanelStack,
   Popover,
 } from '@blueprintjs/core';
-import AddToListPanel from './AddToListPanel';
+import AddToListPanel from '../containers/AddToListPanel';
 
 const BulkAddToList = () => (
   <Popover>

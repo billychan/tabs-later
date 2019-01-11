@@ -1,16 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { cold } from 'react-hot-loader';
 import {
   Classes,
   Button,
 } from '@blueprintjs/core';
-import CreateListPanel from '../containers/CreateListPanel';
+import { connect } from 'react-redux';
+import { getAllItems } from 'common/selectors';
+import CreateListPanel from './CreateListPanel';
 
-const AddToListPanel = ({ openPanel }) => (
+import * as listsActions from '../features/lists/listsActions';
+
+const AddToListPanel = ({ openPanel, lists }) => (
   <div className="panel-content">
     <section className="main-section">
-      content
+      <ul>
+        {
+          lists.map(list => (
+            <li>{list.name}</li>
+          ))
+        }
+      </ul>
     </section>
     <section className="actions">
       <Button
@@ -30,6 +41,14 @@ const AddToListPanel = ({ openPanel }) => (
 
 AddToListPanel.propTypes = {
   openPanel: PropTypes.func.isRequired,
+  lists: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default AddToListPanel;
+const mapStateToProps = state => ({
+  lists: getAllItems(state.lists),
+});
+
+export default connect(
+  mapStateToProps,
+  listsActions,
+)(cold(AddToListPanel));

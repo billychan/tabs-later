@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import { getAllItems } from 'common/selectors';
 import * as tabsActions from '../features/tabs/tabsActions';
-import { getAllTabs } from '../features/tabs/tabsSelectors';
 
 import Tab from '../components/Tab';
 import TabsBulkOperations from './TabsBulkOperations';
@@ -26,7 +26,7 @@ const TabsContainer = ({ tabs, checkTab }) => (
 );
 
 const mapStateToProps = state => ({
-  tabs: getAllTabs(state.tabs),
+  tabs: getAllItems(state.tabs),
 });
 
 TabsContainer.propTypes = {
