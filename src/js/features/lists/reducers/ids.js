@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import {
   CREATE_LIST,
+  FETCH_LISTS_SUCCESS,
 } from '../listsActionTypes';
 
 const allIds = (state = [], action) => {
@@ -8,8 +9,14 @@ const allIds = (state = [], action) => {
     case CREATE_LIST:
       return [
         ...state,
-        action.payload.id,
+        action.payload.list.id,
       ];
+    case FETCH_LISTS_SUCCESS: {
+      return [
+        ...state,
+        ...action.payload.lists.result,
+      ];
+    }
     default:
       return state;
   }

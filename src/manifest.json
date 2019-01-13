@@ -10,7 +10,7 @@
   },
   "permissions": [
     "tabs",
-    "storage"
+    "unlimitedStorage"
   ],
   "icons": {
     "128": "src/img/icon-128.png"

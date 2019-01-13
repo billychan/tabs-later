@@ -1,15 +1,11 @@
 import { normalize } from 'normalizr';
+import { getAllTabsFromBrowser } from 'services/browserTabs';
 import {
   FETCH_TABS_REQUEST,
   FETCH_TABS_SUCCESS,
   TAB_CHECKED_TOGGLE,
 } from './tabsActionTypes';
 import { arrayOfTabs } from './tabsSchema';
-
-const getAllTabsFromBrowser = () => (new Promise(resolve => window.chrome.tabs.query({
-  currentWindow: true,
-}, resolve))
-);
 
 export const fetchAllTabs = () => (dispatch) => {
   dispatch({

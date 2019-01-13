@@ -1,15 +1,23 @@
-import list from './list';
 import {
   CREATE_LIST,
+  UPDATE_LIST,
+  FETCH_LISTS_SUCCESS,
 } from '../listsActionTypes';
 
 const byId = (state = {}, action) => {
   switch (action.type) {
-    case CREATE_LIST: {
-      const { id } = action.payload;
+    case CREATE_LIST:
+    case UPDATE_LIST: {
+      const { list } = action.payload;
       return {
         ...state,
-        [id]: list(state[id], action),
+        [list.id]: list,
+      };
+    }
+    case FETCH_LISTS_SUCCESS: {
+      return {
+        ...state,
+        ...action.payload.lists.entities.list,
       };
     }
     default:
