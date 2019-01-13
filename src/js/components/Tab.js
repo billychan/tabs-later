@@ -22,16 +22,16 @@ export default function Tab({
   onChange,
 }) {
   return (
-    <li className="tab flex-container">
+    <li className="item-row">
       <Checkbox
-        className="tab-checkbox"
+        className="item-row__checkbox"
         checked={checked}
         onChange={({ target }) => onChange(id, target.checked)}
       />
-      <span className="tab-favicon">
+      <span className="item-row__favicon">
         <img src={favIconUrl} onError={handleImageError} />
       </span>
-      <span className="tab-title">
+      <span className="item-row__text_main">
         <a href={url} alt={title}>{title}</a>
       </span>
     </li>

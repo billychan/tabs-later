@@ -8,6 +8,8 @@ import {
 } from '@blueprintjs/core';
 import { connect } from 'react-redux';
 import { getAllItems } from 'common/selectors';
+import List from 'components/List';
+
 import CreateListPanel from './CreateListPanel';
 
 import * as listsActions from '../features/lists/listsActions';
@@ -15,10 +17,13 @@ import * as listsActions from '../features/lists/listsActions';
 const AddToListPanel = ({ openPanel, lists }) => (
   <div className="panel-content">
     <section className="main-section">
-      <ul>
+      <ul className="item-rows-ul">
         {
           lists.map(list => (
-            <li>{list.name}</li>
+            <List
+              {...list}
+              key={list.id}
+            />
           ))
         }
       </ul>

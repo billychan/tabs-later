@@ -11,7 +11,7 @@ import TabsBulkOperations from './TabsBulkOperations';
 const TabsContainer = ({ tabs, checkTab }) => (
   <section className="tabs-container">
     <TabsBulkOperations />
-    <ul className="tabs-list">
+    <ul className="item-rows-ul">
       {
           tabs.map(tab => (
             <Tab
