@@ -9,7 +9,7 @@
     "eslint": "node ./node_modules/.bin/eslint"
   },
   "dependencies": {
-    "@blueprintjs/core": "^3.9.0",
+    "@blueprintjs/core": "^3.11.0",
     "@blueprintjs/icons": "^3.3.0",
     "classnames": "^2.2.6",
     "node-sass": "^4.10.0",

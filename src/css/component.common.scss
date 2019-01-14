@@ -24,13 +24,21 @@
   }
 }
 
-.item-row__text_main {
-  margin-left: 8px;
-  width: 90%;
+.item-row__text {
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   a {
     text-decoration: none;
   }
+}
+
+.item-row__text_main {
+  margin-left: 8px;
+  width: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.item-row__right-secondary {
+  margin-left: auto;
+  margin-right: 10px;
 }

@@ -19,7 +19,7 @@ const App = ({ fetchAllTabs, fetchLists }) => {
   }, []);
 
   return (
-    <section className="app-container">
+    <section className="app-container scrollable-section">
       <UiTabs
         id="app-tabs"
         onChange={setCurrentTabId}

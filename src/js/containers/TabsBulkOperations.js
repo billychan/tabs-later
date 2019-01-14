@@ -17,7 +17,7 @@ const TabsBulkOperations = ({ tabIds, checkTabs, checkedStatus }) => (
       onChange={checked => checkTabs(tabIds, checked)}
     />
     <Search />
-    <BulkAddToList />
+    <BulkAddToList enabled={checkedStatus > 0} />
   </section>
 );
 

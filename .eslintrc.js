@@ -12,6 +12,8 @@ module.exports = {
     "import/no-unresolved": [0],
     // For quicker start at begnining
     "react/forbid-prop-types": [0],
+    // Save time on dealing with custom attributes which might start with _
+    "no-underscore-dangle": [0]
   },
   env: {
     browser: true

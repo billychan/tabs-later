@@ -1,3 +1,7 @@
-export const FETCH_TABS_REQUEST = 'FETCH_TABS_REQUEST';
-export const FETCH_TABS_SUCCESS = 'FETCH_TABS_SUCCESS';
-export const TAB_CHECKED_TOGGLE = 'TAB_CHECKED_TOGGLE';
+import { TABS_NAMESPACE, buildNamespaceFn } from 'common/actionNameSpaces';
+
+const ns = buildNamespaceFn(TABS_NAMESPACE);
+
+export const FETCH_TABS_REQUEST = ns('FETCH_TABS_REQUEST');
+export const FETCH_TABS_SUCCESS = ns('FETCH_TABS_SUCCESS');
+export const TAB_CHECKED_TOGGLE = ns('TAB_CHECKED_TOGGLE');

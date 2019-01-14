@@ -1,6 +1,6 @@
 import PouchDB from 'pouchdb';
 
-const db = new PouchDB('tabs-later');
+const db = new PouchDB('tabs-later', { auto_compaction: true });
 
 export const createList = list => (
   db.put({
@@ -12,4 +12,6 @@ export const createList = list => (
 // The difference in update is a _rev attribute needed, and _id is already included.
 export const updateList = list => db.put(list);
 
-export const fetchLists = () => db.allDocs({ include_docs: true });
+export const bulkUpdateLists = lists => db.bulkDocs(lists);
+
+export const fetchLists = () => db.allDocs({ include_docs: true, latest: true });

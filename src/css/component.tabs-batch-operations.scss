@@ -23,15 +23,10 @@
 .panel-content {
   .main-section {
     height: 230px;
-    padding: 10px 0;
-  }
-  .create-list-section {
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
   .actions {
     display: flex;
+    padding-top: 10px;
     justify-content: space-between;
     .secondary-btn {
       margin-left: auto;

@@ -2,6 +2,7 @@ import {
   CREATE_LIST,
   UPDATE_LIST,
   FETCH_LISTS_SUCCESS,
+  BATCH_UPDATE_LISTS_SUCCESS,
 } from '../listsActionTypes';
 
 const byId = (state = {}, action) => {
@@ -14,12 +15,12 @@ const byId = (state = {}, action) => {
         [list.id]: list,
       };
     }
-    case FETCH_LISTS_SUCCESS: {
+    case BATCH_UPDATE_LISTS_SUCCESS:
+    case FETCH_LISTS_SUCCESS:
       return {
         ...state,
         ...action.payload.lists.entities.list,
       };
-    }
     default:
       return state;
   }

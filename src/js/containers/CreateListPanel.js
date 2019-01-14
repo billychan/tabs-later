@@ -10,7 +10,7 @@ const CreateListPanel = ({ closePanel, createList }) => {
   const [listName, setListName] = useState('');
   return (
     <div className="panel-content">
-      <section className="main-section create-list-section">
+      <section className="main-section with-centered-children">
         <input
           type="text"
           className={Classes.INPUT}

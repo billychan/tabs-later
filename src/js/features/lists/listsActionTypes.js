@@ -1,8 +1,18 @@
-import { LISTS_NAMESPACE, buildNamespaceFn } from '../actionNameSpaces';
+import { LISTS_NAMESPACE, buildNamespaceFn } from 'common/actionNameSpaces';
 
 const ns = buildNamespaceFn(LISTS_NAMESPACE);
 
-export const CREATE_LIST = ns('CREATE_LIST');
-export const UPDATE_LIST = ns('UPDATE_LIST');
+export const UPDATE_LIST_REQUEST = ns('UPDATE_LIST_REQUEST');
+export const UPDATE_LIST_SUCCESS = ns('UPDATE_LIST_SUCCESS');
+
 export const FETCH_LISTS_REQUEST = ns('FETCH_LISTS_REQUEST');
 export const FETCH_LISTS_SUCCESS = ns('FETCH_LISTS_SUCCESS');
+export const FETCH_LISTS_FAILURE = ns('FETCH_LISTS_FAILURE');
+
+export const CREATE_LIST_REQUEST = ns('CREATE_LIST_REQUEST');
+export const CREATE_LIST_SUCCESS = ns('CREATE_LIST_SUCCESS');
+export const CREATE_LIST_FAILURE = ns('CREATE_LIST_FAILURE');
+
+export const BATCH_UPDATE_LISTS_REQUEST = ns('BATCH_UPDATE_LISTS_REQUEST');
+export const BATCH_UPDATE_LISTS_SUCCESS = ns('BATCH_UPDATE_LISTS_SUCCESS');
+export const BATCH_UPDATE_LISTS_FAILURE = ns('BATCH_UPDATE_LISTS_FAILURE');

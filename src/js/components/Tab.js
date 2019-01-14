@@ -31,7 +31,7 @@ export default function Tab({
       <span className="item-row__favicon">
         <img src={favIconUrl} onError={handleImageError} />
       </span>
-      <span className="item-row__text_main">
+      <span className="item-row__text item-row__text_main">
         <a href={url} alt={title}>{title}</a>
       </span>
     </li>

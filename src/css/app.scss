@@ -11,19 +11,7 @@ body {
 }
 
 section.app-container {
-  overflow-x: auto;
-  overflow-y: scroll;
-  height: 100%;
   padding: 0 6px;
-  &::-webkit-scrollbar {
-    -webkit-appearance: none;
-    width: 3px;
-    background-color: #fff;
-  }
-  &::-webkit-scrollbar-thumb {
-    border: 1px solid #f8f8f8;
-    background-color: #e5e5e5;
-  }
 
   header {
     text-align: center
