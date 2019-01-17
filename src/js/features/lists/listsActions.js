@@ -15,7 +15,7 @@ import {
   FETCH_LISTS_SUCCESS,
 } from './listsActionTypes';
 
-import { buildListFromName, tabToLink, addLinksToList } from './listsUtils';
+import { buildListFromName, tabToLink, addLinksToList } from './listsEntityUtils';
 
 export const createList = ({ name }) => (dispatch) => {
   dispatch({ type: CREATE_LIST_REQUEST });

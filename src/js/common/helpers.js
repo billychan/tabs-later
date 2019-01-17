@@ -12,8 +12,3 @@ export const arrayToObjectWithKey = (arr = [], key = 'id') => (
     [item[key]]: item,
   }), {})
 );
-
-/**
- * @description Given an array of objects, make the objects unique by given key's value
- */
-export const uniqObjectsOnKey = (arr = [], key) => Object.values(arrayToObjectWithKey(arr, key));

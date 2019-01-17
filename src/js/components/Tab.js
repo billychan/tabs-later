@@ -24,7 +24,6 @@ export default function Tab({
   return (
     <li className="item-row">
       <Checkbox
-        className="item-row__checkbox"
         checked={checked}
         onChange={({ target }) => onChange(id, target.checked)}
       />

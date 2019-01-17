@@ -9,20 +9,24 @@ import Tab from '../components/Tab';
 import TabsBulkOperations from './TabsBulkOperations';
 
 const TabsContainer = ({ tabs, checkTab }) => (
-  <section className="tabs-container">
+  <div>
     <TabsBulkOperations />
-    <ul className="item-rows-ul">
-      {
-          tabs.map(tab => (
-            <Tab
-              {...tab}
-              key={tab.id}
-              onChange={(tabId, checked) => checkTab(tabId, checked)}
-            />
-          ))
-        }
-    </ul>
-  </section>
+    <section className="tabs-collection-container">
+      <div className="scrollable-section">
+        <ul className="item-rows-ul ">
+          {
+              tabs.map(tab => (
+                <Tab
+                  {...tab}
+                  key={tab.id}
+                  onChange={(tabId, checked) => checkTab(tabId, checked)}
+                />
+              ))
+            }
+        </ul>
+      </div>
+    </section>
+  </div>
 );
 
 const mapStateToProps = state => ({

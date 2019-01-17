@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 import {
-  CREATE_LIST,
+  CREATE_LIST_SUCCESS,
   FETCH_LISTS_SUCCESS,
 } from '../listsActionTypes';
 
 const allIds = (state = [], action) => {
   switch (action.type) {
-    case CREATE_LIST:
+    case CREATE_LIST_SUCCESS:
       return [
         ...state,
         action.payload.list.id,

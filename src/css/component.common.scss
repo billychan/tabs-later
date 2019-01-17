@@ -6,15 +6,11 @@
 .item-row {
   display: flex;
   list-style: none;
-  height: 28px;
+  height: 30px;
   padding: 4px 0;
   &:hover {
     background: #eee;
   }
-}
-
-.item-row__checkbox {
-  padding-top: 2px;
 }
 
 .item-row__favicon {

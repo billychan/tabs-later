@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import { cold } from 'react-hot-loader';
 import {
   Classes,
@@ -11,59 +10,46 @@ import { connect } from 'react-redux';
 import { getAllItems } from 'common/selectors';
 import { getCheckedTabs } from 'features/tabs/tabsSelectors';
 import * as listsActions from 'features/lists/listsActions';
+import { hasAllLinks } from 'features/lists/listsEntityUtils';
 
-import List from 'components/List';
+import ListForAdding from 'components/ListForAdding';
 import CreateListPanel from './CreateListPanel';
 
 const AddToListPanel = ({
   openPanel, lists, addLinksFromTabs, checkedTabs,
-}) => {
-  const [selectedLists, setSelectedLists] = useState([]);
-  return (
-    <div className="panel-content">
-      <section className="main-section scrollable-section">
-        <ul className="item-rows-ul">
-          {
-            lists.map(list => (
-              <List
-                {...list}
-                key={list.id}
-                selected={selectedLists.includes(list)}
-                onChange={(id, selected) => {
-                  const targetList = lists.find(item => item.id === id);
-                  if (selected) {
-                    setSelectedLists([...selectedLists, targetList]);
-                  } else {
-                    setSelectedLists(selectedLists.filter(item => item.id !== id));
-                  }
-                }}
-              />
-            ))
-          }
-        </ul>
-      </section>
-      <section className="actions">
-        <Button
-          text="New List"
-          onClick={() => {
-            openPanel({
-              component: CreateListPanel,
-              title: 'New List',
-            });
-          }}
-        />
-        <Button text="Cancel" className={classNames(Classes.POPOVER_DISMISS, 'secondary-btn')} />
-        <Button
-          text="Done"
-          intent="primary"
-          onClick={() => {
-            addLinksFromTabs(selectedLists, checkedTabs);
-          }}
-        />
-      </section>
-    </div>
-  );
-};
+}) => (
+  <div className="panel-content">
+    <section className="main-section scrollable-section">
+      <ul className="item-rows-ul">
+        {
+          lists.map(list => (
+            <ListForAdding
+              {...list}
+              key={list.id}
+              enabled={!hasAllLinks(list, checkedTabs)}
+              onClickAddButton={() => {
+                addLinksFromTabs([list], checkedTabs);
+              }}
+            />
+          ))
+        }
+      </ul>
+    </section>
+    <section className="actions">
+      <Button
+        text="New List"
+        intent="primary"
+        onClick={() => {
+          openPanel({
+            component: CreateListPanel,
+            title: 'New List',
+          });
+        }}
+      />
+      <Button text="Done" className={Classes.POPOVER_DISMISS} />
+    </section>
+  </div>
+);
 
 AddToListPanel.propTypes = {
   openPanel: PropTypes.func.isRequired,

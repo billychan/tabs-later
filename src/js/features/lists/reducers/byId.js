@@ -1,14 +1,14 @@
 import {
-  CREATE_LIST,
-  UPDATE_LIST,
+  CREATE_LIST_SUCCESS,
+  UPDATE_LIST_SUCCESS,
   FETCH_LISTS_SUCCESS,
   BATCH_UPDATE_LISTS_SUCCESS,
 } from '../listsActionTypes';
 
 const byId = (state = {}, action) => {
   switch (action.type) {
-    case CREATE_LIST:
-    case UPDATE_LIST: {
+    case CREATE_LIST_SUCCESS:
+    case UPDATE_LIST_SUCCESS: {
       const { list } = action.payload;
       return {
         ...state,
