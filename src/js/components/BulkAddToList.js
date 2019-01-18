@@ -5,7 +5,7 @@ import {
   PanelStack,
   Popover,
 } from '@blueprintjs/core';
-import AddToListPanel from '../containers/AddToListPanel';
+import AddToListPanel from 'containers/panels/AddToListPanel';
 
 const NoTabsCheckedWarning = () => (
   <section className="with-centered-children">

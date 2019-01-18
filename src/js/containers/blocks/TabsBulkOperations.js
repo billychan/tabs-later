@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { getAllIds } from 'common/selectors';
-import * as tabsActions from '../features/tabs/tabsActions';
-import { getCheckedStatus, getCheckedTabsCount } from '../features/tabs/tabsSelectors';
+import * as tabsActions from 'features/tabs/tabsActions';
+import { getCheckedStatus, getCheckedTabsCount } from 'features/tabs/tabsSelectors';
 
-import Search from '../components/Search';
-import BulkCheck from '../components/BulkCheck';
-import BulkAddToList from '../components/BulkAddToList';
+import Search from 'components/Search';
+import BulkCheck from 'components/BulkCheck';
+import BulkAddToList from 'components/BulkAddToList';
 
 const TabsBulkOperations = ({
   tabIds, checkTabs, checkedStatus, numberOfTabs,

@@ -4,7 +4,7 @@ import { Classes, Button } from '@blueprintjs/core';
 import { cold } from 'react-hot-loader';
 
 import { connect } from 'react-redux';
-import * as listsActions from '../features/lists/listsActions';
+import * as listsActions from 'features/lists/listsActions';
 
 const CreateListPanel = ({ closePanel, createList }) => {
   const [listName, setListName] = useState('');

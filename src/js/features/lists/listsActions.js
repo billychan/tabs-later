@@ -36,11 +36,14 @@ export const createList = ({ name }) => (dispatch) => {
 
 export const updateList = (list, attributes) => (dispatch) => {
   dispatch({ type: UPDATE_LIST_REQUEST });
-  const newList = { ...list, attributes };
-  storage.updateList(newList).then(() => dispatch({
+  const newList = { ...list, ...attributes };
+  storage.updateList(newList).then(resp => dispatch({
     type: UPDATE_LIST_SUCCESS,
     payload: {
-      list: newList,
+      list: {
+        ...newList,
+        _rev: resp.rev,
+      },
     },
   }));
 };

@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { getAllItems } from 'common/selectors';
-import * as tabsActions from '../features/tabs/tabsActions';
+import * as tabsActions from 'features/tabs/tabsActions';
 
-import Tab from '../components/Tab';
-import TabsBulkOperations from './TabsBulkOperations';
+import Tab from 'components/Tab';
+import TabsBulkOperations from 'containers/blocks/TabsBulkOperations';
 
 const TabsContainer = ({ tabs, checkTab }) => (
   <div>

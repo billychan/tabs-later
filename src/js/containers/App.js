@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { cold } from 'react-hot-loader';
 import { Tab as UiTab, Tabs as UiTabs, FocusStyleManager } from '@blueprintjs/core';
-import { fetchAllTabs as fetchAllTabsAction } from '../features/tabs/tabsActions';
-import { fetchLists as fetchListsAction } from '../features/lists/listsActions';
+import { fetchAllTabs as fetchAllTabsAction } from 'features/tabs/tabsActions';
+import { fetchLists as fetchListsAction } from 'features/lists/listsActions';
 
-import TabsContainer from './TabsContainer';
-import SavedListsContainer from './SavedListsContainer';
+import TabsContainer from 'containers/pages/TabsContainer';
+import SavedListsContainer from 'containers/pages/SavedListsContainer';
 
 const App = ({ fetchAllTabs, fetchLists }) => {
   const [currentTabId, setCurrentTabId] = useState('browserTabs');

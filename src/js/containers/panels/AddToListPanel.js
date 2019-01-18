@@ -12,8 +12,9 @@ import { getCheckedTabs } from 'features/tabs/tabsSelectors';
 import * as listsActions from 'features/lists/listsActions';
 import { hasAllLinks } from 'features/lists/listsEntityUtils';
 
-import ListForAdding from 'components/ListForAdding';
-import CreateListPanel from './CreateListPanel';
+import ListItem from 'components/blocks/ListItem';
+import AddToListButton from 'components/buttons/AddToListButton';
+import CreateListPanel from 'containers/panels/CreateListPanel';
 
 const AddToListPanel = ({
   openPanel, lists, addLinksFromTabs, checkedTabs,
@@ -23,14 +24,14 @@ const AddToListPanel = ({
       <ul className="item-rows-ul">
         {
           lists.map(list => (
-            <ListForAdding
-              {...list}
-              key={list.id}
-              enabled={!hasAllLinks(list, checkedTabs)}
-              onClickAddButton={() => {
-                addLinksFromTabs([list], checkedTabs);
-              }}
-            />
+            <ListItem {...list} key={list.id}>
+              <AddToListButton
+                enabled={!hasAllLinks(list, checkedTabs)}
+                onClick={() => {
+                  addLinksFromTabs([list], checkedTabs);
+                }}
+              />
+            </ListItem>
           ))
         }
       </ul>
