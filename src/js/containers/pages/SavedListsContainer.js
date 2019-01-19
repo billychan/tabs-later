@@ -8,7 +8,7 @@ import * as listsActions from 'features/lists/listsActions';
 
 import ExtendedListItem from 'components/blocks/ExtendedListItem';
 
-const SavedListsContainer = ({ lists, updateList }) => (
+const SavedListsContainer = ({ lists, updateList, deleteList }) => (
   <section className="main-section scrollable-section">
     <ul className="item-rows-ul">
       {
@@ -17,6 +17,7 @@ const SavedListsContainer = ({ lists, updateList }) => (
             {...list}
             key={list.id}
             onSave={name => updateList(list, { name })}
+            onDeletion={() => deleteList(list)}
           />
         ))
       }
@@ -27,6 +28,7 @@ const SavedListsContainer = ({ lists, updateList }) => (
 SavedListsContainer.propTypes = {
   lists: PropTypes.arrayOf(PropTypes.object).isRequired,
   updateList: PropTypes.func.isRequired,
+  deleteList: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({

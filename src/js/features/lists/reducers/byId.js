@@ -3,6 +3,7 @@ import {
   UPDATE_LIST_SUCCESS,
   FETCH_LISTS_SUCCESS,
   BATCH_UPDATE_LISTS_SUCCESS,
+  DELETE_LIST_SUCCESS,
 } from '../listsActionTypes';
 
 const byId = (state = {}, action) => {
@@ -21,6 +22,11 @@ const byId = (state = {}, action) => {
         ...state,
         ...action.payload.lists.entities.list,
       };
+    case DELETE_LIST_SUCCESS: {
+      const listId = action.payload.list.id;
+      const { [listId]: listToDelete, ...remaining } = state;
+      return remaining;
+    }
     default:
       return state;
   }

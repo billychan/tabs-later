@@ -12,6 +12,8 @@ export const createList = list => (
 // The difference in update is a _rev attribute needed, and _id is already included.
 export const updateList = list => db.put(list);
 
+export const deleteList = list => db.remove(list._id, list._rev);
+
 export const bulkUpdateLists = lists => db.bulkDocs(lists);
 
 export const fetchLists = () => db.allDocs({ include_docs: true, latest: true });

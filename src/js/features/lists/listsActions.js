@@ -9,6 +9,8 @@ import {
   CREATE_LIST_SUCCESS,
   UPDATE_LIST_REQUEST,
   UPDATE_LIST_SUCCESS,
+  DELETE_LIST_REQUEST,
+  DELETE_LIST_SUCCESS,
   BATCH_UPDATE_LISTS_REQUEST,
   BATCH_UPDATE_LISTS_SUCCESS,
   FETCH_LISTS_REQUEST,
@@ -45,6 +47,14 @@ export const updateList = (list, attributes) => (dispatch) => {
         _rev: resp.rev,
       },
     },
+  }));
+};
+
+export const deleteList = list => (dispatch) => {
+  dispatch({ type: DELETE_LIST_REQUEST });
+  storage.deleteList(list).then(() => dispatch({
+    type: DELETE_LIST_SUCCESS,
+    payload: { list },
   }));
 };
 
