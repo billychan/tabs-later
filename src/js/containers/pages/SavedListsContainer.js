@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { getAllItems } from 'common/selectors';
 import * as listsActions from 'features/lists/listsActions';
 
+import { showSuccessMessage } from 'components/uiHelpers';
 import ExtendedListItem from 'components/blocks/ExtendedListItem';
 
 const SavedListsContainer = ({ lists, updateList, deleteList }) => (
@@ -16,8 +17,14 @@ const SavedListsContainer = ({ lists, updateList, deleteList }) => (
           <ExtendedListItem
             {...list}
             key={list.id}
-            onSave={name => updateList(list, { name })}
-            onDeletion={() => deleteList(list)}
+            onSave={(name) => {
+              updateList(list, { name })
+                .then(() => showSuccessMessage(`List "${name}" updated`));
+            }}
+            onDeletion={() => {
+              deleteList(list)
+                .then(() => showSuccessMessage(`List "${list.name}" removed`));
+            }}
           />
         ))
       }

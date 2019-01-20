@@ -4,6 +4,8 @@ import { Classes, Button } from '@blueprintjs/core';
 import { cold } from 'react-hot-loader';
 
 import { connect } from 'react-redux';
+
+import { showSuccessMessage } from 'components/uiHelpers';
 import * as listsActions from 'features/lists/listsActions';
 
 const CreateListPanel = ({ closePanel, createList }) => {
@@ -25,7 +27,9 @@ const CreateListPanel = ({ closePanel, createList }) => {
           text="Add"
           intent="primary"
           onClick={() => {
-            createList({ name: listName });
+            createList({ name: listName }).then(() => {
+              showSuccessMessage(`List "${listName}" created`);
+            });
             closePanel();
           }}
         />

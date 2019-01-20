@@ -12,3 +12,12 @@ export const arrayToObjectWithKey = (arr = [], key = 'id') => (
     [item[key]]: item,
   }), {})
 );
+
+/**
+ * @example
+ *    maybePluralize(1, 'tab', 'tabs') // => 1 tab
+ *    maybePluralize(2, 'tab', 'tabs') // => 2 tabs
+ */
+export const maybePluralize = (count, singular, plural) => (
+  `${count} ${count === 1 ? singular : plural}`
+);

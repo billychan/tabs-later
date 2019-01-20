@@ -22,7 +22,7 @@ import { buildListFromName, tabToLink, addLinksToList } from './listsEntityUtils
 export const createList = ({ name }) => (dispatch) => {
   dispatch({ type: CREATE_LIST_REQUEST });
   const list = buildListFromName(name);
-  storage.createList(list).then((resp) => {
+  return storage.createList(list).then((resp) => {
     dispatch({
       type: CREATE_LIST_SUCCESS,
       payload: {
@@ -39,7 +39,7 @@ export const createList = ({ name }) => (dispatch) => {
 export const updateList = (list, attributes) => (dispatch) => {
   dispatch({ type: UPDATE_LIST_REQUEST });
   const newList = { ...list, ...attributes };
-  storage.updateList(newList).then(resp => dispatch({
+  return storage.updateList(newList).then(resp => dispatch({
     type: UPDATE_LIST_SUCCESS,
     payload: {
       list: {
@@ -52,7 +52,7 @@ export const updateList = (list, attributes) => (dispatch) => {
 
 export const deleteList = list => (dispatch) => {
   dispatch({ type: DELETE_LIST_REQUEST });
-  storage.deleteList(list).then(() => dispatch({
+  return storage.deleteList(list).then(() => dispatch({
     type: DELETE_LIST_SUCCESS,
     payload: { list },
   }));
@@ -62,7 +62,7 @@ export const addLinksFromTabs = (lists, tabs) => (dispatch) => {
   dispatch({ type: BATCH_UPDATE_LISTS_REQUEST });
   const links = tabs.map(tabToLink);
   const listsToSave = lists.map(list => addLinksToList(list, links));
-  storage.bulkUpdateLists(listsToSave).then((responses) => {
+  return storage.bulkUpdateLists(listsToSave).then((responses) => {
     const responseObj = arrayToObjectWithKey(responses);
     const listsWithRevUpdated = listsToSave.map(list => ({
       ...list,

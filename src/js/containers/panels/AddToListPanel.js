@@ -8,10 +8,13 @@ import {
 
 import { connect } from 'react-redux';
 import { getAllItems } from 'common/selectors';
+import { maybePluralize } from 'common/helpers';
+
 import { getCheckedTabs } from 'features/tabs/tabsSelectors';
 import * as listsActions from 'features/lists/listsActions';
 import { hasAllLinks } from 'features/lists/listsEntityUtils';
 
+import { showSuccessMessage } from 'components/uiHelpers';
 import ListItem from 'components/blocks/ListItem';
 import AddToListButton from 'components/buttons/AddToListButton';
 import CreateListPanel from 'containers/panels/CreateListPanel';
@@ -28,7 +31,12 @@ const AddToListPanel = ({
               <AddToListButton
                 enabled={!hasAllLinks(list, checkedTabs)}
                 onClick={() => {
-                  addLinksFromTabs([list], checkedTabs);
+                  addLinksFromTabs([list], checkedTabs).then(() => {
+                    showSuccessMessage(
+                      `${maybePluralize(checkedTabs.length, 'Tab', 'Tabs')} saved to \
+                      list "${list.name}"`,
+                    );
+                  });
                 }}
               />
             </ListItem>
