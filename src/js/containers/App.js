@@ -6,8 +6,8 @@ import { Tab as UiTab, Tabs as UiTabs, FocusStyleManager } from '@blueprintjs/co
 import { fetchAllTabs as fetchAllTabsAction } from 'features/tabs/tabsActions';
 import { fetchLists as fetchListsAction } from 'features/lists/listsActions';
 
-import TabsContainer from 'containers/pages/TabsContainer';
-import SavedListsContainer from 'containers/pages/SavedListsContainer';
+import TabsPage from 'containers/pages/TabsPage';
+import ListsPagePanel from 'components/pages/ListsPagePanel';
 
 const App = ({ fetchAllTabs, fetchLists }) => {
   const [currentTabId, setCurrentTabId] = useState('browserTabs');
@@ -26,8 +26,8 @@ const App = ({ fetchAllTabs, fetchLists }) => {
         selectedTabId={currentTabId}
         renderActiveTabPanelOnly
       >
-        <UiTab id="browserTabs" title="Current Tabs" panel={<TabsContainer />} />
-        <UiTab id="savedLists" title="Saved Lists" panel={<SavedListsContainer />} />
+        <UiTab id="browserTabs" title="Current Tabs" panel={<TabsPage />} />
+        <UiTab id="savedLists" title="Saved Lists" panel={<ListsPagePanel />} />
       </UiTabs>
     </section>
   );

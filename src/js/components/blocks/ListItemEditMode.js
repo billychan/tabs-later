@@ -8,8 +8,8 @@ import CancelButton from 'components/buttons/CancelButton';
 const ListItemEditMode = ({ name, onSave, onCancel }) => {
   const [value, setValue] = useState(name);
   return (
-    <li className="item-row item-row_edit-mode horizontal-center-aligned">
-      <span className="item-row__text item-row__text_main">
+    <li className="ListItem">
+      <span className="ListItem__main ListItem__main--edit col-9">
         <input
           type="text"
           className={Classes.INPUT}
@@ -20,12 +20,14 @@ const ListItemEditMode = ({ name, onSave, onCancel }) => {
           }}
         />
       </span>
-      <SaveButton
-        onClick={() => onSave(value)}
-      />
-      <CancelButton
-        onClick={onCancel}
-      />
+      <div className="ListItem__actions col-3">
+        <SaveButton
+          onClick={() => onSave(value)}
+        />
+        <CancelButton
+          onClick={onCancel}
+        />
+      </div>
     </li>
   );
 };

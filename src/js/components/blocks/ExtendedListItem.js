@@ -10,7 +10,7 @@ import EditButton from 'components/buttons/EditButton';
 import DeleteButton from 'components/buttons/DeleteButton';
 
 const ExtendedListItem = ({
-  name, links, onSave, onDeletion,
+  name, links, onSave, onDeletion, onClick,
 }) => {
   const [editMode, setEditMode] = useState(false);
   const [isDeletionAlertOpen, setIsDeletionAlertOpen] = useState(false);
@@ -30,9 +30,15 @@ const ExtendedListItem = ({
     );
   }
   return (
-    <ListItem name={name} links={links}>
-      <EditButton onClick={() => { setEditMode(true); }} />
+    <ListItem
+      name={name}
+      links={links}
+      mainCols={12}
+      actionsVisibleOnHover
+      onClick={onClick}
+    >
       <DeleteButton onClick={() => setIsDeletionAlertOpen(true)} />
+      <EditButton onClick={() => { setEditMode(true); }} />
       <Alert
         cancelButtonText="Cancel"
         confirmButtonText="Delete"
@@ -58,6 +64,7 @@ ExtendedListItem.propTypes = {
   links: PropTypes.object.isRequired,
   onSave: PropTypes.func.isRequired,
   onDeletion: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default cold(ExtendedListItem);

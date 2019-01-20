@@ -7,3 +7,16 @@
 .text-small {
   font-size: 0.8rem;
 }
+
+.pull-right {
+  float: right;
+}
+
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.text-nowrap {
+  white-space: nowrap;
+}

@@ -8,10 +8,13 @@ import * as listsActions from 'features/lists/listsActions';
 
 import { showSuccessMessage } from 'components/uiHelpers';
 import ExtendedListItem from 'components/blocks/ExtendedListItem';
+import ListDetailsPage from 'components/pages/ListDetailsPage';
 
-const SavedListsContainer = ({ lists, updateList, deleteList }) => (
-  <section className="main-section scrollable-section">
-    <ul className="item-rows-ul">
+const ListsPage = ({
+  lists, updateList, deleteList, openPanel,
+}) => (
+  <section className="main-section">
+    <ul className="ListItems">
       {
         lists.map(list => (
           <ExtendedListItem
@@ -25,6 +28,15 @@ const SavedListsContainer = ({ lists, updateList, deleteList }) => (
               deleteList(list)
                 .then(() => showSuccessMessage(`List "${list.name}" removed`));
             }}
+            onClick={() => {
+              openPanel({
+                component: ListDetailsPage,
+                title: list.name,
+                props: {
+                  links: Object.values(list.links),
+                },
+              });
+            }}
           />
         ))
       }
@@ -32,10 +44,11 @@ const SavedListsContainer = ({ lists, updateList, deleteList }) => (
   </section>
 );
 
-SavedListsContainer.propTypes = {
+ListsPage.propTypes = {
   lists: PropTypes.arrayOf(PropTypes.object).isRequired,
   updateList: PropTypes.func.isRequired,
   deleteList: PropTypes.func.isRequired,
+  openPanel: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -45,4 +58,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   listsActions,
-)(cold(SavedListsContainer));
+)(cold(ListsPage));

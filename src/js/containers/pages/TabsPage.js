@@ -5,26 +5,24 @@ import { connect } from 'react-redux';
 import { getAllItems } from 'common/selectors';
 import * as tabsActions from 'features/tabs/tabsActions';
 
-import Tab from 'components/Tab';
+import TabItem from 'components/blocks/TabItem';
 import TabsBulkOperations from 'containers/blocks/TabsBulkOperations';
 
-const TabsContainer = ({ tabs, checkTab }) => (
-  <div>
+const TabsPage = ({ tabs, checkTab }) => (
+  <div className="TabsPage">
     <TabsBulkOperations />
-    <section className="tabs-collection-container">
-      <div className="scrollable-section">
-        <ul className="item-rows-ul ">
-          {
-              tabs.map(tab => (
-                <Tab
-                  {...tab}
-                  key={tab.id}
-                  onChange={(tabId, checked) => checkTab(tabId, checked)}
-                />
-              ))
-            }
-        </ul>
-      </div>
+    <section className="TabsPage__tabs">
+      <ul className="TabItems">
+        {
+            tabs.map(tab => (
+              <TabItem
+                {...tab}
+                key={tab.id}
+                onChange={(tabId, checked) => checkTab(tabId, checked)}
+              />
+            ))
+          }
+      </ul>
     </section>
   </div>
 );
@@ -33,7 +31,7 @@ const mapStateToProps = state => ({
   tabs: getAllItems(state.tabs),
 });
 
-TabsContainer.propTypes = {
+TabsPage.propTypes = {
   tabs: PropTypes.arrayOf(PropTypes.object).isRequired,
   checkTab: PropTypes.func.isRequired,
 };
@@ -41,4 +39,4 @@ TabsContainer.propTypes = {
 export default connect(
   mapStateToProps,
   tabsActions,
-)(TabsContainer);
+)(TabsPage);

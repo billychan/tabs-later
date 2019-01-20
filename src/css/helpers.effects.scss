@@ -1,22 +1,4 @@
-.text-center {
-  text-align: center;
-}
-
-.bottom-10 {
-  margin-bottom: 10px;
-}
-
-.horizontal-center-aligned {
-  align-items: center;
-}
-
-.with-centered-children {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.scrollable-section {
+.scrollable {
   overflow-x: auto;
   overflow-y: scroll;
   height: 100%;
@@ -29,5 +11,17 @@
     border: 1px solid #f8f8f8;
     background-color: #e5e5e5;
   }
+}
 
+.hoverable {
+  .visible-on-hover {
+    display: none;
+  }
+  &:hover {
+    background: $color-hover;
+    cursor: pointer;
+    .visible-on-hover {
+      display: block;
+    }
+  }
 }

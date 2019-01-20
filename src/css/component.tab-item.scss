@@ -1,0 +1,21 @@
+.TabItems {
+  @extend .item-rows-ul;
+  @extend .scrollable;
+}
+
+.TabItem {
+  @extend .item-row;
+  @extend .hoverable;
+  padding: 2px 4px;
+  height: 32px;
+}
+
+.TabItem__checkbox {
+  margin-bottom: 0;
+}
+
+.TabItem__main {
+  @extend .text-nowrap;
+  @extend .text-ellipsis;
+  margin-left: 8px;
+}

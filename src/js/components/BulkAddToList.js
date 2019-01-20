@@ -5,7 +5,7 @@ import {
   PanelStack,
   Popover,
 } from '@blueprintjs/core';
-import AddToListPanel from 'containers/panels/AddToListPanel';
+import AddToListPanel from 'containers/popovers/AddToListPanel';
 
 const NoTabsCheckedWarning = () => (
   <section className="with-centered-children">
@@ -24,7 +24,7 @@ const BulkAddToList = ({ enabled, numberOfTabsToAdd }) => (
         ? (
           <PanelStack initialPanel={{
             component: AddToListPanel,
-            title: `Add ${numberOfTabsToAdd} Links To List`,
+            title: `Add ${numberOfTabsToAdd} Tabs To List`,
           }}
           />
         )

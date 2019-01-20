@@ -1,3 +1,24 @@
 .flex-container {
   display: flex;
 }
+
+.flex-col {
+  padding: 0;
+}
+
+*[class^='col-'], *[class*=' col-'] {
+  @extend .flex-col;
+}
+
+.col-12 { width: 100%; }
+.col-11 { width: (100% / 12 * 11); }
+.col-10 { width: (100% / 6 * 5); }
+.col-9  { width: (100% / 4 * 3); }
+.col-8  { width: (100% / 3 * 2); }
+.col-6  { width: (100% / 2); }
+.col-4  { width: (100% / 3); }
+.col-3  { width: (100% / 4); }
+.col-2  { width: (100% / 6); }
+.col-1  { width: (100% / 12); }
+
+

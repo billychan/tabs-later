@@ -1,0 +1,38 @@
+.text-center {
+  text-align: center;
+}
+
+.horizontal-center-aligned {
+  align-items: center;
+}
+
+.vertical-center-aligned {
+  justify-content: center;
+}
+
+.with-centered-children {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.right-secondary {
+  margin-left: auto;
+  margin-right: 10px;
+}
+
+.absolute-vertical-center {
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
+.absolute-horizontal-center {
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.absolute-all-center {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

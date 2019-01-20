@@ -21,3 +21,5 @@ export const arrayToObjectWithKey = (arr = [], key = 'id') => (
 export const maybePluralize = (count, singular, plural) => (
   `${count} ${count === 1 ? singular : plural}`
 );
+
+export const noop = () => {};

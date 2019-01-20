@@ -17,17 +17,17 @@ import { hasAllLinks } from 'features/lists/listsEntityUtils';
 import { showSuccessMessage } from 'components/uiHelpers';
 import ListItem from 'components/blocks/ListItem';
 import AddToListButton from 'components/buttons/AddToListButton';
-import CreateListPanel from 'containers/panels/CreateListPanel';
+import CreateListPanel from 'containers/popovers/CreateListPanel';
 
 const AddToListPanel = ({
   openPanel, lists, addLinksFromTabs, checkedTabs,
 }) => (
   <div className="panel-content">
-    <section className="main-section scrollable-section">
-      <ul className="item-rows-ul">
+    <section className="main-section scrollable">
+      <ul className="ListItems">
         {
           lists.map(list => (
-            <ListItem {...list} key={list.id}>
+            <ListItem {...list} key={list.id} mainCols={11} actionCols={1}>
               <AddToListButton
                 enabled={!hasAllLinks(list, checkedTabs)}
                 onClick={() => {
