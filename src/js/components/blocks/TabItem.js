@@ -12,6 +12,7 @@ const TabItem = ({
   title,
   onChange,
   showCheckbox,
+  children,
 }) => (
   <li className="TabItem">
     {
@@ -25,7 +26,12 @@ const TabItem = ({
     }
     <Favicon url={favIconUrl} />
     <span className="TabItem__main">
-      {title}
+      <span className="TabItem__main__name">
+        {title}
+      </span>
+    </span>
+    <span className="TabItem__actions TabItem__actions--hover">
+      {children}
     </span>
   </li>
 );
@@ -37,6 +43,7 @@ TabItem.propTypes = {
   id: PropTypes.number,
   onChange: PropTypes.func,
   showCheckbox: PropTypes.bool,
+  children: PropTypes.node,
 };
 
 TabItem.defaultProps = {
@@ -45,6 +52,7 @@ TabItem.defaultProps = {
   id: undefined,
   onChange: noop,
   showCheckbox: true,
+  children: '',
 };
 
 export default TabItem;

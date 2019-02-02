@@ -1,0 +1,36 @@
+@mixin item-rows-ul {
+  padding: 0;
+  margin: 0;
+}
+
+@mixin item-row {
+  display: flex;
+  position: relative;
+  list-style: none;
+  padding: 2px 0;
+  align-items: center;
+  border-radius: 4px;
+}
+
+@mixin item-row__main($height) {
+  @extend .text-nowrap;
+  @extend .text-ellipsis;
+  @extend .flex-container;
+  padding: 0 4px;
+  height: $height;
+  line-height: $height;
+}
+
+@mixin item-row__actions {
+  @extend .absolute-vertical-center;
+  position: absolute;
+  right: 0;
+  > * {
+    @extend .pull-right;
+  }
+}
+
+@mixin item-row__actions--hover {
+  @extend .visible-on-hover;
+  background-color: $color-hover;
+}

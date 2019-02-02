@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import { cold } from 'react-hot-loader';
 
 import { connect } from 'react-redux';
-import { getAllItems } from 'common/selectors';
 import * as listsActions from 'features/lists/listsActions';
+
+import { getAllItems } from 'common/selectors';
 
 import { showSuccessMessage } from 'components/uiHelpers';
 import ExtendedListItem from 'components/blocks/ExtendedListItem';
-import ListDetailsPage from 'components/pages/ListDetailsPage';
+import ListDetailsPage from 'containers/pages/ListDetailsPage';
 
 const ListsPage = ({
   lists, updateList, deleteList, openPanel,

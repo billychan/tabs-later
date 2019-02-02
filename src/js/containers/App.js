@@ -3,17 +3,15 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { cold } from 'react-hot-loader';
 import { Tab as UiTab, Tabs as UiTabs, FocusStyleManager } from '@blueprintjs/core';
-import { fetchAllTabs as fetchAllTabsAction } from 'features/tabs/tabsActions';
 import { fetchLists as fetchListsAction } from 'features/lists/listsActions';
 
 import TabsPage from 'containers/pages/TabsPage';
 import ListsPagePanel from 'components/pages/ListsPagePanel';
 
-const App = ({ fetchAllTabs, fetchLists }) => {
+const App = ({ fetchLists }) => {
   const [currentTabId, setCurrentTabId] = useState('browserTabs');
 
   useEffect(() => {
-    fetchAllTabs();
     fetchLists();
     FocusStyleManager.onlyShowFocusOnTabs();
   }, []);
@@ -34,14 +32,12 @@ const App = ({ fetchAllTabs, fetchLists }) => {
 };
 
 App.propTypes = {
-  fetchAllTabs: PropTypes.func.isRequired,
   fetchLists: PropTypes.func.isRequired,
 };
 
 export default connect(
   () => ({}),
   {
-    fetchAllTabs: fetchAllTabsAction,
     fetchLists: fetchListsAction,
   },
 )(cold(App));

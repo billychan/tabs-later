@@ -1,21 +1,34 @@
+$tab-item-height: 32px;
+
 .TabItems {
-  @extend .item-rows-ul;
+  @include item-rows-ul;
   @extend .scrollable;
 }
 
 .TabItem {
-  @extend .item-row;
+  @include item-row;
   @extend .hoverable;
   padding: 2px 4px;
-  height: 32px;
+  height: $tab-item-height;
+}
+
+.TabItem__main {
+  @include item-row__main($item-height);
+  margin-left: 8px;
+}
+
+.TabItem__main__name {
+  @extend .text-ellipsis;
 }
 
 .TabItem__checkbox {
   margin-bottom: 0;
 }
 
-.TabItem__main {
-  @extend .text-nowrap;
-  @extend .text-ellipsis;
-  margin-left: 8px;
+.TabItem__actions {
+  @include item-row__actions;
+}
+
+.TabItem__actions--hover {
+  @include item-row__actions--hover;
 }

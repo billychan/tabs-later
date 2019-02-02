@@ -1,4 +1,4 @@
 .ListDetailsPage {
-  @extend .item-rows-ul;
+  @include item-rows-ul;
   @extend .scrollable;
 }

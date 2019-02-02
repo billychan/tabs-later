@@ -1,23 +1,18 @@
 $item-height: 36px;
 
 .ListItems {
-  @extend .item-rows-ul;
+  @include item-rows-ul;
   @extend .scrollable;
 }
 
 .ListItem {
-  @extend .item-row;
+  @include item-row;
   @extend .hoverable;
-  position: relative;
   height: $item-height;
 }
 
 .ListItem__main {
-  @extend .text-nowrap;
-  @extend .flex-container;
-  padding: 0 4px;
-  height: $item-height;
-  line-height: $item-height;
+  @include item-row__main($item-height);
 }
 
 .ListItem__main__name {
@@ -36,15 +31,9 @@ $item-height: 36px;
 }
 
 .ListItem__actions {
-  @extend .absolute-vertical-center;
-  position: absolute;
-  right: 0;
-  > * {
-    @extend .pull-right;
-  }
+  @include item-row__actions;
 }
 
 .ListItem__actions--hover {
-  @extend .visible-on-hover;
-  background-color: $color-hover;
+  @include item-row__actions--hover;
 }
