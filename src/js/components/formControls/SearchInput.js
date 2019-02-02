@@ -22,7 +22,7 @@ const DeleteIcon = (
   />
 );
 
-const Search = () => {
+const SearchInput = () => {
   const [query, setQuery] = useState('');
   const DeleteButton = (
     <Button
@@ -46,4 +46,4 @@ const Search = () => {
   );
 };
 
-export default cold(Search);
+export default cold(SearchInput);

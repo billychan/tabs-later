@@ -6,20 +6,20 @@ import { getAllIds } from 'common/selectors';
 import * as tabsActions from 'features/tabs/tabsActions';
 import { getCheckedStatus, getCheckedTabsCount } from 'features/tabs/tabsSelectors';
 
-import Search from 'components/Search';
-import BulkCheck from 'components/BulkCheck';
-import BulkAddToList from 'components/BulkAddToList';
+import SearchInput from 'components/formControls/SearchInput';
+import BulkCheck from 'components/formControls/BulkCheck';
+import BulkAddToListButton from 'components/buttons/BulkAddToListButton';
 
 const TabsBulkOperations = ({
   tabIds, checkTabs, checkedStatus, numberOfTabs,
 }) => (
-  <section className="tabs-batch-operations">
+  <section className="BulkOperations">
     <BulkCheck
       checkedStatus={checkedStatus}
       onChange={checked => checkTabs(tabIds, checked)}
     />
-    <Search />
-    <BulkAddToList enabled={checkedStatus > 0} numberOfTabsToAdd={numberOfTabs} />
+    <SearchInput />
+    <BulkAddToListButton enabled={checkedStatus > 0} numberOfTabsToAdd={numberOfTabs} />
   </section>
 );
 

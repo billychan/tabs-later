@@ -13,13 +13,13 @@ const NoTabsCheckedWarning = () => (
   </section>
 );
 
-const BulkAddToList = ({ enabled, numberOfTabsToAdd }) => (
+const BulkAddToListButton = ({ enabled, numberOfTabsToAdd }) => (
   <Popover>
     <Button
       icon="add-to-artifact"
       minimal
     />
-    <div className="add-to-list-box">
+    <div className="add-to-list-box popover-content">
       { enabled
         ? (
           <PanelStack initialPanel={{
@@ -34,9 +34,9 @@ const BulkAddToList = ({ enabled, numberOfTabsToAdd }) => (
   </Popover>
 );
 
-BulkAddToList.propTypes = {
+BulkAddToListButton.propTypes = {
   enabled: PropTypes.bool.isRequired,
   numberOfTabsToAdd: PropTypes.number.isRequired,
 };
 
-export default BulkAddToList;
+export default BulkAddToListButton;

@@ -1,0 +1,19 @@
+.TabsPage {
+  height: $popup-secondary-block-height;
+}
+.TabsPage__tabs {
+  height: $popup-third-block-height + 15px;
+  padding: 6px 0;
+  margin-left: -4px;
+}
+
+.ListDetailsPage {
+  padding-top: 10px;
+}
+
+.ListDetailsPage__lists {
+  @include item-rows-ul;
+  @extend .scrollable;
+  height: $popup-third-block-height - 30px;
+  margin-left: -4px;
+}

@@ -7,9 +7,7 @@
 }
 
 .add-to-list-box {
-  padding: 20px;
   > * {
-    width: 300px;
     height: 300px;
   }
   .panel-content {
@@ -28,9 +26,16 @@
   }
 }
 
+.popover-content {
+  padding: 20px;
+  > * {
+    width: 300px;
+  }
+}
+
 
 .ListsPagePanel {
   > * {
-    height: 400px;
+    height: $popup-secondary-block-height;
   }
 }

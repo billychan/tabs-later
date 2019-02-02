@@ -11,19 +11,14 @@ const TabItem = ({
   id,
   title,
   onChange,
-  showCheckbox,
   children,
 }) => (
   <li className="TabItem">
-    {
-      showCheckbox
-        ? (<Checkbox
-          className="TabItem__checkbox"
-          checked={checked}
-          onChange={({ target }) => onChange(id, target.checked)}
-        />
-        ) : ''
-    }
+    <Checkbox
+      className="TabItem__checkbox"
+      checked={checked}
+      onChange={({ target }) => onChange(id, target.checked)}
+    />
     <Favicon url={favIconUrl} />
     <span className="TabItem__main">
       <span className="TabItem__main__name">
@@ -42,7 +37,6 @@ TabItem.propTypes = {
   title: PropTypes.string.isRequired,
   id: PropTypes.number,
   onChange: PropTypes.func,
-  showCheckbox: PropTypes.bool,
   children: PropTypes.node,
 };
 
@@ -51,7 +45,6 @@ TabItem.defaultProps = {
   favIconUrl: '',
   id: undefined,
   onChange: noop,
-  showCheckbox: true,
   children: '',
 };
 

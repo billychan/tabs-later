@@ -23,3 +23,14 @@ export const maybePluralize = (count, singular, plural) => (
 );
 
 export const noop = () => {};
+
+/**
+ * @return {0|1|2} Checked status: 0 means none, 1 means some, 2 means all
+ */
+export const calculateCheckedStatus = (total, checked) => {
+  if (checked === 0) {
+    return 0;
+  }
+
+  return total - checked === 0 ? 2 : 1;
+};

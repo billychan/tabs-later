@@ -6,6 +6,7 @@ const ListsPagePanel = () => (
   <section className="ListsPagePanel">
     <PanelStack initialPanel={{
       component: ListsPage,
+      title: 'All Lists',
     }}
     />
   </section>

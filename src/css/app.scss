@@ -4,8 +4,8 @@ body {
   margin: 0;
 }
 
-#root {
-  width: 400px;
-  height: 550px;
+.popup-root {
+  width: $popup-root-width;
+  height: $popup-root-height;
   padding: 5px 5px 28px;
 }
