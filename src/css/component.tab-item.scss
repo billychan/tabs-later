@@ -1,4 +1,4 @@
-$tab-item-height: 32px;
+$tab-item-height: 34px;
 
 .TabItems {
   @include item-rows-ul;
@@ -13,12 +13,21 @@ $tab-item-height: 32px;
 }
 
 .TabItem__main {
-  @include item-row__main($item-height);
-  margin-left: 8px;
+  @extend .text-nowrap;
+  @extend .text-ellipsis;
+  padding: 0 4px;
+
+  margin-left: 4px;
 }
 
 .TabItem__main__name {
   @extend .text-ellipsis;
+}
+
+.TabItem__main__url {
+  font-size: 9px;
+  @extend .text-ellipsis;
+  color: #555;
 }
 
 .TabItem__checkbox {

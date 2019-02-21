@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { cold } from 'react-hot-loader';
 
 import { getAllItems } from 'common/selectors';
+import { focusTab } from 'services/browserTabs';
 import * as tabsActions from 'features/tabs/tabsActions';
 
 import TabItem from 'components/blocks/TabItem';
@@ -24,6 +25,7 @@ const TabsPage = ({ tabs, checkTab, fetchAllTabs }) => {
                   {...tab}
                   key={tab.id}
                   onChange={(tabId, checked) => checkTab(tabId, checked)}
+                  onMainBodyClicked={() => focusTab(tab.index)}
                 />
               ))
             }

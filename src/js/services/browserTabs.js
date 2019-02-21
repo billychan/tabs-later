@@ -11,3 +11,6 @@ export const openTabsOnBrowser = (urls = []) => {
   ));
   return Promise.all(promises);
 };
+
+export const focusTab = index => (
+  new Promise(resolve => window.chrome.tabs.highlight({ tabs: index }, resolve)));

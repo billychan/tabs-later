@@ -10,7 +10,9 @@ const TabItem = ({
   favIconUrl,
   id,
   title,
+  url,
   onChange,
+  onMainBodyClicked,
   children,
 }) => (
   <li className="TabItem">
@@ -20,14 +22,22 @@ const TabItem = ({
       onChange={({ target }) => onChange(id, target.checked)}
     />
     <Favicon url={favIconUrl} />
-    <span className="TabItem__main">
-      <span className="TabItem__main__name">
+    <div
+      className="TabItem__main"
+      title={`${title} - ${url}`}
+      role="navigation"
+      onClick={onMainBodyClicked}
+    >
+      <div className="TabItem__main__name">
         {title}
-      </span>
-    </span>
-    <span className="TabItem__actions TabItem__actions--hover">
+      </div>
+      <div className="TabItem__main__url">
+        {url}
+      </div>
+    </div>
+    <div className="TabItem__actions TabItem__actions--hover">
       {children}
-    </span>
+    </div>
   </li>
 );
 
@@ -36,7 +46,9 @@ TabItem.propTypes = {
   favIconUrl: PropTypes.string,
   title: PropTypes.string.isRequired,
   id: PropTypes.number,
+  url: PropTypes.string,
   onChange: PropTypes.func,
+  onMainBodyClicked: PropTypes.func,
   children: PropTypes.node,
 };
 
@@ -44,7 +56,9 @@ TabItem.defaultProps = {
   checked: false,
   favIconUrl: '',
   id: undefined,
+  url: '',
   onChange: noop,
+  onMainBodyClicked: noop,
   children: '',
 };
 
