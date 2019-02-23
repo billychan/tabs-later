@@ -24,8 +24,8 @@ const App = ({ fetchLists }) => {
         selectedTabId={currentTabId}
         renderActiveTabPanelOnly
       >
-        <UiTab id="browserTabs" title="Current Tabs" panel={<TabsPage />} />
-        <UiTab id="savedLists" title="Saved Lists" panel={<ListsPagePanel />} />
+        <UiTab id="browserTabs" title="Current Tabs" panel={<TabsPage />} className="app-tab" />
+        <UiTab id="savedLists" title="Saved Lists" panel={<ListsPagePanel />} className="app-tab" />
       </UiTabs>
     </section>
   );

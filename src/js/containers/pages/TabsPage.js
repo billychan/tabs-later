@@ -9,12 +9,14 @@ import * as tabsActions from 'features/tabs/tabsActions';
 
 import TabItem from 'components/blocks/TabItem';
 import TabItemActions from 'components/blocks/TabItemActions';
+import SelectedItemsHints from 'components/elements/SelectedItemsHints';
 import TabsBulkOperations from 'containers/blocks/TabsBulkOperations';
 
 const TabsPage = ({ tabs, checkTab, fetchAllTabs }) => {
   useEffect(() => {
     fetchAllTabs();
   }, []);
+  const checkedCount = tabs.filter(tab => tab.checked).length;
   return (
     <div className="TabsPage">
       <TabsBulkOperations />
@@ -35,6 +37,9 @@ const TabsPage = ({ tabs, checkTab, fetchAllTabs }) => {
               ))
             }
         </ul>
+      </section>
+      <section className="PageBottomHints">
+        <SelectedItemsHints selectedCount={checkedCount} totalCount={tabs.length} />
       </section>
     </div>
   );

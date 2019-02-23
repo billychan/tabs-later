@@ -15,6 +15,7 @@ import TabItemActions from 'components/blocks/TabItemActions';
 import SearchInput from 'components/formControls/SearchInput';
 import BulkCheck from 'components/formControls/BulkCheck';
 import BulkOpenUrlsButton from 'components/buttons/BulkOpenUrlsButton';
+import SelectedItemsHints from 'components/elements/SelectedItemsHints';
 
 import { openTabsOnBrowser } from 'services/browserTabs';
 
@@ -74,6 +75,9 @@ const ListDetailsPage = ({ links, tabs }) => {
           ))
         }
       </ul>
+      <section className="ListDetailsPage_bottom PageBottomHints">
+        <SelectedItemsHints selectedCount={checkedLinksCount} totalCount={linksCount} />
+      </section>
     </section>
   );
 };
