@@ -8,6 +8,7 @@ import { focusTab } from 'services/browserTabs';
 import * as tabsActions from 'features/tabs/tabsActions';
 
 import TabItem from 'components/blocks/TabItem';
+import TabItemActions from 'components/blocks/TabItemActions';
 import TabsBulkOperations from 'containers/blocks/TabsBulkOperations';
 
 const TabsPage = ({ tabs, checkTab, fetchAllTabs }) => {
@@ -25,7 +26,12 @@ const TabsPage = ({ tabs, checkTab, fetchAllTabs }) => {
                   {...tab}
                   key={tab.id}
                   onChange={(tabId, checked) => checkTab(tabId, checked)}
-                />
+                >
+                  <TabItemActions onOpeningLink={() => {
+                    focusTab(tab.index);
+                  }}
+                  />
+                </TabItem>
               ))
             }
         </ul>
