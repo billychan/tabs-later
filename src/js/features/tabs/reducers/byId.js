@@ -1,8 +1,9 @@
 import {
   FETCH_TABS_SUCCESS,
   TAB_CHECKED_TOGGLE,
+  TABS_CHECKED_TOGGLE,
 } from '../tabsActionTypes';
-import tab from './tab';
+import { toggleTab } from './tab';
 
 const byId = (state = {}, action) => {
   switch (action.type) {
@@ -17,8 +18,15 @@ const byId = (state = {}, action) => {
       const { tabId } = action.payload;
       return {
         ...state,
-        [tabId]: tab(state[tabId], action),
+        [tabId]: toggleTab(state[tabId], action.payload.checked),
       };
+    }
+    case TABS_CHECKED_TOGGLE: {
+      const { tabIds, checked } = action.payload;
+      return tabIds.reduce((acc, tabId) => ({
+        ...acc,
+        [tabId]: toggleTab(state[tabId], checked),
+      }), state);
     }
     default:
       return state;
