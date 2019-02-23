@@ -25,7 +25,6 @@ const TabsPage = ({ tabs, checkTab, fetchAllTabs }) => {
                   {...tab}
                   key={tab.id}
                   onChange={(tabId, checked) => checkTab(tabId, checked)}
-                  onMainBodyClicked={() => focusTab(tab.index)}
                 />
               ))
             }
