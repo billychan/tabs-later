@@ -38,8 +38,10 @@ const TabsPage = ({ tabs, checkTab, fetchAllTabs }) => {
             }
         </ul>
       </section>
-      <section className="PageBottomHints">
-        <SelectedItemsHints selectedCount={checkedCount} totalCount={tabs.length} />
+      <section className="PageBottom">
+        <span className="PageBottomHints">
+          <SelectedItemsHints selectedCount={checkedCount} totalCount={tabs.length} />
+        </span>
       </section>
     </div>
   );

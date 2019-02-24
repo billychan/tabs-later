@@ -43,27 +43,26 @@
   }
 }
 
-.TabsPage {
-  height: $popup-secondary-block-height;
-}
-
-.TabsPage__tabs {
-  height: $popup-third-block-height + 15px;
-  padding: 6px 0;
-  margin-left: -4px;
-}
-
 .ListDetailsPage {
   padding-top: 10px;
 }
 
-.ListDetailsPage__lists {
-  @include item-rows-ul;
-  @extend .scrollable;
-  height: $popup-third-block-height - 60px;
-  margin-left: -4px;
+.TabsPage__tabs {
+  height: $popup-third-block-height + 10px;
 }
 
-.ListDetailsPage_bottom {
-  padding-top: 10px;
+.ListDetailsPage__links {
+  height: $popup-third-block-height - 25px;
+}
+
+.ListsPage_lists {
+  height: $popup-third-block-height + 10px;
+}
+
+.TabItems, .ListItems {
+  @include item-rows-ul;
+  @extend .scrollable;
+  padding-top: 6px;
+  border-bottom: 1px solid #ddd;
+  margin-left: -4px;
 }

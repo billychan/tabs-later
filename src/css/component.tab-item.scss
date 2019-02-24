@@ -1,10 +1,5 @@
 $tab-item-height: 34px;
 
-.TabItems {
-  @include item-rows-ul;
-  @extend .scrollable;
-}
-
 .TabItem {
   @include item-row;
   @extend .hoverable;

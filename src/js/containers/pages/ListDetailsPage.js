@@ -50,7 +50,7 @@ const ListDetailsPage = ({ links, tabs }) => {
           onOpenUrls={urls => openTabsOnBrowser(urls)}
         />
       </section>
-      <ul className="ListDetailsPage__lists">
+      <ul className="ListDetailsPage__links TabItems">
         {
           selectableLinks.map(link => (
             <TabItem
@@ -74,8 +74,13 @@ const ListDetailsPage = ({ links, tabs }) => {
           ))
         }
       </ul>
-      <section className="ListDetailsPage_bottom PageBottomHints">
-        <SelectedItemsHints selectedCount={checkedLinksCount} totalCount={linksCount} />
+      <section className="PageBottom">
+        <span className="PageBottomHints">
+          <SelectedItemsHints
+            selectedCount={checkedLinksCount}
+            totalCount={linksCount}
+          />
+        </span>
       </section>
     </section>
   );

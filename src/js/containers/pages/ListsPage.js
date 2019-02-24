@@ -15,7 +15,7 @@ const ListsPage = ({
   lists, updateList, deleteList, openPanel,
 }) => (
   <section className="main-section">
-    <ul className="ListItems">
+    <ul className="ListsPage_lists ListItems">
       {
         lists.map(list => (
           <ExtendedListItem
@@ -42,6 +42,11 @@ const ListsPage = ({
         ))
       }
     </ul>
+    <section className="PageBottom">
+      <span className="PageBottomHints">
+        {`${lists.length} lists`}
+      </span>
+    </section>
   </section>
 );
 
