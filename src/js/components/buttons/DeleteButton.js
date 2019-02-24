@@ -7,6 +7,7 @@ const DeleteButton = ({ onClick, ...attrs }) => (
     icon="trash"
     minimal
     onClick={onClick}
+    title="Delete"
     {...attrs}
   />
 );

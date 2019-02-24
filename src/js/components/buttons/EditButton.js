@@ -7,6 +7,7 @@ const EditButton = ({ onClick, ...attrs }) => (
     icon="edit"
     minimal
     onClick={onClick}
+    title="Edit"
     {...attrs}
   />
 );

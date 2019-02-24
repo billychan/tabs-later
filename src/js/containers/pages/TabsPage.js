@@ -29,9 +29,9 @@ const TabsPage = ({ tabs, checkTab, fetchAllTabs }) => {
                   key={tab.id}
                   onChange={(tabId, checked) => checkTab(tabId, checked)}
                 >
-                  <TabItemActions onOpeningLink={() => {
-                    focusTab(tab.index);
-                  }}
+                  <TabItemActions
+                    onOpeningLink={() => { focusTab(tab.index); }}
+                    openButtonTitle="Switch to tab"
                   />
                 </TabItem>
               ))

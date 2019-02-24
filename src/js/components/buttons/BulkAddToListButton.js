@@ -18,6 +18,7 @@ const BulkAddToListButton = ({ enabled, numberOfTabsToAdd }) => (
     <Button
       icon="add-to-artifact"
       minimal
+      title="Add tabs to list"
     />
     <div className="add-to-list-box popover-content">
       { enabled

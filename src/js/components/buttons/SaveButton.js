@@ -7,6 +7,7 @@ const SaveButton = ({ onClick, ...attrs }) => (
     icon="floppy-disk"
     minimal
     onClick={onClick}
+    title="Save"
     {...attrs}
   />
 );

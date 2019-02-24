@@ -4,10 +4,11 @@ import { Button } from '@blueprintjs/core';
 
 const AddToListButton = ({ onClick, enabled }) => (
   <Button
-    icon={enabled ? 'plus' : 'small-tick'}
+    icon={enabled ? 'tick-circle' : 'small-tick'}
     minimal
     disabled={!enabled}
     onClick={onClick}
+    title={enabled ? 'Add to this list' : 'Already in the list'}
   />
 );
 

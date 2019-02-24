@@ -7,6 +7,7 @@ const CancelButton = ({ onClick }) => (
     icon="undo"
     minimal
     onClick={onClick}
+    title="Cancel"
   />
 );
 

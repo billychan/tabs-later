@@ -67,9 +67,8 @@ const ListDetailsPage = ({ links, tabs }) => {
                 )));
               }}
             >
-              <TabItemActions onOpeningLink={() => {
-                openTabsOnBrowser([link.url]);
-              }}
+              <TabItemActions
+                onOpeningLink={() => { openTabsOnBrowser([link.url]); }}
               />
             </TabItem>
           ))

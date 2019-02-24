@@ -29,6 +29,7 @@ const SearchInput = () => {
       icon={DeleteIcon}
       onClick={() => setQuery('')}
       minimal
+      title="Clear"
     />
   );
   const MaybeDeleteButton = query ? DeleteButton : null;
