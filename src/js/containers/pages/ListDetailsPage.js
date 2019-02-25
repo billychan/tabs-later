@@ -11,6 +11,7 @@ import * as tabsActions from 'features/tabs/tabsActions';
 
 import TabItem from 'components/blocks/TabItem';
 import TabItemActions from 'components/blocks/TabItemActions';
+import Footer from 'components/blocks/Footer';
 
 import SearchInput from 'components/formControls/SearchInput';
 import BulkCheck from 'components/formControls/BulkCheck';
@@ -74,14 +75,16 @@ const ListDetailsPage = ({ links, tabs }) => {
           ))
         }
       </ul>
-      <section className="PageBottom">
-        <span className="PageBottomHints">
-          <SelectedItemsHints
-            selectedCount={checkedLinksCount}
-            totalCount={linksCount}
-          />
-        </span>
-      </section>
+      <Footer>
+        <section className="PageBottom">
+          <span className="PageBottomHints">
+            <SelectedItemsHints
+              selectedCount={checkedLinksCount}
+              totalCount={linksCount}
+            />
+          </span>
+        </section>
+      </Footer>
     </section>
   );
 };

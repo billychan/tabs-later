@@ -8,6 +8,7 @@ import * as listsActions from 'features/lists/listsActions';
 import { getAllItems } from 'common/selectors';
 
 import { showSuccessMessage } from 'components/uiHelpers';
+import Footer from 'components/blocks/Footer';
 import ExtendedListItem from 'components/blocks/ExtendedListItem';
 import ListDetailsPage from 'containers/pages/ListDetailsPage';
 
@@ -42,11 +43,13 @@ const ListsPage = ({
         ))
       }
     </ul>
-    <section className="PageBottom">
-      <span className="PageBottomHints">
-        {`${lists.length} lists`}
-      </span>
-    </section>
+    <Footer>
+      <section className="PageBottom">
+        <span className="PageBottomHints">
+          {`${lists.length} lists`}
+        </span>
+      </section>
+    </Footer>
   </section>
 );
 

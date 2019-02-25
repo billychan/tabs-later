@@ -20,6 +20,7 @@ const App = ({ fetchLists }) => {
     <section className="app-container">
       <UiTabs
         id="app-tabs"
+        className="app-tabs"
         onChange={setCurrentTabId}
         selectedTabId={currentTabId}
         renderActiveTabPanelOnly

@@ -9,6 +9,7 @@ import * as tabsActions from 'features/tabs/tabsActions';
 
 import TabItem from 'components/blocks/TabItem';
 import TabItemActions from 'components/blocks/TabItemActions';
+import Footer from 'components/blocks/Footer';
 import SelectedItemsHints from 'components/elements/SelectedItemsHints';
 import TabsBulkOperations from 'containers/blocks/TabsBulkOperations';
 
@@ -38,11 +39,13 @@ const TabsPage = ({ tabs, checkTab, fetchAllTabs }) => {
             }
         </ul>
       </section>
-      <section className="PageBottom">
-        <span className="PageBottomHints">
-          <SelectedItemsHints selectedCount={checkedCount} totalCount={tabs.length} />
-        </span>
-      </section>
+      <Footer>
+        <section className="PageBottom">
+          <span className="PageBottomHints">
+            <SelectedItemsHints selectedCount={checkedCount} totalCount={tabs.length} />
+          </span>
+        </section>
+      </Footer>
     </div>
   );
 };

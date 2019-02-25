@@ -2,10 +2,17 @@ body {
   width: 100%;
   height: 100%;
   margin: 0;
+  background: $body-bg;
 }
 
 .popup-root {
   width: $popup-root-width;
   height: $popup-root-height;
-  padding: 5px 5px 28px;
+}
+
+.footer {
+  width: 100%;
+  height: 30px;
+  top: inherit;
+  bottom: 0;
 }

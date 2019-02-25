@@ -1,9 +1,15 @@
-.app-container {
-  padding: 0 6px;
+.root {
+  position: relative;
+}
 
+.app-container {
   header {
     text-align: center
   }
+}
+
+.app-tabs {
+  padding: 0 10px
 }
 
 .app-tab {
@@ -63,6 +69,14 @@
   @include item-rows-ul;
   @extend .scrollable;
   padding-top: 6px;
-  border-bottom: 1px solid #ddd;
   margin-left: -4px;
+}
+
+.PageBottom {
+  padding: 6px 10px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: $secondary-body-bg;
 }

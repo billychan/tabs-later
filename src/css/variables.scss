@@ -1,8 +1,13 @@
-$color-global-bg: #fff;
-$color-hover: #eee;
+@import "~@blueprintjs/core/lib/scss/variables";
+
 
 // Layout sizes
 $popup-root-width: 450px;
 $popup-root-height: 600px;
 $popup-secondary-block-height: 530px;
 $popup-third-block-height: 465px;
+
+// Colors
+$body-bg: #fff;
+$secondary-body-bg: $gray5;
+$color-hover: $light-gray2;
