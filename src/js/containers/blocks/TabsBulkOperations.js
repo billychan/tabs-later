@@ -11,14 +11,16 @@ import BulkCheck from 'components/formControls/BulkCheck';
 import BulkAddToListButton from 'components/buttons/BulkAddToListButton';
 
 const TabsBulkOperations = ({
-  tabIds, checkTabs, checkedStatus, numberOfTabs,
+  tabIds, checkTabs, checkedStatus, numberOfTabs, onSearch,
 }) => (
   <section className="BulkOperations">
     <BulkCheck
       checkedStatus={checkedStatus}
       onChange={checked => checkTabs(tabIds, checked)}
     />
-    <SearchInput />
+    <SearchInput
+      onSearch={query => onSearch(query)}
+    />
     <BulkAddToListButton enabled={checkedStatus > 0} numberOfTabsToAdd={numberOfTabs} />
   </section>
 );
@@ -28,6 +30,7 @@ TabsBulkOperations.propTypes = {
   checkTabs: PropTypes.func.isRequired,
   checkedStatus: PropTypes.number.isRequired,
   numberOfTabs: PropTypes.number.isRequired,
+  onSearch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({

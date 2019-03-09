@@ -10,6 +10,10 @@ body {
   height: $popup-root-height;
 }
 
+.root {
+  position: relative;
+}
+
 .footer {
   width: 100%;
   height: 30px;

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import {
   Button,
   Colors,
   Icon,
   InputGroup,
 } from '@blueprintjs/core';
+import debounce from 'lodash/debounce';
 import { cold } from 'react-hot-loader';
 
 const SearchIcon = (
@@ -22,12 +24,16 @@ const DeleteIcon = (
   />
 );
 
-const SearchInput = () => {
+const SearchInput = ({ onSearch }) => {
   const [query, setQuery] = useState('');
+  const setQueryAndEmit = (queryText) => {
+    setQuery(queryText);
+    onSearch(queryText);
+  };
   const DeleteButton = (
     <Button
       icon={DeleteIcon}
-      onClick={() => setQuery('')}
+      onClick={() => setQueryAndEmit('')}
       minimal
       title="Clear"
     />
@@ -38,13 +44,26 @@ const SearchInput = () => {
       large={false}
       className="operation-search"
       leftIcon={SearchIcon}
-      onChange={({ target }) => setQuery(target.value)}
+      // onChange={debounce((event) => {
+      //   if (event.target) {
+      //     setQueryAndEmit(event.target.value);
+      //   }
+      // }, 300)}
+      onChange={(event) => {
+        if (event.target) {
+          setQueryAndEmit(event.target.value);
+        }
+      }}
       placeholder=""
       rightElement={MaybeDeleteButton}
       small
       value={query}
     />
   );
+};
+
+SearchInput.propTypes = {
+  onSearch: PropTypes.func.isRequired,
 };
 
 export default cold(SearchInput);

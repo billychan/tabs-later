@@ -31,12 +31,8 @@ const TabItem = ({
         role="navigation"
         onClick={() => { checkboxRef.current.input.click(); }}
       >
-        <div className="TabItem__main__name">
-          {title}
-        </div>
-        <div className="TabItem__main__url">
-          {url}
-        </div>
+        <div className="TabItem__main__name" dangerouslySetInnerHTML={{ __html: title }} />
+        <div className="TabItem__main__url" dangerouslySetInnerHTML={{ __html: url }} />
       </div>
       <div className="TabItem__actions TabItem__actions--hover">
         {children}
