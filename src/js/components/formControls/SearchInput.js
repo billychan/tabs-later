@@ -6,7 +6,6 @@ import {
   Icon,
   InputGroup,
 } from '@blueprintjs/core';
-import debounce from 'lodash/debounce';
 import { cold } from 'react-hot-loader';
 
 const SearchIcon = (
@@ -16,6 +15,7 @@ const SearchIcon = (
     style={{ color: Colors.GRAY4, margin: '6px 0 0 6px' }}
   />
 );
+
 const DeleteIcon = (
   <Icon
     icon="delete"
@@ -43,16 +43,10 @@ const SearchInput = ({ onSearch }) => {
     <InputGroup
       large={false}
       className="operation-search"
+      autoFocus
       leftIcon={SearchIcon}
-      // onChange={debounce((event) => {
-      //   if (event.target) {
-      //     setQueryAndEmit(event.target.value);
-      //   }
-      // }, 300)}
-      onChange={(event) => {
-        if (event.target) {
-          setQueryAndEmit(event.target.value);
-        }
+      onChange={({ target }) => {
+        setQueryAndEmit(target.value);
       }}
       placeholder=""
       rightElement={MaybeDeleteButton}

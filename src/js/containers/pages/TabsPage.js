@@ -20,7 +20,11 @@ const TabsPage = ({ tabs, checkTab, fetchAllTabs }) => {
   const checkedCount = tabs.filter(tab => tab.checked).length;
   return (
     <div className="TabsPage">
-      <TabsBulkOperations />
+      <TabsBulkOperations
+        onSearch={(query) => {
+          // console.log('search: ', query);
+        }}
+      />
       <section className="TabsPage__tabs">
         <ul className="TabItems">
           {

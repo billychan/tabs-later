@@ -6,6 +6,7 @@ import Favicon from 'components/elements/Favicon';
 import { noop } from 'common/helpers';
 import { cold } from 'react-hot-loader';
 
+/* eslint-disable react/no-danger */
 const TabItem = ({
   checked,
   favIconUrl,
@@ -14,6 +15,8 @@ const TabItem = ({
   url,
   onChange,
   children,
+  titleHighlighted,
+  urlHighlighted,
 }) => {
   const checkboxRef = useRef(null);
   return (
@@ -31,8 +34,14 @@ const TabItem = ({
         role="navigation"
         onClick={() => { checkboxRef.current.input.click(); }}
       >
-        <div className="TabItem__main__name" dangerouslySetInnerHTML={{ __html: title }} />
-        <div className="TabItem__main__url" dangerouslySetInnerHTML={{ __html: url }} />
+        <div
+          className="TabItem__main__name"
+          dangerouslySetInnerHTML={{ __html: titleHighlighted || title }}
+        />
+        <div
+          className="TabItem__main__url"
+          dangerouslySetInnerHTML={{ __html: urlHighlighted || url }}
+        />
       </div>
       <div className="TabItem__actions TabItem__actions--hover">
         {children}
@@ -49,6 +58,8 @@ TabItem.propTypes = {
   url: PropTypes.string,
   onChange: PropTypes.func,
   children: PropTypes.node,
+  titleHighlighted: PropTypes.string,
+  urlHighlighted: PropTypes.string,
 };
 
 TabItem.defaultProps = {
@@ -58,6 +69,8 @@ TabItem.defaultProps = {
   url: '',
   onChange: noop,
   children: '',
+  titleHighlighted: '',
+  urlHighlighted: '',
 };
 
 export default cold(TabItem);

@@ -48,9 +48,7 @@ const ListDetailsPage = ({ links, tabs }) => {
         <SearchInput
           onSearch={(query) => {
             if (query) {
-              const res = searchLinks(visibleLinks, query);
-              console.log('search results', res);
-              setVisibleLinks(res);
+              setVisibleLinks(searchLinks(visibleLinks, query));
             } else {
               setVisibleLinks(links);
             }
