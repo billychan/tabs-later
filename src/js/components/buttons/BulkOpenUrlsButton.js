@@ -31,12 +31,17 @@ const OpeningConfirmation = ({ urls, existingTabUrls, onOpenUrls }) => {
         )
         : null}
       <p>
-        <Button
-          text={`Open ${uniqueUrls.length} unique url(s) only`}
-          intent="primary"
-          className={Classes.POPOVER_DISMISS}
-          onClick={() => onOpenUrls(uniqueUrls)}
-        />
+        { uniqueUrls.length
+          ? (
+            <Button
+              text={`Open ${uniqueUrls.length} unique url(s) only`}
+              intent="primary"
+              className={Classes.POPOVER_DISMISS}
+              onClick={() => onOpenUrls(uniqueUrls)}
+            />
+          )
+          : null
+        }
       </p>
       <p><Button text="Cancel" className={Classes.POPOVER_DISMISS} /></p>
     </div>

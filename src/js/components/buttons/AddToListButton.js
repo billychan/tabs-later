@@ -8,6 +8,7 @@ const AddToListButton = ({ onClick, enabled }) => (
     minimal
     disabled={!enabled}
     onClick={onClick}
+    intent={enabled ? 'primary' : 'none'}
     title={enabled ? 'Add to this list' : 'Already in the list'}
   />
 );

@@ -1,48 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { cold } from 'react-hot-loader';
-import { connect } from 'react-redux';
 
 import { calculateCheckedStatus } from 'common/helpers';
-import { getAllItems } from 'common/selectors';
 import { searchLinks } from 'common/utils/search';
 
-import * as tabsActions from 'features/tabs/tabsActions';
-
 import TabItem from 'components/blocks/TabItem';
-import TabItemActions from 'components/blocks/TabItemActions';
 import Footer from 'components/blocks/Footer';
 
 import SearchInput from 'components/formControls/SearchInput';
 import BulkCheck from 'components/formControls/BulkCheck';
-import BulkOpenUrlsButton from 'components/buttons/BulkOpenUrlsButton';
 import SelectedItemsHints from 'components/elements/SelectedItemsHints';
-
-import { openTabsOnBrowser } from 'services/browserTabs';
 
 const selectLink = (link, toSelect = true) => ({ ...link, checked: toSelect });
 const selectLinks = (links, toSelect = true) => links.map(link => selectLink(link, toSelect));
 
-/**
- * Note openTabsOnBrowser makes side effect directly. The reason not going through an action
- * creator is there is no suitable action to update state. Normally fetching all tabs again is
- * expected after new tab opened, but the new tab info will be empty if fetched immediately after
- * creation since it's not fully loaded yet, so it's better just refreshing info when displaying
- * tabs list page.
- */
-const ListDetailsPage = ({ links, tabs }) => {
+const mergeLinksWithCheckedState = (links, localLinks) => (
+  links.map((link) => {
+    const localLink = localLinks.find(item => item.id === link.id);
+    if (localLink) {
+      return {
+        ...link,
+        checked: localLink.checked,
+      };
+    }
+    return link;
+  })
+);
+
+const getCheckedLinksCount = links => links.filter(link => link.checked).length;
+
+const ListDetailsPage = ({
+  links,
+  renderBulkOperations,
+  renderItemOperations,
+  className,
+}) => {
   const linksCount = links.length;
   const [visibleLinks, setVisibleLinks] = useState(links);
-  const [checkedLinksCount, setCheckedLinksCount] = useState(0);
+  // The links prop may change, sync with it with local state
+  useEffect(() => {
+    setVisibleLinks(mergeLinksWithCheckedState(links, visibleLinks));
+  }, [links]);
   return (
-    <section className="ListDetailsPage">
+    <section className={`ListDetailsPage${className ? ` ${className}` : ''}`}>
       <section className="BulkOperations">
         <BulkCheck
-          checkedStatus={calculateCheckedStatus(linksCount, checkedLinksCount)}
+          checkedStatus={calculateCheckedStatus(linksCount, getCheckedLinksCount(visibleLinks))}
           onChange={(checked) => {
             setVisibleLinks(selectLinks(visibleLinks, checked));
-            setCheckedLinksCount(checked ? linksCount : 0);
           }}
         />
         <SearchInput
@@ -54,24 +61,22 @@ const ListDetailsPage = ({ links, tabs }) => {
             }
           }}
         />
-        <BulkOpenUrlsButton
-          urls={visibleLinks.filter(link => link.checked).map(link => link.url)}
-          existingTabUrls={tabs.map(tab => tab.url)}
-          onOpenUrls={urls => openTabsOnBrowser(urls)}
-        />
+        {
+          renderBulkOperations({
+            selectedLinks: visibleLinks.filter(link => link.checked),
+          })
+        }
       </section>
-      <ul className="ListDetailsPage__links TabItems">
+      <ul className="ListDetailsPage__links LinkItems">
         {
           visibleLinks.map(link => (
             <TabItem
               {...link}
               title={link.titleHighlighted || link.title}
               url={link.urlHighlighted || link.url}
-              key={link.url}
+              key={link.id}
               checked={link.checked}
               onChange={(_id, checked) => {
-                const inc = checked ? 1 : -1;
-                setCheckedLinksCount(checkedLinksCount + inc);
                 setVisibleLinks(visibleLinks.map(linkItem => (
                   link.url === linkItem.url
                     ? { ...link, checked }
@@ -79,9 +84,7 @@ const ListDetailsPage = ({ links, tabs }) => {
                 )));
               }}
             >
-              <TabItemActions
-                onOpeningLink={() => { openTabsOnBrowser([link.url]); }}
-              />
+              { renderItemOperations({ link }) }
             </TabItem>
           ))
         }
@@ -90,7 +93,7 @@ const ListDetailsPage = ({ links, tabs }) => {
         <section className="PageBottom">
           <span className="PageBottomHints">
             <SelectedItemsHints
-              selectedCount={checkedLinksCount}
+              selectedCount={getCheckedLinksCount(visibleLinks)}
               totalCount={linksCount}
             />
           </span>
@@ -102,14 +105,13 @@ const ListDetailsPage = ({ links, tabs }) => {
 
 ListDetailsPage.propTypes = {
   links: PropTypes.arrayOf(PropTypes.object).isRequired,
-  tabs: PropTypes.arrayOf(PropTypes.object).isRequired,
+  renderBulkOperations: PropTypes.func.isRequired,
+  renderItemOperations: PropTypes.func.isRequired,
+  className: PropTypes.string,
 };
 
-const mapStateToProps = state => ({
-  tabs: getAllItems(state.tabs),
-});
+ListDetailsPage.defaultProps = {
+  className: '',
+};
 
-export default connect(
-  mapStateToProps,
-  tabsActions,
-)(cold(ListDetailsPage));
+export default cold(ListDetailsPage);

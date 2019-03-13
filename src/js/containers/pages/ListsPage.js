@@ -10,12 +10,25 @@ import { getAllItems } from 'common/selectors';
 import { showSuccessMessage } from 'components/uiHelpers';
 import Footer from 'components/blocks/Footer';
 import ExtendedListItem from 'components/blocks/ExtendedListItem';
-import ListDetailsPage from 'containers/pages/ListDetailsPage';
+import ListDetailsPage from 'components/pages/ListDetailsPage';
+import OpenLinkButton from 'components/buttons/OpenLinkButton';
 
+import BulkOpenUrlsButton from 'components/buttons/BulkOpenUrlsButton';
+import { openTabsOnBrowser } from 'services/browserTabs';
+
+import { listLinksToLinksArray } from 'features/lists/listsEntityUtils';
+
+/**
+ * Note openTabsOnBrowser makes side effect directly. The reason not going through an action
+ * creator is there is no suitable action to update state. Normally fetching all tabs again is
+ * expected after new tab opened, but the new tab info will be empty if fetched immediately after
+ * creation since it's not fully loaded yet, so it's better just refreshing info when displaying
+ * tabs list page.
+ */
 const ListsPage = ({
-  lists, updateList, deleteList, openPanel,
+  lists, updateList, deleteList, openPanel, tabs,
 }) => (
-  <section className="main-section">
+  <section className="ListsPage">
     <ul className="ListsPage_lists ListItems">
       {
         lists.map(list => (
@@ -35,7 +48,21 @@ const ListsPage = ({
                 component: ListDetailsPage,
                 title: list.name,
                 props: {
-                  links: Object.values(list.links),
+                  links: listLinksToLinksArray(list),
+                  /* eslint-disable react/prop-types */
+                  // selectedLinks is an argument passing around, not really a prop of this component
+                  renderBulkOperations: ({ selectedLinks }) => (
+                    <BulkOpenUrlsButton
+                      urls={selectedLinks.map(link => link.url)}
+                      existingTabUrls={tabs.map(tab => tab.url)}
+                      onOpenUrls={urls => openTabsOnBrowser(urls)}
+                    />
+                  ),
+                  renderItemOperations: ({ link }) => (
+                    <OpenLinkButton
+                      onClick={() => openTabsOnBrowser([link.url])}
+                    />
+                  ),
                 },
               });
             }}
@@ -58,10 +85,12 @@ ListsPage.propTypes = {
   updateList: PropTypes.func.isRequired,
   deleteList: PropTypes.func.isRequired,
   openPanel: PropTypes.func.isRequired,
+  tabs: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 const mapStateToProps = state => ({
   lists: getAllItems(state.lists),
+  tabs: getAllItems(state.tabs),
 });
 
 export default connect(

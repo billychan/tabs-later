@@ -9,7 +9,9 @@
 }
 
 .app-tabs {
-  padding: 0 10px
+  div[role="tablist"] {
+    padding-left: 10px;
+  }
 }
 
 .app-tab {
@@ -49,23 +51,23 @@
   }
 }
 
+.ListsPage, .ListDetailsPage {
+  padding: 10px 0 0 10px;
+}
+
 .ListDetailsPage {
-  padding-top: 10px;
-}
-
-.TabsPage__tabs {
-  height: $popup-third-block-height + 10px;
-}
-
-.ListDetailsPage__links {
   height: $popup-third-block-height - 25px;
+}
+
+.ListDetailsPage.TabsPage {
+  height: $popup-third-block-height + 15px;
 }
 
 .ListsPage_lists {
   height: $popup-third-block-height + 10px;
 }
 
-.TabItems, .ListItems {
+.LinkItems, .ListItems {
   @include item-rows-ul;
   @extend .scrollable;
   padding-top: 6px;

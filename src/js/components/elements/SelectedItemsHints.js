@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { maybePluralize } from 'common/helpers';
 
 const SelectedItemsHints = ({ selectedCount, totalCount }) => (
   <span>
@@ -7,9 +8,9 @@ const SelectedItemsHints = ({ selectedCount, totalCount }) => (
     {' '}
     of
     {' '}
-    <em>{totalCount}</em>
+    {maybePluralize(totalCount, 'item', 'items')}
     {' '}
-    items selected
+    selected
   </span>
 );
 

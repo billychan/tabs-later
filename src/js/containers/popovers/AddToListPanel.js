@@ -10,9 +10,8 @@ import { connect } from 'react-redux';
 import { getAllItems } from 'common/selectors';
 import { maybePluralize } from 'common/helpers';
 
-import { getCheckedTabs } from 'features/tabs/tabsSelectors';
 import * as listsActions from 'features/lists/listsActions';
-import { hasAllLinks } from 'features/lists/listsEntityUtils';
+import { getUniqueLinks } from 'features/lists/listsEntityUtils';
 
 import { showSuccessMessage } from 'components/uiHelpers';
 import ListItem from 'components/blocks/ListItem';
@@ -20,27 +19,30 @@ import AddToListButton from 'components/buttons/AddToListButton';
 import CreateListPanel from 'containers/popovers/CreateListPanel';
 
 const AddToListPanel = ({
-  openPanel, lists, addLinksFromTabs, checkedTabs,
+  openPanel, lists, addLinksFromTabs, links,
 }) => (
   <div className="panel-content">
     <section className="main-section scrollable">
       <ul className="ListItems">
         {
-          lists.map(list => (
-            <ListItem {...list} key={list.id} mainCols={11} actionCols={1}>
-              <AddToListButton
-                enabled={!hasAllLinks(list, checkedTabs)}
-                onClick={() => {
-                  addLinksFromTabs([list], checkedTabs).then(() => {
-                    showSuccessMessage(
-                      `${maybePluralize(checkedTabs.length, 'Tab', 'Tabs')} saved to \
-                      list "${list.name}"`,
-                    );
-                  });
-                }}
-              />
-            </ListItem>
-          ))
+          lists.map((list) => {
+            const uniqueLinksCount = getUniqueLinks(list, links).length;
+            return (
+              <ListItem {...list} key={list.id} mainCols={11} actionCols={1}>
+                <AddToListButton
+                  enabled={!!uniqueLinksCount}
+                  onClick={() => {
+                    addLinksFromTabs([list], links).then(() => {
+                      showSuccessMessage(
+                        `${maybePluralize(uniqueLinksCount, 'tab', 'tabs')} saved to \
+                        list "${list.name}"`,
+                      );
+                    });
+                  }}
+                />
+              </ListItem>
+            );
+          })
         }
       </ul>
     </section>
@@ -63,13 +65,12 @@ const AddToListPanel = ({
 AddToListPanel.propTypes = {
   openPanel: PropTypes.func.isRequired,
   lists: PropTypes.arrayOf(PropTypes.object).isRequired,
-  checkedTabs: PropTypes.arrayOf(PropTypes.object).isRequired,
+  links: PropTypes.arrayOf(PropTypes.object).isRequired,
   addLinksFromTabs: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   lists: getAllItems(state.lists),
-  checkedTabs: getCheckedTabs(state.tabs),
 });
 
 export default connect(
