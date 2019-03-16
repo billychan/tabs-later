@@ -6,6 +6,7 @@
   "scripts": {
     "build": "node utils/build.js",
     "start": "node utils/webserver.js",
+    "test": "jest",
     "eslint": "node ./node_modules/.bin/eslint"
   },
   "dependencies": {
@@ -13,8 +14,6 @@
     "@blueprintjs/icons": "^3.3.0",
     "classnames": "^2.2.6",
     "fuse.js": "^3.4.3",
-    "lodash": "^4.17.11",
-    "node-sass": "^4.10.0",
     "node-uuid": "^1.4.8",
     "normalizr": "^3.3.0",
     "pouchdb": "^7.0.0",
@@ -28,11 +27,12 @@
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
-    "babel-core": "^6.17.0",
+    "@babel/core": "^7.3.0",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^10.0.1",
-    "babel-loader": "^6.2.4",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-react": "^6.16.0",
+    "babel-jest": "^24.5.0",
+    "babel-loader": "^8.0.5",
     "clean-webpack-plugin": "^0.1.17",
     "copy-webpack-plugin": "^4.2.0",
     "css-loader": "^0.25.0",
@@ -50,9 +50,10 @@
     "eslint-plugin-react": "^7.10.0",
     "eslint-plugin-react-hooks": "next",
     "file-loader": "^2.0.0",
-    "fs-extra": "^0.30.0",
     "html-loader": "^0.4.5",
     "html-webpack-plugin": "2.24.1",
+    "jest": "^24.5.0",
+    "node-sass": "^4.10.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.13.0",
     "webpack": "2.2.1",
