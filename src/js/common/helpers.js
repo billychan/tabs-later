@@ -34,3 +34,23 @@ export const calculateCheckedStatus = (total, checked) => {
 
   return total - checked === 0 ? 2 : 1;
 };
+
+export const pickDuplications = (items, keyName) => (
+  items.reduce((acc, item) => {
+    const value = item[keyName];
+    const { uniqueValues, duplications } = acc;
+
+    return uniqueValues.has(value)
+      ? {
+        uniqueValues,
+        duplications: duplications.concat(item),
+      }
+      : {
+        uniqueValues: uniqueValues.add(value),
+        duplications,
+      };
+  }, {
+    uniqueValues: new Set(),
+    duplications: [],
+  })
+);
