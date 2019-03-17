@@ -35,7 +35,12 @@ export const calculateCheckedStatus = (total, checked) => {
   return total - checked === 0 ? 2 : 1;
 };
 
-export const pickDuplications = (items, keyName) => (
+/**
+ * @param {Array<Object>} items
+ * @param {string} keyName key name to check duplication on
+ * @return {Array<Object} duplicated items
+ */
+export const filterDuplications = (items, keyName) => (
   items.reduce((acc, item) => {
     const value = item[keyName];
     const { uniqueValues, duplications } = acc;
@@ -49,8 +54,9 @@ export const pickDuplications = (items, keyName) => (
         uniqueValues: uniqueValues.add(value),
         duplications,
       };
-  }, {
+  },
+  {
     uniqueValues: new Set(),
     duplications: [],
-  })
+  }).duplications
 );

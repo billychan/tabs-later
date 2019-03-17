@@ -20,7 +20,7 @@ const BulkAddToListButton = ({ links }) => (
       minimal
       title="Add tabs to list"
     />
-    <div className="add-to-list-box popover-content">
+    <section className="add-to-list-box popover-content">
       { links.length
         ? (
           <PanelStack initialPanel={{
@@ -32,7 +32,7 @@ const BulkAddToListButton = ({ links }) => (
         )
         : <NoTabsCheckedWarning />
       }
-    </div>
+    </section>
   </Popover>
 );
 

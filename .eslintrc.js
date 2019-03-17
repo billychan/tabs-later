@@ -1,6 +1,6 @@
 module.exports = {
-  extends: ["airbnb"],
-  plugins: ["react-hooks"],
+  extends: ["airbnb", "plugin:jest/recommended"],
+  plugins: ["react-hooks", "jest"],
   parser: "babel-eslint",
   parserOptions: {
     ecmaVersion: 2018
@@ -20,6 +20,7 @@ module.exports = {
     "jsx-a11y/no-noninteractive-element-interactions": [0]
   },
   env: {
-    browser: true
+    browser: true,
+    "jest/globals": true
   }
 };
