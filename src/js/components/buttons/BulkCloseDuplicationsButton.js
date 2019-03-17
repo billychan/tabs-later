@@ -4,22 +4,37 @@ import {
   Button,
   Popover,
 } from '@blueprintjs/core';
+
 import { filterDuplications, maybePluralize } from 'common/helpers';
+
 import CancelPopoverButton from 'components/buttons/CancelPopoverButton';
+import NoItemsWarningPopover from 'components/elements/NoItemsWarningPopover';
+
+const CloseButton = () => (
+  <Button icon="property" minimal title="Close duplicated tabs" />
+);
+
+const NoDuplicationMessage = () => (
+  <p>There is no duplications. All set!</p>
+);
 
 const BulkCloseDuplicationsButton = ({ links, onConfirm }) => {
   const duplicatedLinks = filterDuplications(links, 'url');
   const dupSize = duplicatedLinks.length;
 
+  if (!links.length) {
+    return (
+      <NoItemsWarningPopover>
+        <CloseButton />
+      </NoItemsWarningPopover>
+    );
+  }
+
   return (
     <Popover>
-      <Button
-        icon="property"
-        minimal
-        title="Close duplicated tabs"
-      />
+      <CloseButton />
       <section className="popover-content BulkCloseDuplications">
-        {
+        {(
           dupSize
             ? (
               <>
@@ -42,9 +57,8 @@ const BulkCloseDuplicationsButton = ({ links, onConfirm }) => {
                   <CancelPopoverButton />
                 </section>
               </>
-            ) : (
-              <p>There is no duplications. All set!</p>
-            )
+            ) : <NoDuplicationMessage />
+          )
         }
       </section>
     </Popover>

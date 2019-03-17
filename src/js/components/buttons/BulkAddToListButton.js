@@ -5,35 +5,31 @@ import {
   PanelStack,
   Popover,
 } from '@blueprintjs/core';
-import AddToListPanel from 'containers/popovers/AddToListPanel';
 
-const NoTabsCheckedWarning = () => (
-  <section className="with-centered-children">
-    <p>Please select tabs to add</p>
-  </section>
-);
+import AddToListPanel from 'containers/popovers/AddToListPanel';
+import NoItemsWarningPopover from 'components/elements/NoItemsWarningPopover';
+
+const AddTabsButton = () => <Button icon="add-to-artifact" minimal title="Add tabs to list" />;
 
 const BulkAddToListButton = ({ links }) => (
-  <Popover>
-    <Button
-      icon="add-to-artifact"
-      minimal
-      title="Add tabs to list"
-    />
-    <section className="add-to-list-box popover-content">
-      { links.length
-        ? (
+  links.length
+    ? (
+      <Popover>
+        <AddTabsButton />
+        <section className="add-to-list-box popover-content">
           <PanelStack initialPanel={{
             component: AddToListPanel,
             title: `Add ${links.length} Tabs To List`,
             props: { links },
           }}
           />
-        )
-        : <NoTabsCheckedWarning />
-      }
-    </section>
-  </Popover>
+        </section>
+      </Popover>
+    ) : (
+      <NoItemsWarningPopover>
+        <AddTabsButton />
+      </NoItemsWarningPopover>
+    )
 );
 
 BulkAddToListButton.propTypes = {
