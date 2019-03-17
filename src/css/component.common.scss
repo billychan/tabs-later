@@ -7,7 +7,31 @@
   }
 }
 
+.actions {
+  display: flex;
+  padding-top: 10px;
+  justify-content: space-between;
+  .secondary-btn {
+    margin-left: auto;
+    margin-right: 10px;
+  }
+}
+
 .PageBottomHints {
   font-size: 11px;
   color: #666;
+}
+
+.BulkCloseDuplications {
+  ul {
+    @extend .scrollable;
+    max-height: 300px;
+    padding-left: 10px;
+    li {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+  }
 }

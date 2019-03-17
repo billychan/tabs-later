@@ -1,10 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { cold } from 'react-hot-loader';
-import {
-  Classes,
-  Button,
-} from '@blueprintjs/core';
+import { Button } from '@blueprintjs/core';
 
 import { connect } from 'react-redux';
 import { getAllItems } from 'common/selectors';
@@ -16,6 +13,7 @@ import { getUniqueLinks } from 'features/lists/listsEntityUtils';
 import { showSuccessMessage } from 'components/uiHelpers';
 import ListItem from 'components/blocks/ListItem';
 import AddToListButton from 'components/buttons/AddToListButton';
+import CancelPopoverButton from 'components/buttons/CancelPopoverButton';
 import CreateListPanel from 'containers/popovers/CreateListPanel';
 
 const AddToListPanel = ({
@@ -57,7 +55,7 @@ const AddToListPanel = ({
           });
         }}
       />
-      <Button text="Done" className={Classes.POPOVER_DISMISS} />
+      <CancelPopoverButton />
     </section>
   </div>
 );

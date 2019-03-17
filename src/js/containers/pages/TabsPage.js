@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { cold } from 'react-hot-loader';
 
 import { getAllItems } from 'common/selectors';
-import { focusTab } from 'services/browserTabs';
+import { focusTab, closeTabs } from 'services/browserTabs';
 
 import * as tabsActions from 'features/tabs/tabsActions';
 
@@ -12,8 +12,8 @@ import ListDetailsPage from 'components/pages/ListDetailsPage';
 import OpenLinkButton from 'components/buttons/OpenLinkButton';
 
 import BulkAddToListButton from 'components/buttons/BulkAddToListButton';
+import BulkCloseDuplicationsButton from 'components/buttons/BulkCloseDuplicationsButton';
 
-// TODO Note: The all tabs state still needs to be maintained in global state
 const TabsPage = ({ tabs, fetchAllTabs }) => {
   useEffect(() => {
     fetchAllTabs();
@@ -23,10 +23,17 @@ const TabsPage = ({ tabs, fetchAllTabs }) => {
       links={tabs}
       className="TabsPage"
       renderBulkOperations={({ selectedLinks }) => (
-        // TODO: This is not complete, since the links are not really passed.
-        <BulkAddToListButton
-          links={selectedLinks}
-        />
+        <>
+          <BulkAddToListButton
+            links={selectedLinks}
+          />
+          <BulkCloseDuplicationsButton
+            links={selectedLinks}
+            onConfirm={(duplicatedLinks) => {
+              closeTabs(duplicatedLinks.map(link => link.id));
+            }}
+          />
+        </>
       )}
       renderItemOperations={({ link }) => (
         <OpenLinkButton

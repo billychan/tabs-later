@@ -6,6 +6,7 @@ import {
   Classes,
 } from '@blueprintjs/core';
 import { cold } from 'react-hot-loader';
+import CancelPopoverButton from 'components/buttons/CancelPopoverButton';
 
 const OpeningConfirmation = ({ urls, existingTabUrls, onOpenUrls }) => {
   const uniqueUrls = urls.filter(url => !existingTabUrls.includes(url));
@@ -43,7 +44,7 @@ const OpeningConfirmation = ({ urls, existingTabUrls, onOpenUrls }) => {
           : null
         }
       </p>
-      <p><Button text="Cancel" className={Classes.POPOVER_DISMISS} /></p>
+      <p><CancelPopoverButton /></p>
     </div>
   );
 };
