@@ -78,7 +78,7 @@ const ListDetailsPage = ({
               checked={link.checked}
               onChange={(_id, checked) => {
                 setVisibleLinks(visibleLinks.map(linkItem => (
-                  link.url === linkItem.url
+                  link.id === linkItem.id
                     ? { ...link, checked }
                     : linkItem
                 )));

@@ -1,5 +1,5 @@
 import { normalize } from 'normalizr';
-import { getAllTabsFromBrowser } from 'services/browserTabs';
+import { getAllTabsFromBrowser, closeTabs as closeTabsService } from 'services/browserTabs';
 import {
   FETCH_TABS_REQUEST,
   FETCH_TABS_SUCCESS,
@@ -16,4 +16,8 @@ export const fetchAllTabs = () => (dispatch) => {
       payload: { tabs: normalize(tabs, arrayOfTabs) },
     });
   });
+};
+
+export const closeTabs = tabIds => (dispatch) => {
+  closeTabsService(tabIds).then(fetchAllTabs()(dispatch));
 };

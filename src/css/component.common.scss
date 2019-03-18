@@ -22,7 +22,7 @@
   color: #666;
 }
 
-.BulkCloseDuplications {
+.popover-content-with-scrollable {
   ul {
     @extend .scrollable;
     max-height: 300px;

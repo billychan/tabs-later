@@ -33,7 +33,7 @@ const BulkCloseDuplicationsButton = ({ links, onConfirm }) => {
   return (
     <Popover>
       <CloseButton />
-      <section className="popover-content BulkCloseDuplications">
+      <section className="popover-content popover-content-with-scrollable">
         {(
           dupSize
             ? (

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { cold } from 'react-hot-loader';
 
 import { getAllItems } from 'common/selectors';
-import { focusTab, closeTabs } from 'services/browserTabs';
+import { focusTab } from 'services/browserTabs';
 
 import * as tabsActions from 'features/tabs/tabsActions';
 
@@ -13,8 +13,10 @@ import OpenLinkButton from 'components/buttons/OpenLinkButton';
 
 import BulkAddToListButton from 'components/buttons/BulkAddToListButton';
 import BulkCloseDuplicationsButton from 'components/buttons/BulkCloseDuplicationsButton';
+import BulkDeleteButton from 'components/buttons/BulkDeleteButton';
+import DeleteButton from 'components/buttons/DeleteButton';
 
-const TabsPage = ({ tabs, fetchAllTabs }) => {
+const TabsPage = ({ tabs, fetchAllTabs, closeTabs }) => {
   useEffect(() => {
     fetchAllTabs();
   }, []);
@@ -33,13 +35,24 @@ const TabsPage = ({ tabs, fetchAllTabs }) => {
               closeTabs(duplicatedLinks.map(link => link.id));
             }}
           />
+          <BulkDeleteButton
+            links={selectedLinks}
+            onConfirm={(linksToClose) => {
+              closeTabs(linksToClose.map(link => link.id));
+            }}
+          />
         </>
       )}
       renderItemOperations={({ link }) => (
-        <OpenLinkButton
-          title="Switch to tab"
-          onClick={() => { focusTab(link.index); }}
-        />
+        <>
+          <DeleteButton
+            onClick={() => closeTabs([link.id])}
+          />
+          <OpenLinkButton
+            title="Switch to tab"
+            onClick={() => { focusTab(link.index); }}
+          />
+        </>
       )}
     />
   );
@@ -52,6 +65,7 @@ const mapStateToProps = state => ({
 TabsPage.propTypes = {
   tabs: PropTypes.arrayOf(PropTypes.object).isRequired,
   fetchAllTabs: PropTypes.func.isRequired,
+  closeTabs: PropTypes.func.isRequired,
 };
 
 export default connect(
