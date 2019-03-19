@@ -3,6 +3,8 @@ $item-height: 36px;
 .ListItems {
   @include item-rows-ul;
   @extend .scrollable;
+  margin-left: -4px;
+  padding: 10px 0 0 10px;
 }
 
 .ListItem {

@@ -42,7 +42,7 @@
   }
 }
 
-.ListsPage, .ListDetailsPage {
+.ListDetailsPage {
   padding: 10px 0 0 10px;
 }
 
@@ -58,7 +58,7 @@
   height: $popup-third-block-height + 10px;
 }
 
-.LinkItems, .ListItems {
+.LinkItems {
   @include item-rows-ul;
   @extend .scrollable;
   padding-top: 6px;

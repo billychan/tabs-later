@@ -8,20 +8,22 @@ import {
 import { maybePluralize } from 'common/helpers';
 import CancelPopoverButton from 'components/buttons/CancelPopoverButton';
 import NoItemsWarningPopover from 'components/elements/NoItemsWarningPopover';
-import DeleteButton from 'components/buttons/DeleteButton';
+import { DeleteButton } from 'components/buttons/ButtonWithTooltip';
+
+const tooltip = 'Close selected tabs';
 
 const BulkDeleteButton = ({ links, onConfirm }) => {
   if (!links.length) {
     return (
       <NoItemsWarningPopover warningText="Please select tabs to close.">
-        <DeleteButton />
+        <DeleteButton tooltip={tooltip} />
       </NoItemsWarningPopover>
     );
   }
 
   return (
     <Popover>
-      <DeleteButton />
+      <DeleteButton tooltip={tooltip} />
       <section className="popover-content popover-content-with-scrollable">
         <p>
           {`Going to close following ${maybePluralize(links.length, 'tab', 'tabs')}`}

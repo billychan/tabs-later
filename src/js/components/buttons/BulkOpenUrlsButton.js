@@ -7,6 +7,7 @@ import {
 } from '@blueprintjs/core';
 import { cold } from 'react-hot-loader';
 import CancelPopoverButton from 'components/buttons/CancelPopoverButton';
+import CustomTooltip from 'components/elements/CustomTooltip';
 
 const OpeningConfirmation = ({ urls, existingTabUrls, onOpenUrls }) => {
   const uniqueUrls = urls.filter(url => !existingTabUrls.includes(url));
@@ -51,11 +52,12 @@ const OpeningConfirmation = ({ urls, existingTabUrls, onOpenUrls }) => {
 
 const BulkOpenUrlsButton = ({ urls, existingTabUrls, onOpenUrls }) => (
   <Popover>
-    <Button
-      icon="document-open"
-      title="Open urls"
-      minimal
-    />
+    <CustomTooltip tooltip="Open selected urls">
+      <Button
+        icon="document-open"
+        minimal
+      />
+    </CustomTooltip>
     <div className="popover-content">
       <h3 className="text-center">Open Urls</h3>
       <div>

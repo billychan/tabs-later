@@ -6,8 +6,7 @@ import { Alert, Intent } from '@blueprintjs/core';
 
 import ListItem from 'components/blocks/ListItem';
 import ListItemEditMode from 'components/blocks/ListItemEditMode';
-import EditButton from 'components/buttons/EditButton';
-import DeleteButton from 'components/buttons/DeleteButton';
+import { DeleteButton, EditButton } from 'components/buttons/ButtonWithTooltip';
 
 const ExtendedListItem = ({
   name, links, onSave, onDeletion, onClick,
@@ -37,7 +36,10 @@ const ExtendedListItem = ({
       actionsVisibleOnHover
       onClick={onClick}
     >
-      <DeleteButton onClick={() => setIsDeletionAlertOpen(true)} />
+      <DeleteButton
+        onClick={() => setIsDeletionAlertOpen(true)}
+        tooltip="Delete list"
+      />
       <EditButton onClick={() => { setEditMode(true); }} />
       <Alert
         cancelButtonText="Cancel"

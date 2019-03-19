@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { cold } from 'react-hot-loader';
-import { Button } from '@blueprintjs/core';
+import { Button, Intent } from '@blueprintjs/core';
 
 import { connect } from 'react-redux';
 import { getAllItems } from 'common/selectors';
@@ -12,9 +12,11 @@ import { getUniqueLinks } from 'features/lists/listsEntityUtils';
 
 import { showSuccessMessage } from 'components/uiHelpers';
 import ListItem from 'components/blocks/ListItem';
-import AddToListButton from 'components/buttons/AddToListButton';
+// import AddToListButton from 'components/buttons/AddToListButton';
 import CancelPopoverButton from 'components/buttons/CancelPopoverButton';
 import CreateListPanel from 'containers/popovers/CreateListPanel';
+
+import { ConfirmButton } from 'components/buttons/ButtonWithTooltip';
 
 const AddToListPanel = ({
   openPanel, lists, addLinksFromTabs, links,
@@ -27,8 +29,10 @@ const AddToListPanel = ({
             const uniqueLinksCount = getUniqueLinks(list, links).length;
             return (
               <ListItem {...list} key={list.id} mainCols={11} actionCols={1}>
-                <AddToListButton
-                  enabled={!!uniqueLinksCount}
+                <ConfirmButton
+                  disabled={!uniqueLinksCount}
+                  intent={Intent.PRIMARY}
+                  tooltip={uniqueLinksCount ? 'Add to list' : 'Already in list'}
                   onClick={() => {
                     addLinksFromTabs([list], links).then(() => {
                       showSuccessMessage(

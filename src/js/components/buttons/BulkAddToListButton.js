@@ -1,21 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Button,
   PanelStack,
   Popover,
 } from '@blueprintjs/core';
 
-import AddToListPanel from 'containers/popovers/AddToListPanel';
 import NoItemsWarningPopover from 'components/elements/NoItemsWarningPopover';
+import AddToListPanel from 'containers/popovers/AddToListPanel';
+import { AddToListButton as ActionButton } from 'components/buttons/ButtonWithTooltip';
 
-const AddTabsButton = () => <Button icon="add-to-artifact" minimal title="Add tabs to list" />;
+const AddToListButton = () => (
+  <ActionButton tooltip="Add selected tabs to list" />
+);
 
 const BulkAddToListButton = ({ links }) => (
   links.length
     ? (
       <Popover>
-        <AddTabsButton />
+        <AddToListButton />
         <section className="add-to-list-box popover-content">
           <PanelStack initialPanel={{
             component: AddToListPanel,
@@ -27,7 +29,7 @@ const BulkAddToListButton = ({ links }) => (
       </Popover>
     ) : (
       <NoItemsWarningPopover warningText="Pleas selecte items to add to list.">
-        <AddTabsButton />
+        <AddToListButton />
       </NoItemsWarningPopover>
     )
 );

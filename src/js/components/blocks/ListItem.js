@@ -12,7 +12,7 @@ const ListItem = ({
   return (
     <li className="ListItem">
       <span
-        className={`ListItem__main col-${mainCols} link-reset`}
+        className={`ListItem__main col-${mainCols}`}
         role="button"
         tabIndex={0}
         onClick={onClick}

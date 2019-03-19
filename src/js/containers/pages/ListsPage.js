@@ -11,7 +11,7 @@ import { showSuccessMessage } from 'components/uiHelpers';
 import Footer from 'components/blocks/Footer';
 import ExtendedListItem from 'components/blocks/ExtendedListItem';
 import ListDetailsPage from 'components/pages/ListDetailsPage';
-import OpenLinkButton from 'components/buttons/OpenLinkButton';
+import { OpenLinkButton } from 'components/buttons/ButtonWithTooltip';
 
 import BulkOpenUrlsButton from 'components/buttons/BulkOpenUrlsButton';
 import { openTabsOnBrowser } from 'services/browserTabs';
@@ -50,7 +50,7 @@ const ListsPage = ({
                 props: {
                   links: listLinksToLinksArray(list),
                   /* eslint-disable react/prop-types */
-                  // selectedLinks is an argument passing around, not really a prop of this component
+                  // selectedLinks is an argument passing around, not really prop of this component
                   renderBulkOperations: ({ selectedLinks }) => (
                     <BulkOpenUrlsButton
                       urls={selectedLinks.map(link => link.url)}
@@ -60,6 +60,7 @@ const ListsPage = ({
                   ),
                   renderItemOperations: ({ link }) => (
                     <OpenLinkButton
+                      tooltip="Open link in new tab"
                       onClick={() => openTabsOnBrowser([link.url])}
                     />
                   ),

@@ -9,12 +9,11 @@ import { focusTab } from 'services/browserTabs';
 import * as tabsActions from 'features/tabs/tabsActions';
 
 import ListDetailsPage from 'components/pages/ListDetailsPage';
-import OpenLinkButton from 'components/buttons/OpenLinkButton';
 
 import BulkAddToListButton from 'components/buttons/BulkAddToListButton';
 import BulkCloseDuplicationsButton from 'components/buttons/BulkCloseDuplicationsButton';
 import BulkDeleteButton from 'components/buttons/BulkDeleteButton';
-import DeleteButton from 'components/buttons/DeleteButton';
+import { DeleteButton, OpenLinkButton } from 'components/buttons/ButtonWithTooltip';
 
 const TabsPage = ({ tabs, fetchAllTabs, closeTabs }) => {
   useEffect(() => {
@@ -46,10 +45,11 @@ const TabsPage = ({ tabs, fetchAllTabs, closeTabs }) => {
       renderItemOperations={({ link }) => (
         <>
           <DeleteButton
+            tooltip="Close tab"
             onClick={() => closeTabs([link.id])}
           />
           <OpenLinkButton
-            title="Switch to tab"
+            tooltip="Go to tab"
             onClick={() => { focusTab(link.index); }}
           />
         </>

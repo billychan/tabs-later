@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Classes } from '@blueprintjs/core';
 import { cold } from 'react-hot-loader';
-import SaveButton from 'components/buttons/SaveButton';
-import CancelButton from 'components/buttons/CancelButton';
+import { CancelButton, SaveButton } from 'components/buttons/ButtonWithTooltip';
 
 const ListItemEditMode = ({ name, onSave, onCancel }) => {
   const [value, setValue] = useState(name);

@@ -9,9 +9,10 @@ import { filterDuplications, maybePluralize } from 'common/helpers';
 
 import CancelPopoverButton from 'components/buttons/CancelPopoverButton';
 import NoItemsWarningPopover from 'components/elements/NoItemsWarningPopover';
+import { RemoveDuplicationsButton as ActionButton } from 'components/buttons/ButtonWithTooltip';
 
-const CloseButton = () => (
-  <Button icon="property" minimal title="Close duplicated tabs" />
+const RemoveDuplicationsButton = () => (
+  <ActionButton tooltip="Close duplicated tabs" />
 );
 
 const NoDuplicationMessage = () => (
@@ -25,14 +26,14 @@ const BulkCloseDuplicationsButton = ({ links, onConfirm }) => {
   if (!links.length) {
     return (
       <NoItemsWarningPopover warningText="Please select items to close duplicated ones among them.">
-        <CloseButton />
+        <RemoveDuplicationsButton />
       </NoItemsWarningPopover>
     );
   }
 
   return (
     <Popover>
-      <CloseButton />
+      <RemoveDuplicationsButton />
       <section className="popover-content popover-content-with-scrollable">
         {(
           dupSize
