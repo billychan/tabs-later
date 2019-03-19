@@ -13,7 +13,7 @@ import DeleteButton from 'components/buttons/DeleteButton';
 const BulkDeleteButton = ({ links, onConfirm }) => {
   if (!links.length) {
     return (
-      <NoItemsWarningPopover>
+      <NoItemsWarningPopover warningText="Please select tabs to close.">
         <DeleteButton />
       </NoItemsWarningPopover>
     );

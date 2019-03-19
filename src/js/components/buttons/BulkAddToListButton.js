@@ -26,7 +26,7 @@ const BulkAddToListButton = ({ links }) => (
         </section>
       </Popover>
     ) : (
-      <NoItemsWarningPopover>
+      <NoItemsWarningPopover warningText="Pleas selecte items to add to list.">
         <AddTabsButton />
       </NoItemsWarningPopover>
     )

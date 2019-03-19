@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Popover } from '@blueprintjs/core';
+import CancelPopoverButton from 'components/buttons/CancelPopoverButton';
 
 const NoItemsWarningPopover = ({ warningText, children }) => (
   <Popover>
@@ -8,6 +9,9 @@ const NoItemsWarningPopover = ({ warningText, children }) => (
     <section className="popover-content">
       <section className="with-centered-children">
         <p>{warningText}</p>
+      </section>
+      <section className="actions actions--single">
+        <CancelPopoverButton />
       </section>
     </section>
   </Popover>

@@ -24,7 +24,7 @@ const BulkCloseDuplicationsButton = ({ links, onConfirm }) => {
 
   if (!links.length) {
     return (
-      <NoItemsWarningPopover>
+      <NoItemsWarningPopover warningText="Please select items to close duplicated ones among them.">
         <CloseButton />
       </NoItemsWarningPopover>
     );
@@ -57,7 +57,14 @@ const BulkCloseDuplicationsButton = ({ links, onConfirm }) => {
                   <CancelPopoverButton />
                 </section>
               </>
-            ) : <NoDuplicationMessage />
+            ) : (
+              <>
+                <section><NoDuplicationMessage /></section>
+                <section className="actions actions--single">
+                  <CancelPopoverButton />
+                </section>
+              </>
+            )
           )
         }
       </section>
