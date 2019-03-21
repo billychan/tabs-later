@@ -1,5 +1,6 @@
 import v4 from 'node-uuid';
 import { arrayToObjectWithKey } from 'common/helpers';
+import omit from 'lodash/omit';
 
 export const buildListFromName = name => ({
   // Timestamp for easier sorting at db side
@@ -8,16 +9,14 @@ export const buildListFromName = name => ({
   links: {},
 });
 
-export const addLinksToList = (list, links = []) => {
-  const newLinks = {
-    ...list.links,
-    ...arrayToObjectWithKey(links, 'url'),
-  };
-  return {
-    ...list,
-    links: newLinks,
-  };
-};
+export const addLinkArrToLinksObj = (linksArr = [], linksObj = {}) => ({
+  ...linksObj,
+  ...arrayToObjectWithKey(linksArr, 'url'),
+});
+
+export const removeLinksArrFromLinksObj = (linksArr = [], linksObj = {}) => (
+  omit(linksObj, linksArr.map(link => link.url))
+);
 
 export const tabToLink = ({ title, url, favIconUrl }) => ({
   title, url, favIconUrl,

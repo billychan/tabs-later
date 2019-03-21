@@ -15,7 +15,7 @@ import { noop } from 'common/helpers';
 const ButtonWithTooltip = ({
   onClick, tooltip, icon, disabled, ...attrs
 }) => {
-  const [isOpen, setIsOpen] = useState(undefined);
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <Tooltip
       content={tooltip}

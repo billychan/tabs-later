@@ -8,7 +8,8 @@ import { focusTab } from 'services/browserTabs';
 
 import * as tabsActions from 'features/tabs/tabsActions';
 
-import ListDetailsPage from 'components/pages/ListDetailsPage';
+import LinksPage from 'components/pages/LinksPage';
+import { maybePluralize } from 'common/helpers';
 
 import BulkAddToListButton from 'components/buttons/BulkAddToListButton';
 import BulkCloseDuplicationsButton from 'components/buttons/BulkCloseDuplicationsButton';
@@ -20,7 +21,7 @@ const TabsPage = ({ tabs, fetchAllTabs, closeTabs }) => {
     fetchAllTabs();
   }, []);
   return (
-    <ListDetailsPage
+    <LinksPage
       links={tabs}
       className="TabsPage"
       renderBulkOperations={({ selectedLinks }) => (
@@ -36,6 +37,11 @@ const TabsPage = ({ tabs, fetchAllTabs, closeTabs }) => {
           />
           <BulkDeleteButton
             links={selectedLinks}
+            buttonText="Close selected tabs"
+            noItemsWarning="Please select tabs to close."
+            itemsWarning={
+              `Going to close following ${maybePluralize(selectedLinks.length, 'tab', 'tabs')}`
+            }
             onConfirm={(linksToClose) => {
               closeTabs(linksToClose.map(link => link.id));
             }}

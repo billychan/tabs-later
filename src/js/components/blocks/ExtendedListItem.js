@@ -2,17 +2,15 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { cold } from 'react-hot-loader';
 
-import { Alert, Intent } from '@blueprintjs/core';
-
 import ListItem from 'components/blocks/ListItem';
 import ListItemEditMode from 'components/blocks/ListItemEditMode';
-import { DeleteButton, EditButton } from 'components/buttons/ButtonWithTooltip';
+import { EditButton } from 'components/buttons/ButtonWithTooltip';
+import { DeleteButtonWithConfirmation } from 'components/buttons/ButtonWithConfirmation';
 
 const ExtendedListItem = ({
   name, links, onSave, onDeletion, onClick,
 }) => {
   const [editMode, setEditMode] = useState(false);
-  const [isDeletionAlertOpen, setIsDeletionAlertOpen] = useState(false);
 
   if (editMode) {
     return (
@@ -36,27 +34,13 @@ const ExtendedListItem = ({
       actionsVisibleOnHover
       onClick={onClick}
     >
-      <DeleteButton
-        onClick={() => setIsDeletionAlertOpen(true)}
+      <DeleteButtonWithConfirmation
         tooltip="Delete list"
+        confirmButtonText="Delete"
+        text={`Are you sure to delete the list "${name}"?`}
+        onConfirm={onDeletion}
       />
       <EditButton onClick={() => { setEditMode(true); }} />
-      <Alert
-        cancelButtonText="Cancel"
-        confirmButtonText="Delete"
-        icon="trash"
-        intent={Intent.DANGER}
-        isOpen={isDeletionAlertOpen}
-        style={{ width: '95%' }}
-        onCancel={() => setIsDeletionAlertOpen(false)}
-        onConfirm={onDeletion}
-      >
-        <p>
-          Are you sure to delete the list
-          <em>{` ${name}`}</em>
-          ?
-        </p>
-      </Alert>
     </ListItem>
   );
 };

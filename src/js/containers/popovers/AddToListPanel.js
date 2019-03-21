@@ -12,14 +12,13 @@ import { getUniqueLinks } from 'features/lists/listsEntityUtils';
 
 import { showSuccessMessage } from 'components/uiHelpers';
 import ListItem from 'components/blocks/ListItem';
-// import AddToListButton from 'components/buttons/AddToListButton';
 import CancelPopoverButton from 'components/buttons/CancelPopoverButton';
 import CreateListPanel from 'containers/popovers/CreateListPanel';
 
 import { ConfirmButton } from 'components/buttons/ButtonWithTooltip';
 
 const AddToListPanel = ({
-  openPanel, lists, addLinksFromTabs, links,
+  openPanel, lists, addTabsIntoList, links,
 }) => (
   <div className="panel-content">
     <section className="main-section scrollable">
@@ -34,7 +33,7 @@ const AddToListPanel = ({
                   intent={Intent.PRIMARY}
                   tooltip={uniqueLinksCount ? 'Add to list' : 'Already in list'}
                   onClick={() => {
-                    addLinksFromTabs([list], links).then(() => {
+                    addTabsIntoList(list, links).then(() => {
                       showSuccessMessage(
                         `${maybePluralize(uniqueLinksCount, 'tab', 'tabs')} saved to \
                         list "${list.name}"`,
@@ -68,7 +67,7 @@ AddToListPanel.propTypes = {
   openPanel: PropTypes.func.isRequired,
   lists: PropTypes.arrayOf(PropTypes.object).isRequired,
   links: PropTypes.arrayOf(PropTypes.object).isRequired,
-  addLinksFromTabs: PropTypes.func.isRequired,
+  addTabsIntoList: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({

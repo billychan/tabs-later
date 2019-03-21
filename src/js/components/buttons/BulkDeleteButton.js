@@ -5,17 +5,18 @@ import {
   Popover,
 } from '@blueprintjs/core';
 
-import { maybePluralize } from 'common/helpers';
 import CancelPopoverButton from 'components/buttons/CancelPopoverButton';
 import NoItemsWarningPopover from 'components/elements/NoItemsWarningPopover';
 import { DeleteButton } from 'components/buttons/ButtonWithTooltip';
 
 const tooltip = 'Close selected tabs';
 
-const BulkDeleteButton = ({ links, onConfirm }) => {
+const BulkDeleteButton = ({
+  links, onConfirm, buttonText, noItemsWarning, itemsWarning,
+}) => {
   if (!links.length) {
     return (
-      <NoItemsWarningPopover warningText="Please select tabs to close.">
+      <NoItemsWarningPopover warningText={noItemsWarning}>
         <DeleteButton tooltip={tooltip} />
       </NoItemsWarningPopover>
     );
@@ -23,10 +24,10 @@ const BulkDeleteButton = ({ links, onConfirm }) => {
 
   return (
     <Popover>
-      <DeleteButton tooltip={tooltip} />
+      <DeleteButton tooltip={buttonText} />
       <section className="popover-content popover-content-with-scrollable">
         <p>
-          {`Going to close following ${maybePluralize(links.length, 'tab', 'tabs')}`}
+          {itemsWarning}
         </p>
         <ul>
           {
@@ -37,7 +38,7 @@ const BulkDeleteButton = ({ links, onConfirm }) => {
         </ul>
         <section className="actions">
           <Button
-            text="Close selected tabs"
+            text={buttonText}
             intent="primary"
             onClick={() => { onConfirm(links); }}
           />
@@ -51,6 +52,14 @@ const BulkDeleteButton = ({ links, onConfirm }) => {
 BulkDeleteButton.propTypes = {
   links: PropTypes.arrayOf(PropTypes.object).isRequired,
   onConfirm: PropTypes.func.isRequired,
+  buttonText: PropTypes.string.isRequired,
+  noItemsWarning: PropTypes.string,
+  itemsWarning: PropTypes.string,
+};
+
+BulkDeleteButton.defaultProps = {
+  noItemsWarning: 'Please select items',
+  itemsWarning: 'Going to delete following',
 };
 
 export default BulkDeleteButton;

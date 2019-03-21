@@ -31,7 +31,7 @@ const mergeLinksWithCheckedState = (links, localLinks) => (
 
 const getCheckedLinksCount = links => links.filter(link => link.checked).length;
 
-const ListDetailsPage = ({
+const LinksPage = ({
   links,
   renderBulkOperations,
   renderItemOperations,
@@ -44,7 +44,7 @@ const ListDetailsPage = ({
     setVisibleLinks(mergeLinksWithCheckedState(links, visibleLinks));
   }, [links]);
   return (
-    <section className={`ListDetailsPage${className ? ` ${className}` : ''}`}>
+    <section className={`LinksPage${className ? ` ${className}` : ''}`}>
       <section className="BulkOperations">
         <BulkCheck
           checkedStatus={calculateCheckedStatus(linksCount, getCheckedLinksCount(visibleLinks))}
@@ -67,7 +67,7 @@ const ListDetailsPage = ({
           })
         }
       </section>
-      <ul className="ListDetailsPage__links LinkItems">
+      <ul className="LinksPage__links LinkItems">
         {
           visibleLinks.map(link => (
             <TabItem
@@ -103,15 +103,15 @@ const ListDetailsPage = ({
   );
 };
 
-ListDetailsPage.propTypes = {
+LinksPage.propTypes = {
   links: PropTypes.arrayOf(PropTypes.object).isRequired,
   renderBulkOperations: PropTypes.func.isRequired,
   renderItemOperations: PropTypes.func.isRequired,
   className: PropTypes.string,
 };
 
-ListDetailsPage.defaultProps = {
+LinksPage.defaultProps = {
   className: '',
 };
 
-export default cold(ListDetailsPage);
+export default cold(LinksPage);

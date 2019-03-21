@@ -54,7 +54,7 @@ TabItem.propTypes = {
   checked: PropTypes.bool,
   favIconUrl: PropTypes.string,
   title: PropTypes.string.isRequired,
-  id: PropTypes.number,
+  id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   url: PropTypes.string,
   onChange: PropTypes.func,
   children: PropTypes.node,

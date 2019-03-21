@@ -17,7 +17,9 @@ import {
   FETCH_LISTS_SUCCESS,
 } from './listsActionTypes';
 
-import { buildListFromName, tabToLink, addLinksToList } from './listsEntityUtils';
+import {
+  buildListFromName, tabToLink, addLinkArrToLinksObj, removeLinksArrFromLinksObj,
+} from './listsEntityUtils';
 
 export const createList = ({ name }) => (dispatch) => {
   dispatch({ type: CREATE_LIST_REQUEST });
@@ -36,7 +38,7 @@ export const createList = ({ name }) => (dispatch) => {
   });
 };
 
-export const updateList = (list, attributes) => (dispatch) => {
+export const updateListAttrs = (list, attributes) => (dispatch) => {
   dispatch({ type: UPDATE_LIST_REQUEST });
   const newList = { ...list, ...attributes };
   return storage.updateList(newList).then(resp => dispatch({
@@ -50,6 +52,22 @@ export const updateList = (list, attributes) => (dispatch) => {
   }));
 };
 
+const addLinksIntoList = (list, linksArr) => (
+  updateListAttrs(list, {
+    links: addLinkArrToLinksObj(linksArr, list.links),
+  })
+);
+
+export const addTabsIntoList = (list, tabs) => (
+  addLinksIntoList(list, tabs.map(tabToLink))
+);
+
+export const removeLinksFromList = (list, linksArr) => (
+  updateListAttrs(list, {
+    links: removeLinksArrFromLinksObj(linksArr, list.links),
+  })
+);
+
 export const deleteList = list => (dispatch) => {
   dispatch({ type: DELETE_LIST_REQUEST });
   return storage.deleteList(list).then(() => dispatch({
@@ -58,13 +76,13 @@ export const deleteList = list => (dispatch) => {
   }));
 };
 
-export const addLinksFromTabs = (lists, tabs) => (dispatch) => {
+// Note this API was deprecated in favor of update list individually. It might be useful
+// for later bulk updating cases, need to re-test
+export const bulkUpdateLists = lists => (dispatch) => {
   dispatch({ type: BATCH_UPDATE_LISTS_REQUEST });
-  const links = tabs.map(tabToLink);
-  const listsToSave = lists.map(list => addLinksToList(list, links));
-  return storage.bulkUpdateLists(listsToSave).then((responses) => {
+  return storage.bulkUpdateLists(lists).then((responses) => {
     const responseObj = arrayToObjectWithKey(responses);
-    const listsWithRevUpdated = listsToSave.map(list => ({
+    const listsWithRevUpdated = lists.map(list => ({
       ...list,
       _rev: responseObj[list.id].rev,
     }));

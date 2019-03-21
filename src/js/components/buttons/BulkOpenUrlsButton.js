@@ -6,8 +6,10 @@ import {
   Classes,
 } from '@blueprintjs/core';
 import { cold } from 'react-hot-loader';
+
 import CancelPopoverButton from 'components/buttons/CancelPopoverButton';
-import CustomTooltip from 'components/elements/CustomTooltip';
+import NoItemsWarningPopover from 'components/elements/NoItemsWarningPopover';
+import { OpenLinkButton } from 'components/buttons/ButtonWithTooltip';
 
 const OpeningConfirmation = ({ urls, existingTabUrls, onOpenUrls }) => {
   const uniqueUrls = urls.filter(url => !existingTabUrls.includes(url));
@@ -50,32 +52,28 @@ const OpeningConfirmation = ({ urls, existingTabUrls, onOpenUrls }) => {
   );
 };
 
-const BulkOpenUrlsButton = ({ urls, existingTabUrls, onOpenUrls }) => (
-  <Popover>
-    <CustomTooltip tooltip="Open selected urls">
-      <Button
-        icon="document-open"
-        minimal
-      />
-    </CustomTooltip>
-    <div className="popover-content">
-      <h3 className="text-center">Open Urls</h3>
-      <div>
-        {
-          urls.length === 0
-            ? 'Please select urls to open as tabs'
-            : (
-              <OpeningConfirmation
-                urls={urls}
-                existingTabUrls={existingTabUrls}
-                onOpenUrls={onOpenUrls}
-              />
-            )
-        }
+const BulkOpenUrlsButton = ({ urls, existingTabUrls, onOpenUrls }) => {
+  if (!urls.length) {
+    return (
+      <NoItemsWarningPopover warningText="Please select links to open as tabs">
+        <OpenLinkButton tooltip="Open selected links" />
+      </NoItemsWarningPopover>
+    );
+  }
+  return (
+    <Popover>
+      <OpenLinkButton tooltip="Open selected links" />
+      <div className="popover-content">
+        <h3 className="text-center">Open Urls</h3>
+        <OpeningConfirmation
+          urls={urls}
+          existingTabUrls={existingTabUrls}
+          onOpenUrls={onOpenUrls}
+        />
       </div>
-    </div>
-  </Popover>
-);
+    </Popover>
+  );
+};
 
 OpeningConfirmation.propTypes = {
   urls: PropTypes.arrayOf(PropTypes.string).isRequired,
