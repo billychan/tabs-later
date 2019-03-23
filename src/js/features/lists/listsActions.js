@@ -21,20 +21,22 @@ import {
   buildListFromName, tabToLink, addLinkArrToLinksObj, removeLinksArrFromLinksObj,
 } from './listsEntityUtils';
 
-export const createList = ({ name }) => (dispatch) => {
+export const createList = ({ listName }) => (dispatch) => {
   dispatch({ type: CREATE_LIST_REQUEST });
-  const list = buildListFromName(name);
+  const list = buildListFromName(listName);
   return storage.createList(list).then((resp) => {
+    const newList = {
+      ...list,
+      _rev: resp.rev,
+      _id: list.id,
+    };
     dispatch({
       type: CREATE_LIST_SUCCESS,
       payload: {
-        list: {
-          ...list,
-          _rev: resp.rev,
-          _id: list.id,
-        },
+        list: newList,
       },
     });
+    return newList;
   });
 };
 

@@ -11,14 +11,18 @@ import * as listsActions from 'features/lists/listsActions';
 import { getUniqueLinks } from 'features/lists/listsEntityUtils';
 
 import { showSuccessMessage } from 'components/uiHelpers';
+
 import ListItem from 'components/blocks/ListItem';
 import CancelPopoverButton from 'components/buttons/CancelPopoverButton';
-import CreateListPanel from 'containers/popovers/CreateListPanel';
-
+import CreateListPanel from 'components/popovers/CreateListPanel';
 import { ConfirmButton } from 'components/buttons/ButtonWithTooltip';
 
+const tabsSavedMessage = (listName, links) => (
+  `${maybePluralize(links.length, 'tab', 'tabs')} saved to list "${listName}"`
+);
+
 const AddToListPanel = ({
-  openPanel, lists, addTabsIntoList, links,
+  openPanel, lists, addTabsIntoList, links, createList,
 }) => (
   <div className="panel-content">
     <section className="main-section scrollable">
@@ -34,10 +38,7 @@ const AddToListPanel = ({
                   tooltip={uniqueLinksCount ? 'Add to list' : 'Already in list'}
                   onClick={() => {
                     addTabsIntoList(list, links).then(() => {
-                      showSuccessMessage(
-                        `${maybePluralize(uniqueLinksCount, 'tab', 'tabs')} saved to \
-                        list "${list.name}"`,
-                      );
+                      showSuccessMessage(tabsSavedMessage(list.name, links));
                     });
                   }}
                 />
@@ -55,6 +56,21 @@ const AddToListPanel = ({
           openPanel({
             component: CreateListPanel,
             title: 'New List',
+            props: {
+              onConfirm({ listName }) {
+                createList({ listName })
+                  .then((newList) => {
+                    showSuccessMessage(`List "${listName}" created`);
+                    return newList;
+                  })
+                  .then(newList => (
+                    addTabsIntoList(newList, links)
+                  ))
+                  .then(() => {
+                    showSuccessMessage(tabsSavedMessage(listName, links));
+                  });
+              },
+            },
           });
         }}
       />
@@ -68,6 +84,7 @@ AddToListPanel.propTypes = {
   lists: PropTypes.arrayOf(PropTypes.object).isRequired,
   links: PropTypes.arrayOf(PropTypes.object).isRequired,
   addTabsIntoList: PropTypes.func.isRequired,
+  createList: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({

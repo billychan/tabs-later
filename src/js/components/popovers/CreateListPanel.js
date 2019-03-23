@@ -3,12 +3,7 @@ import PropTypes from 'prop-types';
 import { Classes, Button } from '@blueprintjs/core';
 import { cold } from 'react-hot-loader';
 
-import { connect } from 'react-redux';
-
-import { showSuccessMessage } from 'components/uiHelpers';
-import * as listsActions from 'features/lists/listsActions';
-
-const CreateListPanel = ({ closePanel, createList }) => {
+const CreateListPanel = ({ closePanel, onConfirm }) => {
   const [listName, setListName] = useState('');
   return (
     <div className="panel-content">
@@ -16,6 +11,7 @@ const CreateListPanel = ({ closePanel, createList }) => {
         <input
           type="text"
           className={Classes.INPUT}
+          style={{ width: '96%' }}
           placeholder="Enter List Name..."
           name="list-name"
           onChange={event => setListName(event.target.value)}
@@ -27,10 +23,8 @@ const CreateListPanel = ({ closePanel, createList }) => {
           text="Add"
           intent="primary"
           onClick={() => {
-            createList({ name: listName }).then(() => {
-              showSuccessMessage(`List "${listName}" created`);
-            });
             closePanel();
+            onConfirm({ listName });
           }}
         />
       </section>
@@ -39,13 +33,9 @@ const CreateListPanel = ({ closePanel, createList }) => {
 };
 
 CreateListPanel.propTypes = {
+  // closePanel is from Blueprint Panel
   closePanel: PropTypes.func.isRequired,
-  createList: PropTypes.func.isRequired,
+  onConfirm: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => state.lists;
-
-export default connect(
-  mapStateToProps,
-  listsActions,
-)(cold(CreateListPanel));
+export default cold(CreateListPanel);
