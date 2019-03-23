@@ -8,7 +8,7 @@ const ListItemEditMode = ({ name, onSave, onCancel }) => {
   const [value, setValue] = useState(name);
   return (
     <li className="ListItem">
-      <span className="ListItem__main ListItem__main--edit col-9">
+      <span className="ListItem__main ListItem__main--edit col-10">
         <input
           type="text"
           className={Classes.INPUT}
@@ -19,7 +19,7 @@ const ListItemEditMode = ({ name, onSave, onCancel }) => {
           }}
         />
       </span>
-      <div className="ListItem__actions col-3">
+      <div className="ListItem__actions col-2">
         <SaveButton
           onClick={() => onSave(value)}
         />

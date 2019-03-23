@@ -9,7 +9,6 @@
   list-style: none;
   padding: 2px 0;
   align-items: center;
-  border-radius: 4px;
 }
 
 @mixin item-row__main($height) {
@@ -32,5 +31,5 @@
 
 @mixin item-row__actions--hover {
   @extend .visible-on-hover;
-  background-color: $color-hover;
+  background-color: $body-bg;
 }

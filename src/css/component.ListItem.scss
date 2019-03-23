@@ -10,6 +10,7 @@ $item-height: 36px;
 .ListItem {
   @include item-row;
   @extend .hoverable;
+  @extend .hoverable__clickable;
   height: $item-height;
 }
 

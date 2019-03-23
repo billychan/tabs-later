@@ -18,10 +18,16 @@
     display: none;
   }
   &:hover {
-    background: $color-hover;
-    cursor: pointer;
+    box-shadow: 3px 2px 2px #aaa;
+    cursor: default;
     .visible-on-hover {
       display: block;
     }
+  }
+}
+
+.hoverable__clickable {
+  &:hover {
+    cursor: pointer;
   }
 }

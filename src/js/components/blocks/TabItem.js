@@ -32,7 +32,6 @@ const TabItem = ({
         className="TabItem__main"
         title={`${title} - ${url}`}
         role="navigation"
-        onClick={() => { checkboxRef.current.input.click(); }}
       >
         <div
           className="TabItem__main__name"
