@@ -15,11 +15,12 @@ export const arrayToObjectWithKey = (arr = [], key = 'id') => (
 
 /**
  * @example
- *    maybePluralize(1, 'tab', 'tabs') // => 1 tab
- *    maybePluralize(2, 'tab', 'tabs') // => 2 tabs
+ *    maybePluralize(1, 'tab') // => 1 tab
+ *    maybePluralize(2, 'tab') // => 2 tabs
+ *    maybePluralize(2, 'foot', 'feet') // => 2 feet
  */
 export const maybePluralize = (count, singular, plural) => (
-  `${count} ${count === 1 ? singular : plural}`
+  `${count} ${count === 1 ? singular : (plural || `${singular}s`)}`
 );
 
 export const noop = () => {};

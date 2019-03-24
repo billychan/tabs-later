@@ -72,10 +72,6 @@ export const SaveButton = props => (
   <ButtonWithTooltip icon="floppy-disk" tooltip="Save" {...props} />
 );
 
-export const AddToListButton = props => (
-  <ButtonWithTooltip icon="add-to-artifact" tooltip="Add to list" {...props} />
-);
-
 export const RemoveDuplicationsButton = props => (
   <ButtonWithTooltip icon="property" tooltip="Remove duplications" {...props} />
 );
@@ -86,4 +82,8 @@ export const EditButton = props => (
 
 export const OpenLinkButton = props => (
   <ButtonWithTooltip icon="document-open" tooltip="Open link" {...props} />
+);
+
+export const AddToListButton = props => (
+  <ButtonWithTooltip icon="add-to-folder" tooltip="Add to list" {...props} />
 );

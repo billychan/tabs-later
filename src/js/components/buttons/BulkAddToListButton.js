@@ -4,38 +4,52 @@ import {
   PanelStack,
   Popover,
 } from '@blueprintjs/core';
+import capitalize from 'lodash/capitalize';
+import { maybePluralize } from 'common/helpers';
 
 import NoItemsWarningPopover from 'components/elements/NoItemsWarningPopover';
 import AddToListPanel from 'containers/popovers/AddToListPanel';
-import { AddToListButton as ActionButton } from 'components/buttons/ButtonWithTooltip';
+import { AddToListButton } from 'components/buttons/ButtonWithTooltip';
 
-const AddToListButton = () => (
-  <ActionButton tooltip="Add selected tabs to list" />
-);
+const getTooltip = actionMode => (actionMode === 'add' ? 'Add to list' : 'Move to list');
 
-const BulkAddToListButton = ({ links }) => (
+const BulkAddToListButton = ({ links, actionMode, targetName, sourceList }) => (
   links.length
     ? (
       <Popover>
-        <AddToListButton />
+        <AddToListButton tooltip={getTooltip(actionMode)} />
         <section className="add-to-list-box popover-content">
           <PanelStack initialPanel={{
             component: AddToListPanel,
-            title: `Add ${links.length} Tabs To List`,
-            props: { links },
+            title: `${capitalize(actionMode)} \
+              ${maybePluralize(links.length, capitalize(targetName))} To List`,
+            props: {
+              links,
+              actionMode,
+              sourceList,
+            },
           }}
           />
         </section>
       </Popover>
     ) : (
-      <NoItemsWarningPopover warningText="Pleas selecte items to add to list.">
-        <AddToListButton />
+      <NoItemsWarningPopover warningText={`Pleas select ${targetName}s to ${actionMode} to list.`}>
+        <AddToListButton tooltip={getTooltip(actionMode)} />
       </NoItemsWarningPopover>
     )
 );
 
 BulkAddToListButton.propTypes = {
   links: PropTypes.arrayOf(PropTypes.object).isRequired,
+  actionMode: PropTypes.oneOf(['add', 'move']),
+  targetName: PropTypes.oneOf(['tab', 'link']),
+  sourceList: PropTypes.object,
+};
+
+BulkAddToListButton.defaultProps = {
+  actionMode: 'add',
+  targetName: 'tab',
+  sourceList: null,
 };
 
 export default BulkAddToListButton;

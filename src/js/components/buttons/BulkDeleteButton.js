@@ -9,15 +9,13 @@ import CancelPopoverButton from 'components/buttons/CancelPopoverButton';
 import NoItemsWarningPopover from 'components/elements/NoItemsWarningPopover';
 import { DeleteButton } from 'components/buttons/ButtonWithTooltip';
 
-const tooltip = 'Close selected tabs';
-
 const BulkDeleteButton = ({
   links, onConfirm, buttonText, noItemsWarning, itemsWarning,
 }) => {
   if (!links.length) {
     return (
       <NoItemsWarningPopover warningText={noItemsWarning}>
-        <DeleteButton tooltip={tooltip} />
+        <DeleteButton tooltip={buttonText} />
       </NoItemsWarningPopover>
     );
   }

@@ -12,7 +12,7 @@ import NoItemsWarningPopover from 'components/elements/NoItemsWarningPopover';
 import { RemoveDuplicationsButton as ActionButton } from 'components/buttons/ButtonWithTooltip';
 
 const RemoveDuplicationsButton = () => (
-  <ActionButton tooltip="Close duplicated tabs" />
+  <ActionButton tooltip="Close duplications" />
 );
 
 const NoDuplicationMessage = () => (

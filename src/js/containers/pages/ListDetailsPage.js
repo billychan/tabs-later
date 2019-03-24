@@ -13,6 +13,7 @@ import LinksPage from 'components/pages/LinksPage';
 import { OpenLinkButton } from 'components/buttons/ButtonWithTooltip';
 import BulkOpenUrlsButton from 'components/buttons/BulkOpenUrlsButton';
 import BulkDeleteButton from 'components/buttons/BulkDeleteButton';
+import BulkAddToListButton from 'components/buttons/BulkAddToListButton';
 import { DeleteButtonWithConfirmation } from 'components/buttons/ButtonWithConfirmation';
 
 import { showSuccessMessage } from 'components/uiHelpers';
@@ -29,9 +30,15 @@ const ListDetailsPage = ({ list, tabs, removeLinksFromList }) => (
           existingTabUrls={tabs.map(tab => tab.url)}
           onOpenUrls={urls => openTabsOnBrowser(urls)}
         />
+        <BulkAddToListButton
+          links={selectedLinks}
+          actionMode="move"
+          targetName="link"
+          sourceList={list}
+        />
         <BulkDeleteButton
           links={selectedLinks}
-          buttonText="Delete selected links from list"
+          buttonText="Delete selected links"
           noItemsWarning="Please select links to delete."
           itemsWarning={
             `Going to delete following ${maybePluralize(selectedLinks.length, 'link', 'links')}`
@@ -39,7 +46,7 @@ const ListDetailsPage = ({ list, tabs, removeLinksFromList }) => (
           onConfirm={(links) => {
             removeLinksFromList(list, links)
               .then(() => showSuccessMessage(
-                `Link removed: ${links.map(link => link.url).join(' \n')}`,
+                `${links.length} links deleted: ${links.map(link => link.url).join(' \n')}`,
               ));
           }}
         />
@@ -48,7 +55,7 @@ const ListDetailsPage = ({ list, tabs, removeLinksFromList }) => (
     renderItemOperations={({ link }) => (
       <>
         <DeleteButtonWithConfirmation
-          tooltip="Remove link from list"
+          tooltip="Remove from list"
           confirmButtonText="Yes, remove it"
           text="Are you sure to remove this link from list?"
           onConfirm={() => {

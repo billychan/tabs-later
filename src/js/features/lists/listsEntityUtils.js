@@ -1,6 +1,7 @@
 import v4 from 'node-uuid';
 import { arrayToObjectWithKey } from 'common/helpers';
 import omit from 'lodash/omit';
+import pick from 'lodash/pick';
 
 export const buildListFromName = name => ({
   // Timestamp for easier sorting at db side
@@ -18,10 +19,6 @@ export const removeLinksArrFromLinksObj = (linksArr = [], linksObj = {}) => (
   omit(linksObj, linksArr.map(link => link.url))
 );
 
-export const tabToLink = ({ title, url, favIconUrl }) => ({
-  title, url, favIconUrl,
-});
-
 export const getUniqueLinks = (list, linksToAdd) => (
   linksToAdd.filter(link => !list.links[link.url])
 );
@@ -30,5 +27,13 @@ export const assignIdToLink = obj => ({
   ...obj,
   id: v4(),
 });
+
+export const pickListAttributes = list => pick(list, [
+  'id', 'links', 'name', '_id', '_rev',
+]);
+
+export const pickLinkAttributes = link => pick(link, [
+  'favIconUrl', 'title', 'url',
+]);
 
 export const listLinksToLinksArray = list => Object.values(list.links).map(assignIdToLink);

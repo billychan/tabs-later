@@ -18,14 +18,18 @@ import {
 } from './listsActionTypes';
 
 import {
-  buildListFromName, tabToLink, addLinkArrToLinksObj, removeLinksArrFromLinksObj,
+  buildListFromName,
+  addLinkArrToLinksObj,
+  removeLinksArrFromLinksObj,
+  pickListAttributes,
+  pickLinkAttributes,
 } from './listsEntityUtils';
 
 export const createList = ({ listName }) => (dispatch) => {
   dispatch({ type: CREATE_LIST_REQUEST });
-  const list = buildListFromName(listName);
+  const list = pickListAttributes(buildListFromName(listName));
   return storage.createList(list).then((resp) => {
-    const newList = {
+    const targetList = {
       ...list,
       _rev: resp.rev,
       _id: list.id,
@@ -33,36 +37,60 @@ export const createList = ({ listName }) => (dispatch) => {
     dispatch({
       type: CREATE_LIST_SUCCESS,
       payload: {
-        list: newList,
+        list: targetList,
       },
     });
-    return newList;
+    return targetList;
   });
 };
 
 export const updateListAttrs = (list, attributes) => (dispatch) => {
   dispatch({ type: UPDATE_LIST_REQUEST });
-  const newList = { ...list, ...attributes };
-  return storage.updateList(newList).then(resp => dispatch({
+  const targetList = pickListAttributes({ ...list, ...attributes });
+  return storage.updateList(targetList).then(resp => dispatch({
     type: UPDATE_LIST_SUCCESS,
     payload: {
       list: {
-        ...newList,
+        ...targetList,
         _rev: resp.rev,
       },
     },
   }));
 };
 
+export const bulkUpdateLists = lists => (dispatch) => {
+  dispatch({ type: BATCH_UPDATE_LISTS_REQUEST });
+  return storage.bulkUpdateLists(lists.map(pickListAttributes)).then((responses) => {
+    const responseObj = arrayToObjectWithKey(responses);
+    const listsWithRevUpdated = lists.map(list => ({
+      ...list,
+      _rev: responseObj[list.id].rev,
+    }));
+    dispatch({
+      type: BATCH_UPDATE_LISTS_SUCCESS,
+      payload: { lists: normalize(listsWithRevUpdated, arrayOfLists) },
+    });
+  });
+};
+
 const addLinksIntoList = (list, linksArr) => (
   updateListAttrs(list, {
-    links: addLinkArrToLinksObj(linksArr, list.links),
+    links: addLinkArrToLinksObj(linksArr, pickLinkAttributes(list.links)),
   })
 );
 
 export const addTabsIntoList = (list, tabs) => (
-  addLinksIntoList(list, tabs.map(tabToLink))
+  addLinksIntoList(list, tabs.map(pickLinkAttributes))
 );
+
+export const moveTabsIntoList = (sourceList, links, targetList) => {
+  const cleanedLinks = links.map(pickLinkAttributes);
+  const lists = [
+    { ...sourceList, links: removeLinksArrFromLinksObj(cleanedLinks, sourceList.links) },
+    { ...targetList, links: addLinkArrToLinksObj(cleanedLinks, targetList.links) },
+  ].map(pickListAttributes);
+  return bulkUpdateLists(lists);
+};
 
 export const removeLinksFromList = (list, linksArr) => (
   updateListAttrs(list, {
@@ -76,23 +104,6 @@ export const deleteList = list => (dispatch) => {
     type: DELETE_LIST_SUCCESS,
     payload: { list },
   }));
-};
-
-// Note this API was deprecated in favor of update list individually. It might be useful
-// for later bulk updating cases, need to re-test
-export const bulkUpdateLists = lists => (dispatch) => {
-  dispatch({ type: BATCH_UPDATE_LISTS_REQUEST });
-  return storage.bulkUpdateLists(lists).then((responses) => {
-    const responseObj = arrayToObjectWithKey(responses);
-    const listsWithRevUpdated = lists.map(list => ({
-      ...list,
-      _rev: responseObj[list.id].rev,
-    }));
-    dispatch({
-      type: BATCH_UPDATE_LISTS_SUCCESS,
-      payload: { lists: normalize(listsWithRevUpdated, arrayOfLists) },
-    });
-  });
 };
 
 export const fetchLists = () => (dispatch) => {

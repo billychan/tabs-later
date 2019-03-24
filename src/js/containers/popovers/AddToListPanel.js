@@ -17,12 +17,20 @@ import CancelPopoverButton from 'components/buttons/CancelPopoverButton';
 import CreateListPanel from 'components/popovers/CreateListPanel';
 import { ConfirmButton } from 'components/buttons/ButtonWithTooltip';
 
-const tabsSavedMessage = (listName, links) => (
-  `${maybePluralize(links.length, 'tab', 'tabs')} saved to list "${listName}"`
-);
+const savedMessage = (listName, links, actionMode) => {
+  const verb = actionMode === 'add' ? 'saved' : 'moved';
+  return `${maybePluralize(links.length, 'link')} ${verb} into list "${listName}"`;
+};
 
 const AddToListPanel = ({
-  openPanel, lists, addTabsIntoList, links, createList,
+  openPanel,
+  lists,
+  links,
+  sourceList,
+  actionMode,
+  addTabsIntoList,
+  moveTabsIntoList,
+  createList,
 }) => (
   <div className="panel-content">
     <section className="main-section scrollable">
@@ -30,15 +38,20 @@ const AddToListPanel = ({
         {
           lists.map((list) => {
             const uniqueLinksCount = getUniqueLinks(list, links).length;
+            const tooltip = actionMode === 'add' ? 'Add to list' : 'Move to list';
             return (
               <ListItem {...list} key={list.id} mainCols={11} actionCols={1}>
                 <ConfirmButton
                   disabled={!uniqueLinksCount}
                   intent={Intent.PRIMARY}
-                  tooltip={uniqueLinksCount ? 'Add to list' : 'Already in list'}
+                  tooltip={uniqueLinksCount ? tooltip : 'Already in list'}
                   onClick={() => {
-                    addTabsIntoList(list, links).then(() => {
-                      showSuccessMessage(tabsSavedMessage(list.name, links));
+                    const promise = (actionMode === 'move' && sourceList)
+                      ? moveTabsIntoList(sourceList, links, list)
+                      : addTabsIntoList(list, links);
+                    
+                    promise.then(() => {
+                      showSuccessMessage(savedMessage(list.name, links, actionMode));
                     });
                   }}
                 />
@@ -64,10 +77,12 @@ const AddToListPanel = ({
                     return newList;
                   })
                   .then(newList => (
-                    addTabsIntoList(newList, links)
+                    (actionMode === 'move' && sourceList)
+                      ? moveTabsIntoList(sourceList, links, newList)
+                      : addTabsIntoList(newList, links)
                   ))
                   .then(() => {
-                    showSuccessMessage(tabsSavedMessage(listName, links));
+                    showSuccessMessage(savedMessage(listName, links, actionMode));
                   });
               },
             },
@@ -84,7 +99,15 @@ AddToListPanel.propTypes = {
   lists: PropTypes.arrayOf(PropTypes.object).isRequired,
   links: PropTypes.arrayOf(PropTypes.object).isRequired,
   addTabsIntoList: PropTypes.func.isRequired,
+  moveTabsIntoList: PropTypes.func.isRequired,
   createList: PropTypes.func.isRequired,
+  actionMode: PropTypes.oneOf(['add', 'move']),
+  sourceList: PropTypes.object,
+};
+
+AddToListPanel.defaultProps = {
+  actionMode: 'add',
+  sourceList: null,
 };
 
 const mapStateToProps = state => ({
