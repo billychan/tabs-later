@@ -49,7 +49,6 @@ const AddToListPanel = ({
                     const promise = (actionMode === 'move' && sourceList)
                       ? moveTabsIntoList(sourceList, links, list)
                       : addTabsIntoList(list, links);
-                    
                     promise.then(() => {
                       showSuccessMessage(savedMessage(list.name, links, actionMode));
                     });
@@ -73,7 +72,7 @@ const AddToListPanel = ({
               onConfirm({ listName }) {
                 createList({ listName })
                   .then((newList) => {
-                    showSuccessMessage(`List "${listName}" created`);
+                    showSuccessMessage(`New list "${listName}" created`);
                     return newList;
                   })
                   .then(newList => (

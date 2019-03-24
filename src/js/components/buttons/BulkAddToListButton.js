@@ -13,7 +13,12 @@ import { AddToListButton } from 'components/buttons/ButtonWithTooltip';
 
 const getTooltip = actionMode => (actionMode === 'add' ? 'Add to list' : 'Move to list');
 
-const BulkAddToListButton = ({ links, actionMode, targetName, sourceList }) => (
+const BulkAddToListButton = ({
+  links,
+  actionMode,
+  targetName,
+  sourceList,
+}) => (
   links.length
     ? (
       <Popover>

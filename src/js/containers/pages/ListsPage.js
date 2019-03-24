@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { cold } from 'react-hot-loader';
 
 import { connect } from 'react-redux';
+
 import * as listsActions from 'features/lists/listsActions';
 
 import { getAllItems } from 'common/selectors';
@@ -12,11 +13,20 @@ import Footer from 'components/blocks/Footer';
 import ExtendedListItem from 'components/blocks/ExtendedListItem';
 
 import ListDetailsPage from 'containers/pages/ListDetailsPage';
+import CreateListButton from 'components/buttons/CreateListButton';
 
 const ListsPage = ({
-  lists, updateListAttrs, deleteList, openPanel,
+  lists, updateListAttrs, deleteList, createList, openPanel,
 }) => (
   <section className="ListsPage">
+    <section className="ListPage_actions">
+      <CreateListButton
+        onConfirm={({ listName }) => {
+          createList({ listName })
+            .then(() => showSuccessMessage(`New list "${listName}" created`));
+        }}
+      />
+    </section>
     <ul className="ListsPage_lists ListItems">
       {
         lists.map(list => (
@@ -56,6 +66,7 @@ ListsPage.propTypes = {
   lists: PropTypes.arrayOf(PropTypes.object).isRequired,
   updateListAttrs: PropTypes.func.isRequired,
   deleteList: PropTypes.func.isRequired,
+  createList: PropTypes.func.isRequired,
   openPanel: PropTypes.func.isRequired,
 };
 

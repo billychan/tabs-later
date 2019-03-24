@@ -10,7 +10,7 @@ const ListItem = ({
     ? 'ListItem__actions ListItem__actions--hover'
     : 'ListItem__actions';
   return (
-    <li className="ListItem">
+    <li className="ListItem" title={name}>
       <span
         className={`ListItem__main col-${mainCols}`}
         role="button"

@@ -87,3 +87,7 @@ export const OpenLinkButton = props => (
 export const AddToListButton = props => (
   <ButtonWithTooltip icon="add-to-folder" tooltip="Add to list" {...props} />
 );
+
+export const AddButton = props => (
+  <ButtonWithTooltip icon="plus" tooltip="Add item" {...props} />
+);
