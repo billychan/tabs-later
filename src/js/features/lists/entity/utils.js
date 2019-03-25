@@ -23,6 +23,7 @@ export const getUniqueLinks = (list, linksToAdd) => (
   linksToAdd.filter(link => !list.links[link.url])
 );
 
+// This is a temp Id for UI displaying only. Not stored in db.
 export const assignIdToLink = obj => ({
   ...obj,
   id: v4(),

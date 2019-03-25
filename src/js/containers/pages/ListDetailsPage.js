@@ -7,13 +7,14 @@ import { getAllItems, getItemById } from 'common/selectors';
 import { maybePluralize } from 'common/helpers';
 
 import * as listsActions from 'features/lists/listsActions';
-import { listLinksToLinksArray } from 'features/lists/listsEntityUtils';
+import { listLinksToLinksArray } from 'features/lists/entity/utils';
 
 import LinksPage from 'components/pages/LinksPage';
 import { OpenLinkButton } from 'components/buttons/ButtonWithTooltip';
 import BulkOpenUrlsButton from 'components/buttons/BulkOpenUrlsButton';
 import BulkDeleteButton from 'components/buttons/BulkDeleteButton';
 import BulkAddToListButton from 'components/buttons/BulkAddToListButton';
+import BulkExportLinksButton from 'components/buttons/BulkExportLinksButton';
 import { DeleteButtonWithConfirmation } from 'components/buttons/ButtonWithConfirmation';
 
 import { showSuccessMessage } from 'components/uiHelpers';
@@ -35,6 +36,9 @@ const ListDetailsPage = ({ list, tabs, removeLinksFromList }) => (
           actionMode="move"
           targetName="link"
           sourceList={list}
+        />
+        <BulkExportLinksButton
+          links={selectedLinks}
         />
         <BulkDeleteButton
           links={selectedLinks}

@@ -23,7 +23,7 @@ import {
   removeLinksArrFromLinksObj,
   pickListAttributes,
   pickLinkAttributes,
-} from './listsEntityUtils';
+} from './entity/utils';
 
 export const createList = ({ listName }) => (dispatch) => {
   dispatch({ type: CREATE_LIST_REQUEST });

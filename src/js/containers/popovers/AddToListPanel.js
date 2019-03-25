@@ -8,7 +8,7 @@ import { getAllItems } from 'common/selectors';
 import { maybePluralize } from 'common/helpers';
 
 import * as listsActions from 'features/lists/listsActions';
-import { getUniqueLinks } from 'features/lists/listsEntityUtils';
+import { getUniqueLinks } from 'features/lists/entity/utils';
 
 import { showSuccessMessage } from 'components/uiHelpers';
 
@@ -38,7 +38,7 @@ const AddToListPanel = ({
         {
           lists.map((list) => {
             const uniqueLinksCount = getUniqueLinks(list, links).length;
-            const tooltip = actionMode === 'add' ? 'Add to list' : 'Move to list';
+            const tooltip = actionMode === 'add' ? 'Add to list' : 'Move to another list';
             return (
               <ListItem {...list} key={list.id} mainCols={11} actionCols={1}>
                 <ConfirmButton

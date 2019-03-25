@@ -18,24 +18,6 @@
   margin-top: 10px;
 }
 
-.add-to-list-box {
-  > * {
-    height: 300px;
-  }
-  .panel-content {
-    .main-section {
-      height: 230px;
-    }
-  }
-}
-
-.popover-content {
-  padding: 20px;
-  > * {
-    width: 300px;
-  }
-}
-
 .ListsPagePanel {
   > * {
     height: $popup-secondary-block-height;

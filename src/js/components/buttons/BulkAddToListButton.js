@@ -11,7 +11,7 @@ import NoItemsWarningPopover from 'components/elements/NoItemsWarningPopover';
 import AddToListPanel from 'containers/popovers/AddToListPanel';
 import { AddToListButton } from 'components/buttons/ButtonWithTooltip';
 
-const getTooltip = actionMode => (actionMode === 'add' ? 'Add to list' : 'Move to list');
+const getTooltip = actionMode => (actionMode === 'add' ? 'Add to list' : 'Move to another list');
 
 const BulkAddToListButton = ({
   links,
@@ -23,7 +23,7 @@ const BulkAddToListButton = ({
     ? (
       <Popover>
         <AddToListButton tooltip={getTooltip(actionMode)} />
-        <section className="add-to-list-box popover-content">
+        <section className="popover-panel-wrapper popover-content">
           <PanelStack initialPanel={{
             component: AddToListPanel,
             title: `${capitalize(actionMode)} \
