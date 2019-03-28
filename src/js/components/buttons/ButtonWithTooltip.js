@@ -95,3 +95,7 @@ export const AddButton = props => (
 export const ExportButton = props => (
   <ButtonWithTooltip icon="export" tooltip="Export" {...props} />
 );
+
+export const ImportButton = props => (
+  <ButtonWithTooltip icon="import" tooltip="Import" {...props} />
+);

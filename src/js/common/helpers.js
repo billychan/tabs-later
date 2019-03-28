@@ -1,3 +1,5 @@
+import flow from 'lodash/flow';
+
 /**
  * @description Turn array of objects to object with given key(default to 'id')
  *              It's a quick and lightweight alternative for normalizr schema
@@ -60,4 +62,16 @@ export const filterDuplications = (items, keyName) => (
     uniqueValues: new Set(),
     duplications: [],
   }).duplications
+);
+
+export const removeStartCharFn = char => str => (
+  str.startsWith(char) ? str.slice(1) : str
+);
+
+export const removeEndCharFn = char => str => (
+  str.endsWith(char) ? str.slice(0, -1) : str
+);
+
+export const removeStartOrEndCharFn = char => (
+  flow(removeStartCharFn(char), removeEndCharFn(char))
 );

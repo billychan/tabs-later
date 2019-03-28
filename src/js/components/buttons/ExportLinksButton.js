@@ -7,6 +7,7 @@ import {
   Menu,
   MenuItem,
   TextArea,
+  Intent,
 } from '@blueprintjs/core';
 import { cold } from 'react-hot-loader';
 import { maybePluralize } from 'common/helpers';
@@ -37,6 +38,7 @@ const ExportResults = ({ results }) => {
         <CancelPopoverButton />
         <Button
           text="Copy"
+          intent={Intent.PRIMARY}
           onClick={() => {
             if (textAreaRef && textAreaRef.current) {
               textAreaRef.current.select();
@@ -113,7 +115,7 @@ ExportMenu.propTypes = {
   links: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-const BulkExportLinksButton = ({ links }) => {
+const ExportLinksButton = ({ links }) => {
   if (!links.length) {
     return (
       <NoItemsWarningPopover warningText="Please select links to export as various format.">
@@ -142,8 +144,8 @@ const BulkExportLinksButton = ({ links }) => {
   );
 };
 
-BulkExportLinksButton.propTypes = {
+ExportLinksButton.propTypes = {
   links: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default BulkExportLinksButton;
+export default ExportLinksButton;

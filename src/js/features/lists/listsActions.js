@@ -98,6 +98,8 @@ export const removeLinksFromList = (list, linksArr) => (
   })
 );
 
+export const importLinksToList = addTabsIntoList;
+
 export const deleteList = list => (dispatch) => {
   dispatch({ type: DELETE_LIST_REQUEST });
   return storage.deleteList(list).then(() => dispatch({

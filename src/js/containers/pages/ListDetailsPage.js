@@ -14,14 +14,20 @@ import { OpenLinkButton } from 'components/buttons/ButtonWithTooltip';
 import BulkOpenUrlsButton from 'components/buttons/BulkOpenUrlsButton';
 import BulkDeleteButton from 'components/buttons/BulkDeleteButton';
 import BulkAddToListButton from 'components/buttons/BulkAddToListButton';
-import BulkExportLinksButton from 'components/buttons/BulkExportLinksButton';
+import ExportLinksButton from 'components/buttons/ExportLinksButton';
+import ImportLinksButton from 'components/buttons/ImportLinksButton';
 import { DeleteButtonWithConfirmation } from 'components/buttons/ButtonWithConfirmation';
 
 import { showSuccessMessage } from 'components/uiHelpers';
 
 import { openTabsOnBrowser } from 'services/browserTabs';
 
-const ListDetailsPage = ({ list, tabs, removeLinksFromList }) => (
+const ListDetailsPage = ({
+  list,
+  tabs,
+  removeLinksFromList,
+  importLinksToList,
+}) => (
   <LinksPage
     links={listLinksToLinksArray(list)}
     renderBulkOperations={({ selectedLinks }) => (
@@ -37,8 +43,15 @@ const ListDetailsPage = ({ list, tabs, removeLinksFromList }) => (
           targetName="link"
           sourceList={list}
         />
-        <BulkExportLinksButton
+        <ExportLinksButton
           links={selectedLinks}
+        />
+        <ImportLinksButton
+          onImported={({ results }) => {
+            importLinksToList(list, results).then(() => {
+              showSuccessMessage('Links imported successfully');
+            });
+          }}
         />
         <BulkDeleteButton
           links={selectedLinks}
@@ -84,6 +97,7 @@ ListDetailsPage.propTypes = {
   listId: PropTypes.string.isRequired,
   tabs: PropTypes.arrayOf(PropTypes.object).isRequired,
   removeLinksFromList: PropTypes.func.isRequired,
+  importLinksToList: PropTypes.func.isRequired,
   list: PropTypes.object,
 };
 
