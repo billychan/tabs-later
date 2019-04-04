@@ -75,7 +75,7 @@ export const bulkUpdateLists = lists => (dispatch) => {
 
 const addLinksIntoList = (list, linksArr) => (
   updateListAttrs(list, {
-    links: addLinkArrToLinksObj(linksArr, pickLinkAttributes(list.links)),
+    links: addLinkArrToLinksObj(linksArr, list.links),
   })
 );
 
