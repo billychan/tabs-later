@@ -1,128 +1,121 @@
-/* eslint-disable  */
-var webpack = require("webpack"),
-    path = require("path"),
-    fileSystem = require("fs"),
-    env = require("./utils/env"),
-    CleanWebpackPlugin = require("clean-webpack-plugin"),
-    CopyWebpackPlugin = require("copy-webpack-plugin"),
-    HtmlWebpackPlugin = require("html-webpack-plugin"),
-    WriteFilePlugin = require("write-file-webpack-plugin");
+const webpack = require('webpack');
+const path = require('path');
+const fileSystem = require('fs');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const WriteFilePlugin = require('write-file-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+const env = process.env.NODE_ENV || 'development';
 
 // load the secrets
-var alias = {};
-
-var secretsPath = path.join(__dirname, ("secrets." + env.NODE_ENV + ".js"));
-
-var fileExtensions = ["jpg", "jpeg", "png", "gif", "eot", "otf", "svg", "ttf", "woff", "woff2"];
+const alias = {};
+const secretsPath = path.join(__dirname, (`secrets.${env}.js`));
 
 if (fileSystem.existsSync(secretsPath)) {
-  alias["secrets"] = secretsPath;
+  alias.secrets = secretsPath;
 }
 
-var options = {
+const isDevEnv = env === 'development';
+
+const options = {
   entry: {
-    popup: path.join(__dirname, "src", "js", "pages", "popup", "popup.js"),
-    options: path.join(__dirname, "src", "js", "pages", "options", "options.js"),
-    background: path.join(__dirname, "src", "js", "pages", "background", "background.js")
+    popup: path.join(__dirname, 'src', 'js', 'pages', 'popup', 'popup.js'),
+    options: path.join(__dirname, 'src', 'js', 'pages', 'options', 'options.js'),
+    background: path.join(__dirname, 'src', 'js', 'pages', 'background', 'background.js'),
   },
   output: {
-    path: path.join(__dirname, "build"),
-    filename: "[name].bundle.js"
+    path: path.join(__dirname, 'dist'),
+    filename: '[name].bundle.js',
   },
   module: {
     rules: [
       {
-        test: /\.scss$/,
-        loader: "style-loader!css-loader!sass-loader",
-        exclude: /node_modules/
-      },
-      {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader'
-      },
-      {
-        test: new RegExp('\.(' + fileExtensions.join('|') + ')$'),
-        loader: "file-loader?name=[name].[ext]",
-        exclude: /node_modules/
+        test: /.(scss|css)$/,
+        use: [
+          isDevEnv ? 'style-loader' : MiniCssExtractPlugin.loader,
+          { loader: 'css-loader', options: { importLoaders: 2 } },
+          { loader: 'postcss-loader', ident: 'postcss' },
+        ],
       },
       {
         test: /\.html$/,
-        loader: "html-loader",
-        exclude: /node_modules/
+        use: ['html-loader'],
       },
       {
         test: /\.(js|jsx)$/,
-        loader: "babel-loader",
-        exclude: /node_modules/
+        loader: 'babel-loader',
       },
       {
         test: /\.(ttf|eot|dtd|svg|woff(2)?)(\?[a-z0-9=.]+)?$/,
         loader: 'file-loader',
         options: {
-          name: 'assets/fonts/[name].[ext]'
-        }
+          name: 'assets/fonts/[name].[ext]',
+        },
       },
       {
         test: /\.(jpg|jpeg|gif|png|ico)$/,
         loader: 'file-loader',
         options: {
-          name: 'assets/img/[name].[ext]'
-        }
-      }
-    ]
+          name: 'assets/img/[name].[ext]',
+        },
+      },
+    ],
   },
   resolve: {
     modules: [
       'node_modules',
-      path.resolve('./src/js')
+      path.resolve('./src/js'),
     ],
     alias,
-    extensions: fileExtensions.map(extension => ("." + extension)).concat([".jsx", ".js", ".css"])
+    extensions: ['.js', '.jsx'],
   },
   plugins: [
-    // clean the build folder
-    new CleanWebpackPlugin(["build"]),
+    new CleanWebpackPlugin(),
     // expose and write the allowed env vars on the compiled bundle
     new webpack.DefinePlugin({
-      "process.env.NODE_ENV": JSON.stringify(env.NODE_ENV)
+      'process.env.NODE_ENV': JSON.stringify(env),
     }),
     new CopyWebpackPlugin([
       {
-        from: "src/manifest.json",
-        transform: function (content, path) {
+        from: 'src/manifest.json',
+        transform(content) {
           // generates the manifest file using the package.json informations
           return Buffer.from(JSON.stringify({
             description: process.env.npm_package_description,
             version: process.env.npm_package_version,
-            ...JSON.parse(content.toString())
-          }))
-        }
+            ...JSON.parse(content.toString()),
+          }));
+        },
       },
       {
-        from: 'src/img/*'
-      }
+        from: 'src/img/*',
+      },
     ]),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, "src", "js", "pages", "popup", "popup.html"),
-      filename: "popup.html",
-      chunks: ["popup"]
+      template: path.join(__dirname, 'src', 'js', 'pages', 'popup', 'popup.html'),
+      filename: 'popup.html',
+      chunks: ['popup'],
     }),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, "src", "js", "pages", "options", "options.html"),
-      filename: "options.html",
-      chunks: ["options"]
+      template: path.join(__dirname, 'src', 'js', 'pages', 'options', 'options.html'),
+      filename: 'options.html',
+      chunks: ['options'],
     }),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, "src", "js", "pages", "background", "background.html"),
-      filename: "background.html",
-      chunks: ["background"]
+      template: path.join(__dirname, 'src', 'js', 'pages', 'background', 'background.html'),
+      filename: 'background.html',
+      chunks: ['background'],
     }),
-    new WriteFilePlugin()
-  ]
+    new WriteFilePlugin(),
+  ],
+  devtool: isDevEnv ? 'source-map' : undefined,
+  devServer: isDevEnv ? {
+    hot: true,
+    contentBase: path.join(__dirname, '../build'),
+    headers: { 'Access-Control-Allow-Origin': '*' },
+  } : undefined,
 };
-
-if (env.NODE_ENV === "development") {
-  options.devtool = "source-map";
-}
 
 module.exports = options;

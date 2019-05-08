@@ -29,20 +29,20 @@
 }
 
 .LinksPage {
-  height: $popup-third-block-height - 25px;
+  height: calc($popup-third-block-height - 25px);
 }
 
 .LinksPage.TabsPage {
-  height: $popup-third-block-height + 15px;
+  height: calc($popup-third-block-height + 15px);
 }
 
 .ListsPage_lists {
-  height: $popup-third-block-height + 10px;
+  height: calc($popup-third-block-height + 10px);
 }
 
 .LinkItems {
-  @include item-rows-ul;
-  @extend .scrollable;
+  @extend %item-rows-ul;
+  @extend %scrollable;
   padding-top: 6px;
   margin-left: -4px;
 }

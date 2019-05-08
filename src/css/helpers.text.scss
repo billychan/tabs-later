@@ -1,5 +1,3 @@
-@import "~@blueprintjs/core/lib/scss/variables";
-
 .text-light {
   color: $gray5;
 }
@@ -10,13 +8,4 @@
 
 .pull-right {
   float: right;
-}
-
-.text-ellipsis {
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.text-nowrap {
-  white-space: nowrap;
 }

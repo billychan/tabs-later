@@ -42,7 +42,7 @@ const TabItem = ({
           dangerouslySetInnerHTML={{ __html: urlHighlighted || url }}
         />
       </div>
-      <div className="TabItem__actions TabItem__actions--hover">
+      <div className="TabItem__actions visible-on-hover">
         {children}
       </div>
     </li>

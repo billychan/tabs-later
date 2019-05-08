@@ -1,9 +1,41 @@
-@mixin item-rows-ul {
+%hoverable {
+  .visible-on-hover {
+    background-color: $body-bg;
+    display: none;
+  }
+  &:hover {
+    box-shadow: 3px 2px 2px #aaa;
+    cursor: default;
+    .visible-on-hover {
+      display: block;
+    }
+  }
+}
+
+%hoverable__clickable {
+  &:hover {
+    cursor: pointer;
+  }
+}
+%text-nowrap {
+  white-space: nowrap;
+}
+
+%text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+%flex-container {
+  display: flex;
+}
+
+%item-rows-ul {
   padding: 0;
   margin: 0;
 }
 
-@mixin item-row {
+%item-row {
   display: flex;
   position: relative;
   list-style: none;
@@ -11,16 +43,14 @@
   align-items: center;
 }
 
-@mixin item-row__main($height) {
-  @extend .text-nowrap;
-  @extend .text-ellipsis;
-  @extend .flex-container;
+%item-row__main {
+  @extend %text-nowrap;
+  @extend %text-ellipsis;
+  @extend %flex-container;
   padding: 0 4px;
-  height: $height;
-  line-height: $height;
 }
 
-@mixin item-row__actions {
+%item-row__actions {
   @extend .absolute-vertical-center;
   position: absolute;
   right: 0;
@@ -29,7 +59,17 @@
   }
 }
 
-@mixin item-row__actions--hover {
-  @extend .visible-on-hover;
-  background-color: $body-bg;
+%scrollable {
+  overflow-x: auto;
+  overflow-y: scroll;
+  height: 100%;
+  &::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 3px;
+    background-color: #fff;
+  }
+  &::-webkit-scrollbar-thumb {
+    border: 1px solid #f8f8f8;
+    background-color: $gray3;
+  }
 }

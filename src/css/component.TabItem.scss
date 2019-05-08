@@ -1,27 +1,27 @@
 $tab-item-height: 34px;
 
 .TabItem {
-  @include item-row;
-  @extend .hoverable;
+  @extend %item-row;
+  @extend %hoverable;
   padding: 2px 4px;
   height: $tab-item-height;
 }
 
 .TabItem__main {
-  @extend .text-nowrap;
-  @extend .text-ellipsis;
+  @extend %text-nowrap;
+  @extend %text-ellipsis;
   padding: 0 4px;
 
   margin-left: 4px;
 }
 
 .TabItem__main__name {
-  @extend .text-ellipsis;
+  @extend %text-ellipsis;
 }
 
 .TabItem__main__url {
   font-size: 9px;
-  @extend .text-ellipsis;
+  @extend %text-ellipsis;
   color: #555;
 }
 
@@ -30,9 +30,5 @@ $tab-item-height: 34px;
 }
 
 .TabItem__actions {
-  @include item-row__actions;
-}
-
-.TabItem__actions--hover {
-  @include item-row__actions--hover;
+  @extend %item-row__actions;
 }

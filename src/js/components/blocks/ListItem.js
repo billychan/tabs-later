@@ -7,7 +7,7 @@ const ListItem = ({
 }) => {
   const linksCountText = `(${Object.keys(links).length})`;
   const actionsClass = actionsVisibleOnHover
-    ? 'ListItem__actions ListItem__actions--hover'
+    ? 'ListItem__actions visible-on-hover'
     : 'ListItem__actions';
   return (
     <li className="ListItem" title={name}>

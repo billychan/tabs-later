@@ -32,7 +32,7 @@
 
 .popover-content-with-scrollable {
   ul {
-    @extend .scrollable;
+    @extend %scrollable;
     max-height: 300px;
     padding-left: 10px;
     li {
