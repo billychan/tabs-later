@@ -20,6 +20,7 @@ if (fileSystem.existsSync(secretsPath)) {
 const isDevEnv = env === 'development';
 
 const options = {
+  mode: isDevEnv ? 'development' : 'production',
   entry: {
     popup: path.join(__dirname, 'src', 'js', 'pages', 'popup', 'popup.js'),
     options: path.join(__dirname, 'src', 'js', 'pages', 'options', 'options.js'),
