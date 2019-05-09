@@ -35,7 +35,6 @@ const options = {
         test: /.(scss|css)$/,
         use: [
           isDevEnv ? 'style-loader' : MiniCssExtractPlugin.loader,
-          { loader: 'css-loader', options: { importLoaders: 2 } },
           { loader: 'postcss-loader', ident: 'postcss' },
         ],
       },
