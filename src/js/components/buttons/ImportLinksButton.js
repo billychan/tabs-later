@@ -11,9 +11,7 @@ import {
 } from '@blueprintjs/core';
 import { cold } from 'react-hot-loader';
 import { showErrorMessage } from 'components/uiHelpers';
-import { maybePluralize } from 'common/helpers';
 import { ImportButton } from 'components/buttons/ButtonWithTooltip';
-import NoItemsWarningPopover from 'components/elements/NoItemsWarningPopover';
 import CancelPopoverButton from 'components/buttons/CancelPopoverButton';
 import {
   importLinksFromCsv,
@@ -24,7 +22,8 @@ const ImportForm = ({ onConfirm }) => {
   return (
     <>
       <TextArea
-        large
+        rows="20"
+        className="text-xs my-2"
         placeholder="Please paste CSV text here..."
         onChange={({ target }) => setVal(target.value)}
       />
@@ -74,7 +73,7 @@ const ImportMenu = ({ openPanel, onImported }) => {
         />
         <Menu.Divider />
       </Menu>
-      <section className="actions actions--single">
+      <section className="actions justify-end">
         <CancelPopoverButton />
       </section>
     </>
@@ -95,20 +94,19 @@ const ImportLinksButton = ({ onImported }) => {
       }}
     >
       <ImportButton tooltip="Import Links From CSV" />
-      <section className="popover-panel-wrapper
-          popover-content
-          ExportPopoverPanel"
-      >
-        <PanelStack initialPanel={{
-          component: ImportMenu,
-          title: 'Import Links',
-          props: {
-            onImported({ results }) {
-              setIsOpen(false);
-              onImported({ results });
+      <section className="p-5 w-80 ExportPopoverPanel">
+        <PanelStack
+          className="h-75"
+          initialPanel={{
+            component: ImportMenu,
+            title: 'Import Links',
+            props: {
+              onImported({ results }) {
+                setIsOpen(false);
+                onImported({ results });
+              },
             },
-          },
-        }}
+          }}
         />
       </section>
     </Popover>

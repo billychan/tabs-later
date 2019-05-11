@@ -6,11 +6,11 @@ import CancelPopoverButton from 'components/buttons/CancelPopoverButton';
 const NoItemsWarningPopover = ({ warningText, children }) => (
   <Popover>
     {children}
-    <section className="popover-content">
-      <section className="with-centered-children">
+    <section className="p-5 w-80">
+      <section className="flex items-center justify-center">
         <p>{warningText}</p>
       </section>
-      <section className="actions actions--single">
+      <section className="actions justify-end">
         <CancelPopoverButton />
       </section>
     </section>

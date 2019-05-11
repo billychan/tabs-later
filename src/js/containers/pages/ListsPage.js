@@ -18,8 +18,8 @@ import CreateListButton from 'components/buttons/CreateListButton';
 const ListsPage = ({
   lists, updateListAttrs, deleteList, createList, openPanel,
 }) => (
-  <section className="ListsPage">
-    <section className="ListPage_actions">
+  <section className="relative">
+    <section className="absolute right-0 top-0 -mt-8 mr-2">
       <CreateListButton
         onConfirm={({ listName }) => {
           createList({ listName })
@@ -27,7 +27,7 @@ const ListsPage = ({
         }}
       />
     </section>
-    <ul className="ListsPage_lists ListItems">
+    <ul className="ListsPage_lists ListItems scrollable p-2 m-0 -ml-1">
       {
         lists.map(list => (
           <ExtendedListItem
@@ -53,11 +53,7 @@ const ListsPage = ({
       }
     </ul>
     <Footer>
-      <section className="PageBottom">
-        <span className="PageBottomHints">
-          {`${lists.length} lists`}
-        </span>
-      </section>
+      <span>{`${lists.length} lists`}</span>
     </Footer>
   </section>
 );

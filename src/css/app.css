@@ -1,0 +1,37 @@
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  @apply bg-white;
+}
+
+.popup-root {
+  width: $popup-root-width;
+  height: $popup-root-height;
+}
+
+.ListsPagePanel {
+  > * {
+    height: $popup-secondary-block-height;
+  }
+}
+
+.LinksPage {
+  height: calc($popup-third-block-height - 25px);
+}
+
+.LinksPage.TabsPage {
+  height: calc($popup-third-block-height + 15px);
+}
+
+.ListsPage_lists {
+  height: calc($popup-third-block-height + 10px);
+}
+
+.ExportPopoverPanel {
+  .bp3-panel-stack-header {
+    .bp3-button-text {
+      display: none;
+    }
+  }
+}

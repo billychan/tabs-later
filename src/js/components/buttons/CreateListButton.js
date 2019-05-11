@@ -9,7 +9,7 @@ import { AddButton } from 'components/buttons/ButtonWithTooltip';
 const CreateListButton = ({ onConfirm }) => (
   <Popover>
     <AddButton tooltip="Create New List" />
-    <section className="popover-content">
+    <section className="p-5 w-80">
       <EditListForm
         onConfirm={({ listName }) => {
           onConfirm({ listName });

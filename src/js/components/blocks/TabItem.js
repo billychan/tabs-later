@@ -20,29 +20,31 @@ const TabItem = ({
 }) => {
   const checkboxRef = useRef(null);
   return (
-    <li className="TabItem">
+    <li className="group flex relative list-none p-1 items-center h-10 hover:shadow">
       <Checkbox
-        className="TabItem__checkbox"
+        className="m-0"
         checked={checked}
         ref={checkboxRef}
         onChange={({ target }) => { onChange(id, target.checked); }}
       />
       <Favicon url={favIconUrl} />
       <div
-        className="TabItem__main"
+        className="px-1 m-1 truncate"
         title={`${title} - ${url}`}
         role="navigation"
       >
         <div
-          className="TabItem__main__name"
+          className="truncate"
           dangerouslySetInnerHTML={{ __html: titleHighlighted || title }}
         />
         <div
-          className="TabItem__main__url"
+          className="text-xs text-gray-600 truncate"
           dangerouslySetInnerHTML={{ __html: urlHighlighted || url }}
         />
       </div>
-      <div className="TabItem__actions visible-on-hover">
+      <div className="children:float-right right-0 absolute-vertical-center
+        invisible group-hover:visible bg-white"
+      >
         {children}
       </div>
     </li>

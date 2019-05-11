@@ -34,18 +34,24 @@ const BulkCloseDuplicationsButton = ({ links, onConfirm }) => {
   return (
     <Popover>
       <RemoveDuplicationsButton />
-      <section className="popover-content popover-content-with-scrollable">
+      <section className="p-5">
         {(
           dupSize
             ? (
-              <>
+              <section className="w-75">
                 <p>
                   {`There are ${maybePluralize(dupSize, 'duplicated tab', 'duplicated tabs')}`}
                 </p>
-                <ul>
+                <ul className="scrollable py-2 max-h-20">
                   {
                     duplicatedLinks.map(link => (
-                      <li title={link.url} key={link.id}>{link.url}</li>
+                      <li
+                        title={link.url}
+                        key={link.id}
+                        className="truncate text-xs mb-2 text-gray-600"
+                      >
+                        {link.url}
+                      </li>
                     ))
                   }
                 </ul>
@@ -57,14 +63,14 @@ const BulkCloseDuplicationsButton = ({ links, onConfirm }) => {
                   />
                   <CancelPopoverButton />
                 </section>
-              </>
+              </section>
             ) : (
-              <>
+              <section className="w-75">
                 <section><NoDuplicationMessage /></section>
-                <section className="actions actions--single">
+                <section className="actions justify-end">
                   <CancelPopoverButton />
                 </section>
-              </>
+              </section>
             )
           )
         }

@@ -4,7 +4,7 @@ import { maybePluralize } from 'common/helpers';
 
 const SelectedItemsHints = ({ selectedCount, totalCount }) => (
   <span>
-    <em>{selectedCount}</em>
+    {selectedCount}
     {' '}
     of
     {' '}

@@ -5,7 +5,7 @@ import App from './containers/App';
 
 import '@blueprintjs/core/lib/css/blueprint.css';
 import '@blueprintjs/icons/lib/css/blueprint-icons.css';
-import '../css/main.scss';
+import '../css/main.css';
 
 const Root = ({ store }) => (
   <Provider store={store}>

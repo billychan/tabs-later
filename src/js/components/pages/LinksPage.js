@@ -44,8 +44,8 @@ const LinksPage = ({
     setVisibleLinks(mergeLinksWithCheckedState(links, visibleLinks));
   }, [links]);
   return (
-    <section className={`LinksPage${className ? ` ${className}` : ''}`}>
-      <section className="BulkOperations">
+    <section className={`LinksPage${className ? ` ${className}` : ''} pt-2`}>
+      <section className="flex pb-3 border-b border-gray-300 items-center">
         <BulkCheck
           checkedStatus={calculateCheckedStatus(linksCount, getCheckedLinksCount(visibleLinks))}
           onChange={(checked) => {
@@ -67,7 +67,7 @@ const LinksPage = ({
           })
         }
       </section>
-      <ul className="LinksPage__links LinkItems">
+      <ul className="LinksPage__links scrollable pt-2 -ml-1">
         {
           visibleLinks.map(link => (
             <TabItem
@@ -90,14 +90,12 @@ const LinksPage = ({
         }
       </ul>
       <Footer>
-        <section className="PageBottom">
-          <span className="PageBottomHints">
-            <SelectedItemsHints
-              selectedCount={getCheckedLinksCount(visibleLinks)}
-              totalCount={linksCount}
-            />
-          </span>
-        </section>
+        <span className="text-xs text-gray-600">
+          <SelectedItemsHints
+            selectedCount={getCheckedLinksCount(visibleLinks)}
+            totalCount={linksCount}
+          />
+        </span>
       </Footer>
     </section>
   );

@@ -23,7 +23,7 @@ const BulkCheck = ({ onChange, checkedStatus }) => {
 
   return (
     <Checkbox
-      className="operation-select-all"
+      className="mb-0"
       onChange={({ target }) => onChange(target.checked)}
       checked={checked}
       indeterminate={indeterminate}

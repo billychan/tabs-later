@@ -33,14 +33,14 @@ const AddToListPanel = ({
   createList,
 }) => (
   <div className="panel-content">
-    <section className="main-section scrollable">
-      <ul className="ListItems">
+    <section className="w-60 scrollable">
+      <ul className="scrollable py-2 px-1 m-0 -ml-1">
         {
           lists.map((list) => {
             const uniqueLinksCount = getUniqueLinks(list, links).length;
             const tooltip = actionMode === 'add' ? 'Add to list' : 'Move to another list';
             return (
-              <ListItem {...list} key={list.id} mainCols={11} actionCols={1}>
+              <ListItem {...list} key={list.id} mainCols={11}>
                 <ConfirmButton
                   disabled={!uniqueLinksCount}
                   intent={Intent.PRIMARY}

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { Classes, Button } from '@blueprintjs/core';
 import { cold } from 'react-hot-loader';
 import { noop } from 'common/helpers';
@@ -17,7 +18,7 @@ const EditListForm = ({
   const [listName, setListName] = useState('');
   return (
     <>
-      <section className="main-section with-centered-children">
+      <section className="w-60 flex items-center justify-center">
         <input
           type="text"
           className={Classes.INPUT}
@@ -31,7 +32,10 @@ const EditListForm = ({
         <Button
           text={secondaryButtonText}
           onClick={onCancel}
-          className={`secondary-btn ${Classes.POPOVER_DISMISS}`}
+          className={classNames(
+            'ml-auto mr-2',
+            Classes.POPOVER_DISMISS,
+          )}
         />
         <Button
           text={primaryButtonText}

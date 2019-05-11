@@ -42,7 +42,7 @@ const SearchInput = ({ onSearch }) => {
   return (
     <InputGroup
       large={false}
-      className="operation-search"
+      className="w-48 mr-3"
       autoFocus
       leftIcon={SearchIcon}
       onChange={({ target }) => {

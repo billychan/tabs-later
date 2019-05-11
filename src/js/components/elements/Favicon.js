@@ -11,8 +11,8 @@ const handleImageError = (event) => {
 };
 
 const Favicon = ({ url }) => (
-  <span className="favicon">
-    <img src={url} alt={url} onError={handleImageError} />
+  <span className="w-5 h-5 flex-shrink-0">
+    <img className="w-5 h-5" src={url} alt={url} onError={handleImageError} />
   </span>
 );
 

@@ -5,6 +5,7 @@ import {
   Popover,
   Classes,
 } from '@blueprintjs/core';
+import classNames from 'classnames';
 import { cold } from 'react-hot-loader';
 
 import CancelPopoverButton from 'components/buttons/CancelPopoverButton';
@@ -20,34 +21,36 @@ const OpeningConfirmation = ({ urls, existingTabUrls, onOpenUrls }) => {
       { duplicationsCount > 0
         ? (
           <div>
-            <p>
+            <p className="my-2">
               {`${duplicationsCount} out of ${urlsCount} url(s) already opened as tabs. \
               Do you want to open them in new tabs anyway?`}
             </p>
-            <p>
+            <p className="mb-2">
               <Button
                 text={`Yes, open all ${urlsCount} url(s)`}
-                className={Classes.POPOVER_DISMISS}
+                className={classNames('w-56', Classes.POPOVER_DISMISS)}
                 onClick={() => onOpenUrls(urls)}
               />
             </p>
           </div>
         )
         : null}
-      <p>
+      <p className="mb-2">
         { uniqueUrls.length
           ? (
             <Button
               text={`Open ${uniqueUrls.length} unique url(s) only`}
               intent="primary"
-              className={Classes.POPOVER_DISMISS}
+              className={classNames('w-56', Classes.POPOVER_DISMISS)}
               onClick={() => onOpenUrls(uniqueUrls)}
             />
           )
           : null
         }
       </p>
-      <p><CancelPopoverButton /></p>
+      <p className="mb-2">
+        <CancelPopoverButton className="w-56" />
+      </p>
     </div>
   );
 };
@@ -63,8 +66,8 @@ const BulkOpenUrlsButton = ({ urls, existingTabUrls, onOpenUrls }) => {
   return (
     <Popover>
       <OpenLinkButton tooltip="Open selected links" />
-      <div className="popover-content">
-        <h3 className="text-center">Open Urls</h3>
+      <div className="p-5 w-80">
+        <p className="text-center font-bold">Open Urls</p>
         <OpeningConfirmation
           urls={urls}
           existingTabUrls={existingTabUrls}

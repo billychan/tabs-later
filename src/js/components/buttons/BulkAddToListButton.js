@@ -23,17 +23,19 @@ const BulkAddToListButton = ({
     ? (
       <Popover>
         <AddToListButton tooltip={getTooltip(actionMode)} />
-        <section className="popover-panel-wrapper popover-content">
-          <PanelStack initialPanel={{
-            component: AddToListPanel,
-            title: `${capitalize(actionMode)} \
-              ${maybePluralize(links.length, capitalize(targetName))} To List`,
-            props: {
-              links,
-              actionMode,
-              sourceList,
-            },
-          }}
+        <section className="p-5">
+          <PanelStack
+            className="h-75 w-75"
+            initialPanel={{
+              component: AddToListPanel,
+              title: `${capitalize(actionMode)} \
+                ${maybePluralize(links.length, capitalize(targetName))} To List`,
+              props: {
+                links,
+                actionMode,
+                sourceList,
+              },
+            }}
           />
         </section>
       </Popover>

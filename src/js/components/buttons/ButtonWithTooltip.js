@@ -27,7 +27,7 @@ const ButtonWithTooltip = ({
       onInteraction={(nextState) => {
         setIsOpen(nextState);
       }}
-      className="custom-tooltip"
+      className="whitespace-no-wrap"
     >
       <Button
         icon={icon}

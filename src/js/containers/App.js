@@ -20,13 +20,13 @@ const App = ({ fetchLists }) => {
     <section className="app-container">
       <UiTabs
         id="app-tabs"
-        className="app-tabs"
+        className="p-2"
         onChange={setCurrentTabId}
         selectedTabId={currentTabId}
         renderActiveTabPanelOnly
       >
-        <UiTab id="browserTabs" title="Current Tabs" panel={<TabsPage />} className="app-tab" />
-        <UiTab id="savedLists" title="Saved Lists" panel={<ListsPagePanel />} className="app-tab" />
+        <UiTab id="browserTabs" title="Current Tabs" panel={<TabsPage />} className="mt-3" />
+        <UiTab id="savedLists" title="Saved Lists" panel={<ListsPagePanel />} className="mt-3" />
       </UiTabs>
     </section>
   );

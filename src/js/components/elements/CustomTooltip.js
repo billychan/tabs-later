@@ -11,7 +11,7 @@ const CustomTooltip = ({ tooltip, children, ...attrs }) => (
     hoverOpenDelay={0}
     hoverCloseDelay={0}
     usePortal={false}
-    className="custom-tooltip"
+    className="whitespace-no-wrap"
     {...attrs}
   >
     {children}

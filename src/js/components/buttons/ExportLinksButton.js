@@ -103,7 +103,7 @@ const ExportMenu = ({ openPanel, links }) => {
         />
         <Menu.Divider />
       </Menu>
-      <section className="actions actions--single">
+      <section className="actions justify-end">
         <CancelPopoverButton />
       </section>
     </>
@@ -127,17 +127,16 @@ const ExportLinksButton = ({ links }) => {
   return (
     <Popover>
       <ExportButton tooltip="Export Selected Links" />
-      <section className="popover-panel-wrapper
-        popover-content
-        ExportPopoverPanel"
-      >
-        <PanelStack initialPanel={{
-          component: ExportMenu,
-          title: `${maybePluralize(links.length, 'link')} selected`,
-          props: {
-            links,
-          },
-        }}
+      <section className="popover-panel-wrapper p-5 w-80 ExportPopoverPanel">
+        <PanelStack
+          className="h-75"
+          initialPanel={{
+            component: ExportMenu,
+            title: `${maybePluralize(links.length, 'link')} selected`,
+            props: {
+              links,
+            },
+          }}
         />
       </section>
     </Popover>

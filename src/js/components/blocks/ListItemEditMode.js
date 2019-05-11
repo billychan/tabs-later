@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { Classes } from '@blueprintjs/core';
 import { cold } from 'react-hot-loader';
 import { CancelButton, SaveButton } from 'components/buttons/ButtonWithTooltip';
@@ -7,11 +8,11 @@ import { CancelButton, SaveButton } from 'components/buttons/ButtonWithTooltip';
 const ListItemEditMode = ({ name, onSave, onCancel }) => {
   const [value, setValue] = useState(name);
   return (
-    <li className="ListItem">
-      <span className="ListItem__main ListItem__main--edit col-10">
+    <li className="relative">
+      <span className="block w-10/12">
         <input
           type="text"
-          className={Classes.INPUT}
+          className={classNames(Classes.INPUT, 'w-full')}
           value={value}
           name="edit-name"
           onChange={({ target }) => {
@@ -19,7 +20,7 @@ const ListItemEditMode = ({ name, onSave, onCancel }) => {
           }}
         />
       </span>
-      <div className="ListItem__actions col-2">
+      <div className="children:float-right right-0 absolute-vertical-center w-2/12">
         <SaveButton
           onClick={() => onSave(value)}
         />
