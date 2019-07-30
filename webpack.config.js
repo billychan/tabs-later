@@ -24,7 +24,6 @@ const options = {
   entry: {
     popup: path.join(__dirname, 'src', 'js', 'pages', 'popup', 'popup.js'),
     options: path.join(__dirname, 'src', 'js', 'pages', 'options', 'options.js'),
-    background: path.join(__dirname, 'src', 'js', 'pages', 'background', 'background.js'),
   },
   output: {
     path: path.join(__dirname, 'dist'),
@@ -72,7 +71,9 @@ const options = {
     extensions: ['.js', '.jsx'],
   },
   plugins: [
-    new CleanWebpackPlugin(),
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: ['**/*', '!resources*'],
+    }),
     // expose and write the allowed env vars on the compiled bundle
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(env),
@@ -92,6 +93,11 @@ const options = {
       {
         from: 'src/img/*',
       },
+      {
+        from: 'node_modules/@blueprintjs/icons/resources/icons/*',
+        to: 'resources/icons',
+        flatten: true,
+      },
     ]),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'src', 'js', 'pages', 'popup', 'popup.html'),
@@ -103,11 +109,6 @@ const options = {
       filename: 'options.html',
       chunks: ['options'],
     }),
-    new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'src', 'js', 'pages', 'background', 'background.html'),
-      filename: 'background.html',
-      chunks: ['background'],
-    }),
     new WriteFilePlugin(),
   ],
   devtool: isDevEnv ? 'source-map' : undefined,
@@ -115,6 +116,9 @@ const options = {
     hot: true,
     contentBase: path.join(__dirname, '../build'),
     headers: { 'Access-Control-Allow-Origin': '*' },
+    disableHostCheck: true,
+    host: 'localhost',
+    port: 3000,
   } : undefined,
 };
 

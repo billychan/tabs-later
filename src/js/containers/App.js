@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { cold } from 'react-hot-loader';
@@ -9,11 +9,9 @@ import TabsPage from 'containers/pages/TabsPage';
 import ListsPagePanel from 'components/pages/ListsPagePanel';
 
 const App = ({ fetchLists }) => {
-  const [currentTabId, setCurrentTabId] = useState('browserTabs');
-
   useEffect(() => {
-    fetchLists();
     FocusStyleManager.onlyShowFocusOnTabs();
+    fetchLists();
   }, []);
 
   return (
@@ -21,8 +19,6 @@ const App = ({ fetchLists }) => {
       <UiTabs
         id="app-tabs"
         className="p-2"
-        onChange={setCurrentTabId}
-        selectedTabId={currentTabId}
         renderActiveTabPanelOnly
       >
         <UiTab id="browserTabs" title="Current Tabs" panel={<TabsPage />} className="mt-3" />

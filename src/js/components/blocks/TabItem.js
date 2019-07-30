@@ -20,7 +20,7 @@ const TabItem = ({
 }) => {
   const checkboxRef = useRef(null);
   return (
-    <li className="group flex relative list-none p-1 items-center h-10 hover:shadow">
+    <li className="group flex relative list-none p-1 items-center h-10 hover:shadow cursor-default">
       <Checkbox
         className="m-0"
         checked={checked}

@@ -8,7 +8,10 @@ const ListItem = ({
 }) => {
   const linksCountText = `(${Object.keys(links).length})`;
   return (
-    <li className="group flex relative py-1 pl-2 list-none items-center h-8 hover:shadow" title={name}>
+    <li
+      className="group flex relative py-1 pl-2 list-none items-center h-8 hover:shadow cursor-default"
+      title={name}
+    >
       <span
         className={`flex py-1 truncate w-${mainCols}/12`}
         role="button"
@@ -20,13 +23,13 @@ const ListItem = ({
           {linksCountText}
         </span>
       </span>
-      <div className={
-        classNames(
+      <div
+        className={classNames(
           'children:float-right right-0 absolute-vertical-center inline-block bg-white',
           actionsVisibleOnHover && 'invisible group-hover:visible',
         )}
       >
-        { children }
+        {children}
       </div>
     </li>
   );
