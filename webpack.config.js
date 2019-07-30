@@ -22,8 +22,8 @@ const isDevEnv = env === 'development';
 const options = {
   mode: isDevEnv ? 'development' : 'production',
   entry: {
-    popup: path.join(__dirname, 'src', 'js', 'pages', 'popup', 'popup.js'),
-    options: path.join(__dirname, 'src', 'js', 'pages', 'options', 'options.js'),
+    popup: path.join(__dirname, 'src', 'js', 'pages', 'popup', 'popup.tsx'),
+    options: path.join(__dirname, 'src', 'js', 'pages', 'options', 'options.ts'),
   },
   output: {
     path: path.join(__dirname, 'dist'),
@@ -31,6 +31,11 @@ const options = {
   },
   module: {
     rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
       {
         test: /.(scss|css)$/,
         use: [
@@ -45,6 +50,11 @@ const options = {
       {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',
+      },
+      {
+        enforce: 'pre',
+        test: /\.js$/,
+        loader: 'source-map-loader',
       },
       {
         test: /\.(ttf|eot|dtd|svg|woff(2)?)(\?[a-z0-9=.]+)?$/,
@@ -68,7 +78,7 @@ const options = {
       path.resolve('./src/js'),
     ],
     alias,
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.ts', 'tsx'],
   },
   plugins: [
     new CleanWebpackPlugin({
@@ -111,7 +121,6 @@ const options = {
     }),
     new WriteFilePlugin(),
   ],
-  devtool: isDevEnv ? 'source-map' : undefined,
   devServer: isDevEnv ? {
     hot: true,
     contentBase: path.join(__dirname, '../build'),
