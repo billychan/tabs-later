@@ -78,7 +78,7 @@ const options = {
       path.resolve('./src/js'),
     ],
     alias,
-    extensions: ['.js', '.jsx', '.ts', 'tsx'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
   plugins: [
     new CleanWebpackPlugin({
