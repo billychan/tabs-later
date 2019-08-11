@@ -21,7 +21,7 @@ const ListItem = ({
   const linksCountText = `(${Object.keys(links).length})`;
   return (
     <li
-      className="group flex relative py-1 pl-2 list-none items-center h-8 hover:shadow hover:bg-gray-100
+      className="group flex relative py-1 pl-2 h-10 list-none items-center hover:shadow hover:bg-gray-100
       cursor-default"
       title={name}
     >
@@ -31,14 +31,14 @@ const ListItem = ({
         tabIndex={0}
         onClick={onClick}
       >
-        <span className="truncate w-10/12">{name}</span>
+        <span className="truncate text-base w-10/12">{name}</span>
         <span className="text-gray-500 text-right pr-2 w-2/12 ">
           {linksCountText}
         </span>
       </span>
       <div
         className={classNames(
-          "children:float-right right-0 absolute-vertical-center inline-block bg-white",
+          "children:float-right right-0 absolute-vertical-center inline-block bg-gray-100",
           actionsVisibleOnHover && "invisible group-hover:visible"
         )}
       >

@@ -2,9 +2,8 @@ import * as React from 'react';
 import { cold } from 'react-hot-loader';
 
 import ListItem from 'components/blocks/ListItem';
-import ListItemEditMode from 'components/blocks/ListItemEditMode';
-import { EditButton } from 'components/buttons/ButtonWithTooltip';
 import { DeleteButtonWithConfirmation } from 'components/buttons/ButtonWithConfirmation';
+import CreateEditListButton from 'components/buttons/CreateEditListButton';
 
 interface ExtendedListItemProps {
   name: string,
@@ -15,43 +14,36 @@ interface ExtendedListItemProps {
 }
 
 const ExtendedListItem = ({
-  name, links, onSave, onDeletion, onClick,
-}: ExtendedListItemProps) => {
-  const [editMode, setEditMode] = React.useState(false);
-
-  if (editMode) {
-    return (
-      <ListItemEditMode
-        name={name}
-        onSave={(newName: string) => {
-          setEditMode(false);
-          onSave(newName);
-        }}
-        onCancel={() => {
-          setEditMode(false);
+  name,
+  links,
+  onSave,
+  onDeletion,
+  onClick
+}: ExtendedListItemProps) => (
+  <ListItem
+    name={name}
+    links={links}
+    mainCols={12}
+    actionsVisibleOnHover
+    onClick={onClick}
+  >
+    <>
+      <DeleteButtonWithConfirmation
+        tooltip="Delete list"
+        confirmButtonText="Delete"
+        text={`Are you sure to delete the list "${name}"?`}
+        onConfirm={onDeletion}
+      />
+      <CreateEditListButton
+        mode="edit"
+        listName={name}
+        onConfirm={({ listName }: { listName: string }) => {
+          onSave(listName);
         }}
       />
-    );
-  }
-  return (
-    <ListItem
-      name={name}
-      links={links}
-      mainCols={12}
-      actionsVisibleOnHover
-      onClick={onClick}
-    >
-      <>
-        <DeleteButtonWithConfirmation
-          tooltip="Delete list"
-          confirmButtonText="Delete"
-          text={`Are you sure to delete the list "${name}"?`}
-          onConfirm={onDeletion}
-        />
-        <EditButton onClick={() => { setEditMode(true); }} />
-      </>
-    </ListItem>
-  );
-};
+    </>
+  </ListItem>
+);
+
 
 export default cold(ExtendedListItem);

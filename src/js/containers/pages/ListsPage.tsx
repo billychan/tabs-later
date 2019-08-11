@@ -14,7 +14,7 @@ import Footer from 'components/blocks/Footer';
 import ExtendedListItem from 'components/blocks/ExtendedListItem';
 
 import ListDetailsPage from 'containers/pages/ListDetailsPage';
-import CreateListButton from 'components/buttons/CreateListButton';
+import CreateEditListButton from 'components/buttons/CreateEditListButton';
 
 interface ListsPageProps {
   lists: TabsLater.List[];
@@ -28,8 +28,8 @@ const ListsPage = ({
   lists, updateListAttrs, deleteList, createList, openPanel,
 }: ListsPageProps) => (
   <section className="relative">
-    <section className="absolute right-0 top-0 -mt-8 mr-2 z-10">
-      <CreateListButton
+    <section className="absolute right-0 top-0 -mt-12 mr-2 z-10">
+      <CreateEditListButton
         onConfirm={({ listName }) => {
           createList({ listName })
             .then(() => showSuccessMessage(`New list "${listName}" created`));

@@ -61,7 +61,7 @@ const TabItem = ({
         />
       </div>
       <div className="children:float-right right-0 absolute-vertical-center
-        invisible group-hover:visible bg-white"
+        invisible group-hover:visible bg-gray-100"
       >
         {children}
       </div>

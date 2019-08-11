@@ -6,15 +6,19 @@ import { noop } from 'common/helpers';
 const { useState } = React;
 
 interface EditListFormProps {
-  onConfirm: TabsLater.EventHandler,
-  renderSecondaryButton: TabsLater.Renderer
+  onConfirm: ({ listName }: { listName: string }) => void;
+  renderSecondaryButton: TabsLater.Renderer;
+  mode?: 'add' | 'edit';
+  listName?: string;
 }
 
 const EditListForm = ({
   onConfirm,
   renderSecondaryButton,
+  mode = 'add',
+  listName = '',
 }: EditListFormProps) => {
-  const [listName, setListName] = useState('');
+  const [listNameAttr, setListNameAttr] = useState(listName);
   return (
     <>
       <section className="w-60 flex items-center justify-center">
@@ -24,7 +28,8 @@ const EditListForm = ({
           style={{ width: '96%' }}
           placeholder="Enter List Name..."
           name="list-name"
-          onChange={event => setListName(event.target.value)}
+          defaultValue={listNameAttr}
+          onChange={event => setListNameAttr(event.target.value)}
         />
       </section>
       <section className="actions">
@@ -32,11 +37,11 @@ const EditListForm = ({
           { renderSecondaryButton() }
         </div>
         <Button
-          text="Create List"
+          text={mode === 'add' ? 'Create List' : 'Edit List'}
           className={Classes.POPOVER_DISMISS}
           intent="primary"
           onClick={() => {
-            onConfirm({ listName });
+            onConfirm({ listName: listNameAttr });
           }}
         />
       </section>
