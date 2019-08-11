@@ -21,7 +21,8 @@ const ListItem = ({
   const linksCountText = `(${Object.keys(links).length})`;
   return (
     <li
-      className="group flex relative py-1 pl-2 list-none items-center h-8 hover:shadow cursor-default"
+      className="group flex relative py-1 pl-2 list-none items-center h-8 hover:shadow hover:bg-gray-100
+      cursor-default"
       title={name}
     >
       <span

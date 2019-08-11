@@ -36,7 +36,7 @@ const ListsPage = ({
         }}
       />
     </section>
-    <ul className="ListsPage_lists ListItems scrollable p-2 m-0 -ml-1">
+    <ul className="ListsPage_lists ListItems scrollable py-2 m-0 -ml-1">
       {
         lists.map(list => (
           <ExtendedListItem

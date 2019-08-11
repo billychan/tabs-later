@@ -33,7 +33,9 @@ const TabItem = ({
 }: TabItemProps) => {
   const checkboxRef = React.useRef(null);
   return (
-    <li className="group flex relative list-none p-1 items-center h-10 hover:shadow cursor-default">
+    <li className="group flex relative list-none p-1 items-center h-10 hover:shadow hover:bg-gray-100
+    cursor-default"
+    >
       <Checkbox
         className="m-0"
         checked={checked}

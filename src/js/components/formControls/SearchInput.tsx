@@ -47,7 +47,7 @@ const SearchInput = ({ onSearch }: SearchInputProps) => {
   return (
     <InputGroup
       large={false}
-      className="w-48 mr-3"
+      className="w-48 mr-3 ml-1"
       autoFocus
       leftIcon={SearchIcon}
       onChange={(event: React.FormEvent<HTMLInputElement>) => {

@@ -3,6 +3,7 @@ import { cold } from 'react-hot-loader';
 
 import { calculateCheckedStatus } from 'common/helpers';
 import { searchLinks } from 'common/utils/search';
+import classNames from 'classnames';
 
 import TabItem from 'components/blocks/TabItem';
 import Footer from 'components/blocks/Footer';
@@ -50,7 +51,7 @@ const LinksPage = ({
     setVisibleLinks(mergeLinksWithCheckedState(links, visibleLinks));
   }, [links]);
   return (
-    <section className={`LinksPage${className ? ` ${className}` : ''} pt-2`}>
+    <section className={classNames('LinksPage', className)}>
       <section className="flex pb-3 border-b border-gray-300 items-center">
         <BulkCheck
           checkedStatus={calculateCheckedStatus(linksCount, getCheckedLinksCount(visibleLinks))}

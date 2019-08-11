@@ -7,11 +7,9 @@ const rootId = 'root';
 const Footer = ({ children }: { children: React.ReactChild }) => (
   <Portal
     container={document.getElementById(rootId)}
-    className="w-full h-8 bottom-0 top-auto"
+    className="w-full h-10 bottom-0 top-auto p-4 bg-gray-200 flex items-center"
   >
-    <section className="absolute bottom-0 left-0 w-full bg-gray-200 p-2">
-      {children}
-    </section>
+    {children}
   </Portal>
 );
 
