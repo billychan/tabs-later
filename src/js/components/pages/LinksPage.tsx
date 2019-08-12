@@ -54,7 +54,7 @@ const LinksPage = ({
     <section className={classNames('LinksPage', className)}>
       <section className="flex pb-3 border-b border-gray-300 items-center">
         <BulkCheck
-          checkedStatus={calculateCheckedStatus(linksCount, getCheckedLinksCount(visibleLinks))}
+          checkedStatus={calculateCheckedStatus(visibleLinks.length, getCheckedLinksCount(visibleLinks))}
           onChange={(checked) => {
             setVisibleLinks(visibleLinks.map((link: TabsLater.Link) => selectLink(link, checked)))
           }}

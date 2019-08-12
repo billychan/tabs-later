@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
-import tabs from './features/tabs/tabsReducers';
-import lists from './features/lists/listsReducers';
+import tabs from 'features/tabs/tabsReducers';
+import lists from 'features/lists/listsReducers';
+import preferences from 'features/preferences/preferencesReducer';
 
 const rootReducer = combineReducers({
   tabs,
   lists,
+  preferences
 });
 
 export default rootReducer;

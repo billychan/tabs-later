@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { cold } from 'react-hot-loader';
-import { Button, Intent } from '@blueprintjs/core';
+import { Button, Intent, Checkbox } from '@blueprintjs/core';
 
 import { AppState } from 'rootReducer';
 
@@ -9,6 +9,7 @@ import { getAllItems } from 'common/selectors';
 import pluralize from 'pluralize';
 
 import * as listsActions from 'features/lists/listsActions';
+import * as preferencesActions from 'features/preferences/preferencesActions';
 import { getUniqueLinks } from 'features/lists/entity/utils';
 
 import { showSuccessMessage } from 'components/uiHelpers';
@@ -29,10 +30,12 @@ interface AddToListPanelProps {
   lists: TabsLater.List[];
   links: TabsLater.Link[];
   sourceList?: TabsLater.List;
+  closeTabAfterSaving?: boolean;
   actionMode: TabsLater.AddOrMoveAction;
   addTabsIntoList: TabsLater.ThenableActionCreator;
   moveTabsIntoList: TabsLater.ThenableActionCreator;
   createList: TabsLater.ThenableActionCreator;
+  updatePreferences: TabsLater.ActionCreator;
 }
 
 const savedMessage = ({ listName, links, actionMode }: SavedMessageParams) => {
@@ -46,9 +49,11 @@ const AddToListPanel = ({
   links,
   sourceList,
   actionMode = 'add',
+  closeTabAfterSaving = true,
   addTabsIntoList,
   moveTabsIntoList,
   createList,
+  updatePreferences,
 }: AddToListPanelProps) => (
   <div className="panel-content h-60 my-4">
     <section className="w-75 scrollable">
@@ -56,7 +61,7 @@ const AddToListPanel = ({
         {
           lists.map((list: TabsLater.List) => {
             const uniqueLinksCount = getUniqueLinks(list, links).length;
-            const tooltip = actionMode === 'add' ? 'Add to list' : 'Move to another list';
+            const tooltip = actionMode === 'add' ? 'Add to list' : 'Move to list';
             return (
               <ListItem {...list} key={list.id} mainCols={11}>
                 <>
@@ -87,6 +92,15 @@ const AddToListPanel = ({
       </ul>
     </section>
     <section className="actions mt-4">
+      <Checkbox
+        label="Close tab after saving"
+        defaultChecked={closeTabAfterSaving}
+        onChange={(event) => {
+          updatePreferences({
+            closeTabAfterSaving: event.currentTarget.checked
+          })
+        }}
+      />
       <Button
         text="New List"
         intent="primary"
@@ -121,9 +135,13 @@ const AddToListPanel = ({
 
 const mapStateToProps = (state: AppState) => ({
   lists: getAllItems(state.lists),
+  closeTabAfterSaving: state.preferences.closeTabAfterSaving,
 });
 
 export default connect(
   mapStateToProps,
-  listsActions,
+  {
+    ...listsActions,
+    ...preferencesActions,
+  }
 )(cold(AddToListPanel));
