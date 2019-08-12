@@ -50,8 +50,8 @@ const AddToListPanel = ({
   moveTabsIntoList,
   createList,
 }: AddToListPanelProps) => (
-  <div className="panel-content">
-    <section className="w-60 scrollable">
+  <div className="panel-content h-60 my-4">
+    <section className="w-75 scrollable">
       <ul className="scrollable py-2 px-1 m-0 -ml-1">
         {
           lists.map((list: TabsLater.List) => {
@@ -86,7 +86,7 @@ const AddToListPanel = ({
         }
       </ul>
     </section>
-    <section className="actions">
+    <section className="actions mt-4">
       <Button
         text="New List"
         intent="primary"

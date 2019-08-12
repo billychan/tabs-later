@@ -33,7 +33,7 @@ const BulkAddToListButton = ({
         <AddToListButton tooltip={getTooltip(actionMode)} />
         <section className="p-5">
           <PanelStack
-            className="h-75 w-75"
+            className="h-84 w-75"
             initialPanel={{
               component: AddToListPanel,
               title: `${capitalize(actionMode)} \

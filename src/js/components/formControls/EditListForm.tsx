@@ -28,6 +28,7 @@ const EditListForm = ({
           style={{ width: '96%' }}
           placeholder="Enter List Name..."
           name="list-name"
+          autoFocus
           defaultValue={listNameAttr}
           onChange={event => setListNameAttr(event.target.value)}
         />

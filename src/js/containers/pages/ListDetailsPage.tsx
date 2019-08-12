@@ -79,9 +79,7 @@ const ListDetailsPage = ({
             )}`}
             onConfirm={(links) => {
               removeLinksFromList(list, links).then(() => showSuccessMessage(
-                `${links.length} links deleted: ${links
-                  .map((link: TabsLater.Link) => link.url)
-                  .join(' \n')}`,
+                `${pluralize('link', links.length, true)} deleted`
               ));
             }}
           />
