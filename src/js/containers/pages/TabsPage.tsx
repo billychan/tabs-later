@@ -60,16 +60,16 @@ const TabsPage = ({ tabs, fetchAllTabs, closeTabs }: TabsPageProps) => {
           />
         </>
       )}
-      renderItemOperations={({ tab }) => (
+      renderItemOperations={({ link }) => (
         <>
           <DeleteButton
             tooltip="Close tab"
-            onClick={() => closeTabs([tab.id])}
+            onClick={() => closeTabs([link.id])}
           />
           <OpenLinkButton
             tooltip="Go to tab"
             onClick={() => {
-              focusTab(tab.index);
+              focusTab(link.index);
             }}
           />
         </>

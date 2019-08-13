@@ -33,18 +33,23 @@ export const fetchAllTabs = (
   });
 };
 
-// TODO: Verify this works(including fetch all tabs), and then document this thunk usage pattern
 export const closeTabs = (tabIds: string[]) =>
 (dispatch: ThunkDispatch<AppState, null, FetchAllTabsAction>) => {
   closeTabsOnBrowser(tabIds).then(() => {
-    dispatch(fetchAllTabs());
+    // Use setTimeout for there is a latency before browser knows a tab closed
+    // IMPROVE: Listen to tab events in the future so that any changes in tabs could be reflected
+    // in atom
+    setTimeout(() => {
+      dispatch(fetchAllTabs());
+    }, 100);
   });
 };
 
-// TODO: Verify this works, and then document this thunk usage pattern
 export const openTabs = (urls: TabsLater.Url[]) =>
 (dispatch: ThunkDispatch<AppState, null, FetchAllTabsAction>) => {
   openTabsOnBrowser(urls).then(() => {
-    dispatch(fetchAllTabs());
+    setTimeout(() => {
+      dispatch(fetchAllTabs());
+    }, 100);
   });
 };

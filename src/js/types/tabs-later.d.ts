@@ -47,6 +47,8 @@ declare namespace TabsLater {
   type LinkAttrs = Partial<Link>
 
   interface Tab extends Link {
+    // Tab position, Assigned from browser
+    index: number;
   }
 
   interface NormalizedTabs {

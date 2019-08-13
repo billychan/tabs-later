@@ -9,6 +9,7 @@ import { getAllItems } from 'common/selectors';
 import pluralize from 'pluralize';
 
 import * as listsActions from 'features/lists/listsActions';
+import * as tabsActions from 'features/tabs/tabsActions';
 import * as preferencesActions from 'features/preferences/preferencesActions';
 import { getUniqueLinks } from 'features/lists/entity/utils';
 
@@ -37,6 +38,7 @@ interface AddToListPanelProps {
   moveTabsIntoList: TabsLater.ThenableActionCreator;
   createList: TabsLater.ThenableActionCreator;
   updatePreferences: TabsLater.ActionCreator;
+  closeTabs: TabsLater.EventHandler;
 }
 
 const savedMessage = ({ listName, links, actionMode }: SavedMessageParams) => {
@@ -56,6 +58,7 @@ const AddToListPanel = ({
   moveTabsIntoList,
   createList,
   updatePreferences,
+  closeTabs,
 }: AddToListPanelProps) => (
   <div className="panel-content h-64">
     <section className="w-75 scrollable py-4 shadow">
@@ -74,7 +77,11 @@ const AddToListPanel = ({
                     onClick={() => {
                       const promise = (actionMode === 'move' && sourceList)
                         ? moveTabsIntoList(sourceList, links, list)
-                        : addTabsIntoList(list, links);
+                        : addTabsIntoList(list, links).then(() => {
+                          if (closeTabAfterSaving) {
+                            closeTabs(links.map((link: TabsLater.Tab) => link.id))
+                          }
+                        })
                       promise.then(() => {
                         showSuccessMessage(
                           savedMessage({
@@ -127,7 +134,11 @@ const AddToListPanel = ({
                     .then((newList: TabsLater.List) => (
                       (actionMode === 'move' && sourceList)
                         ? moveTabsIntoList(sourceList, links, newList)
-                        : addTabsIntoList(newList, links)
+                        : addTabsIntoList(newList, links).then(() => {
+                          if (closeTabAfterSaving) {
+                            closeTabs(links.map(link => link.id))
+                          }
+                        })
                     ))
                     .then(() => {
                       showSuccessMessage(savedMessage({ listName, links, actionMode }));
@@ -152,6 +163,7 @@ export default connect(
   mapStateToProps,
   {
     ...listsActions,
+    ...tabsActions,
     ...preferencesActions,
   }
 )(cold(AddToListPanel));
