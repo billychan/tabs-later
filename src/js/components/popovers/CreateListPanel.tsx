@@ -12,7 +12,7 @@ interface CreateListPanelProps {
 } 
 
 const CreateListPanel = ({ closePanel, onConfirm }: CreateListPanelProps) => (
-  <div className="panel-content">
+  <div className="panel-content pt-8">
     <EditListForm
       onConfirm={({ listName }: ListEditParams) => {
         closePanel();

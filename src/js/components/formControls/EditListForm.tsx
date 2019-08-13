@@ -21,7 +21,7 @@ const EditListForm = ({
   const [listNameAttr, setListNameAttr] = useState(listName);
   return (
     <>
-      <section className="w-60 flex items-center justify-center">
+      <section className="w-full flex items-center justify-center">
         <input
           type="text"
           className={Classes.INPUT}

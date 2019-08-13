@@ -31,6 +31,7 @@ interface AddToListPanelProps {
   links: TabsLater.Link[];
   sourceList?: TabsLater.List;
   closeTabAfterSaving?: boolean;
+  showCloseTabOption?: boolean;
   actionMode: TabsLater.AddOrMoveAction;
   addTabsIntoList: TabsLater.ThenableActionCreator;
   moveTabsIntoList: TabsLater.ThenableActionCreator;
@@ -50,13 +51,14 @@ const AddToListPanel = ({
   sourceList,
   actionMode = 'add',
   closeTabAfterSaving = true,
+  showCloseTabOption = false,
   addTabsIntoList,
   moveTabsIntoList,
   createList,
   updatePreferences,
 }: AddToListPanelProps) => (
-  <div className="panel-content h-60 my-4">
-    <section className="w-75 scrollable">
+  <div className="panel-content h-64">
+    <section className="w-75 scrollable py-4 shadow">
       <ul className="scrollable py-2 px-1 m-0 -ml-1">
         {
           lists.map((list: TabsLater.List) => {
@@ -91,44 +93,52 @@ const AddToListPanel = ({
         }
       </ul>
     </section>
-    <section className="actions mt-4">
-      <Checkbox
-        label="Close tab after saving"
-        defaultChecked={closeTabAfterSaving}
-        onChange={(event) => {
-          updatePreferences({
-            closeTabAfterSaving: event.currentTarget.checked
-          })
-        }}
-      />
-      <Button
-        text="New List"
-        intent="primary"
-        onClick={() => {
-          openPanel({
-            component: CreateListPanel,
-            title: 'New List',
-            props: {
-              onConfirm({ listName }: { listName: string}) {
-                createList({ listName })
-                  .then((newList: TabsLater.List) => {
-                    showSuccessMessage(`New list "${listName}" created`);
-                    return newList;
-                  })
-                  .then((newList: TabsLater.List) => (
-                    (actionMode === 'move' && sourceList)
-                      ? moveTabsIntoList(sourceList, links, newList)
-                      : addTabsIntoList(newList, links)
-                  ))
-                  .then(() => {
-                    showSuccessMessage(savedMessage({ listName, links, actionMode }));
-                  });
+    <section className="mt-4">
+      {
+        showCloseTabOption && (
+          <div className="mb-4 pl-2 text-gray-600">
+            <Checkbox
+              label="Close tab after adding"
+              defaultChecked={closeTabAfterSaving}
+              onChange={(event) => {
+                updatePreferences({
+                  closeTabAfterSaving: event.currentTarget.checked
+                })
+              }}
+            />
+          </div>
+        )
+      }
+      <div className="actions">
+        <Button
+          text="New List"
+          intent="primary"
+          onClick={() => {
+            openPanel({
+              component: CreateListPanel,
+              title: 'New List',
+              props: {
+                onConfirm({ listName }: { listName: string}) {
+                  createList({ listName })
+                    .then((newList: TabsLater.List) => {
+                      showSuccessMessage(`New list "${listName}" created`);
+                      return newList;
+                    })
+                    .then((newList: TabsLater.List) => (
+                      (actionMode === 'move' && sourceList)
+                        ? moveTabsIntoList(sourceList, links, newList)
+                        : addTabsIntoList(newList, links)
+                    ))
+                    .then(() => {
+                      showSuccessMessage(savedMessage({ listName, links, actionMode }));
+                    });
+                },
               },
-            },
-          });
-        }}
-      />
-      <CancelPopoverButton />
+            });
+          }}
+        />
+        <CancelPopoverButton />
+      </div>
     </section>
   </div>
 );

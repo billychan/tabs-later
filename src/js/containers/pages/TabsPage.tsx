@@ -35,7 +35,10 @@ const TabsPage = ({ tabs, fetchAllTabs, closeTabs }: TabsPageProps) => {
       className="TabsPage"
       renderBulkOperations={({ selectedLinks }) => (
         <>
-          <BulkAddToListButton links={selectedLinks as TabsLater.Link[]} />
+          <BulkAddToListButton
+            links={selectedLinks as TabsLater.Link[]}
+            showCloseTabOption
+          />
           <BulkCloseDuplicationsButton
             tabs={selectedLinks}
             onConfirm={duplicatedLinks => {
@@ -46,7 +49,11 @@ const TabsPage = ({ tabs, fetchAllTabs, closeTabs }: TabsPageProps) => {
             links={selectedLinks}
             buttonText="Close selected tabs"
             noItemsWarning="Please select tabs to close."
-            itemsWarning={`Going to close following ${pluralize('tab', selectedLinks.length, true)}`}
+            itemsWarning={`Going to close following ${pluralize(
+              "tab",
+              selectedLinks.length,
+              true
+            )}`}
             onConfirm={linksToClose => {
               closeTabs(linksToClose.map((tab: TabsLater.Tab) => tab.id));
             }}
