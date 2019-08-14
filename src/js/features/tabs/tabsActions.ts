@@ -6,14 +6,22 @@ import { arrayOfTabs } from './tabsSchema';
 import {
   FETCH_TABS_REQUEST,
   FETCH_TABS_SUCCESS,
+  REMOVE_TAB,
+  ADD_TAB,
+  UPDATE_TAB,
 
   FetchTabsRequestAction,
-  FetchTabsSuccessAction
+  FetchTabsSuccessAction,
+  RemoveTabAction,
+  AddTabAction,
+  UpdateTabAction,
 } from './types';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { AppState } from 'rootReducer';
 
 type FetchAllTabsAction = FetchTabsRequestAction | FetchTabsSuccessAction
+
+let tabsWatched = false;
 
 export const fetchAllTabs = (
 ): ThunkAction<
@@ -35,21 +43,39 @@ export const fetchAllTabs = (
 
 export const closeTabs = (tabIds: string[]) =>
 (dispatch: ThunkDispatch<AppState, null, FetchAllTabsAction>) => {
-  closeTabsOnBrowser(tabIds).then(() => {
-    // Use setTimeout for there is a latency before browser knows a tab closed
-    // IMPROVE: Listen to tab events in the future so that any changes in tabs could be reflected
-    // in atom
-    setTimeout(() => {
-      dispatch(fetchAllTabs());
-    }, 100);
-  });
+  closeTabsOnBrowser(tabIds);
 };
 
 export const openTabs = (urls: TabsLater.Url[]) =>
 (dispatch: ThunkDispatch<AppState, null, FetchAllTabsAction>) => {
-  openTabsOnBrowser(urls).then(() => {
-    setTimeout(() => {
-      dispatch(fetchAllTabs());
-    }, 100);
-  });
+  openTabsOnBrowser(urls);
 };
+
+export const watchTabChanges = () => 
+(dispatch: ThunkDispatch<AppState, null, AddTabAction | RemoveTabAction | UpdateTabAction >) => {
+  if (!tabsWatched) {
+    window.chrome.tabs.onCreated.addListener((tab: TabsLater.Tab) => {
+      dispatch({
+        type: ADD_TAB,
+        payload: { tab }
+      })
+    })
+    window.chrome.tabs.onRemoved.addListener((id: number) => {
+      dispatch({
+        type: REMOVE_TAB,
+        payload: { id }
+      });
+    })
+    window.chrome.tabs.onUpdated.addListener((id: number, changeInfo: TabsLater.TabChangeInfo) => {
+      dispatch({
+        type: UPDATE_TAB,
+        payload: {
+          id,
+          changeInfo
+        }
+      });
+
+    })
+    tabsWatched = true;
+  }
+}

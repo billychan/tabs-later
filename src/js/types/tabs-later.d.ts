@@ -51,6 +51,12 @@ declare namespace TabsLater {
     index: number;
   }
 
+  interface TabChangeInfo {
+    title?: string;
+    url?: string;
+    favIconUrl?: string;
+  }
+
   interface NormalizedTabs {
     entities: {
       tab: {

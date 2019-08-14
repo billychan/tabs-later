@@ -4,7 +4,8 @@ import { cold } from 'react-hot-loader';
 
 import { Route, HashRouter, Switch } from 'react-router-dom';
 
-import { fetchLists as fetchListsAction } from 'features/lists/listsActions';
+import * as listsActions from 'features/lists/listsActions';
+import * as tabsActions from 'features/tabs/tabsActions';
 
 import { FocusStyleManager } from "@blueprintjs/core";
 
@@ -15,14 +16,16 @@ import ListsPagePanel from 'components/pages/ListsPagePanel';
 
 interface AppProps {
   fetchLists: TabsLater.ThenableActionCreator;
+  watchTabChanges: TabsLater.EventHandler;
 }
 
 const { useEffect } = React;
 
-const App = ({ fetchLists }: AppProps) => {
+const App = ({ fetchLists, watchTabChanges }: AppProps) => {
   useEffect(() => {
     fetchLists();
     FocusStyleManager.onlyShowFocusOnTabs();
+    watchTabChanges();
   }, []);
 
   return (
@@ -30,8 +33,8 @@ const App = ({ fetchLists }: AppProps) => {
       <NavBar />
       <section className="p-2">
         <Switch>
-          <Route exact path='/' component={TabsPage} />
-          <Route path='/lists' component={ListsPagePanel} />
+          <Route exact path="/" component={TabsPage} />
+          <Route path="/lists" component={ListsPagePanel} />
         </Switch>
       </section>
     </HashRouter>
@@ -41,6 +44,7 @@ const App = ({ fetchLists }: AppProps) => {
 export default connect(
   () => ({}),
   {
-    fetchLists: fetchListsAction,
+    ...listsActions,
+    ...tabsActions
   },
 )(cold(App));

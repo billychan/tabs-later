@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { cold } from 'react-hot-loader';
+import { sortBy } from 'lodash';
 
 import { AppState } from 'rootReducer';
 
@@ -79,7 +80,7 @@ const TabsPage = ({ tabs, fetchAllTabs, closeTabs }: TabsPageProps) => {
 };
 
 const mapStateToProps = (state: AppState) => ({
-  tabs: getAllItems(state.tabs),
+  tabs: sortBy(getAllItems(state.tabs), 'index')
 });
 
 export default connect(
