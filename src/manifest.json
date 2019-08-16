@@ -3,14 +3,14 @@
   "options_page": "options.html",
   "browser_action": {
     "default_popup": "popup.html",
-    "default_icon": "src/img/icon-34.png"
+    "default_icon": "src/img/logo-34.png"
   },
   "permissions": [
     "tabs",
     "unlimitedStorage"
   ],
   "icons": {
-    "128": "src/img/icon-128.png"
+    "128": "src/img/logo-128.png"
   },
   "manifest_version": 2,
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
