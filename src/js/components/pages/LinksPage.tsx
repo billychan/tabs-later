@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { without, map } from 'lodash';
+import { without, map, intersection, find, compact } from 'lodash';
 import { cold } from 'react-hot-loader';
 
 import { calculateCheckedStatus } from 'common/helpers';
@@ -17,7 +17,7 @@ const { useState, useEffect } = React;
 
 interface LinksPageProps {
   links: TabsLater.Link[];
-  renderBulkOperations: TabsLater.Renderer<{ selectedIds: (number | string)[] }>
+  renderBulkOperations: TabsLater.Renderer<{ selectedLinks: (TabsLater.Tab | TabsLater.Link)[] }>
   renderItemOperations: TabsLater.Renderer;
   className?: string;
 }
@@ -42,6 +42,13 @@ const LinksPage = ({
     if (!hasQuery) {
       setVisibleLinks(links);
     }
+    // When links changed especially removed, update checkedIds to keep relevant values.
+    setCheckedIds(
+      intersection(
+        checkedIds,
+        map(links, 'id')
+      )
+    )
   }, [links]);
 
   return (
@@ -68,7 +75,9 @@ const LinksPage = ({
           }}
         />
         {
-          renderBulkOperations({ selectedIds: checkedIds })
+          renderBulkOperations({
+            selectedLinks: compact(checkedIds.map(id => find(links, { id })))
+          })
         }
       </section>
       <ul className="LinksPage__links scrollable pt-2 -ml-1">

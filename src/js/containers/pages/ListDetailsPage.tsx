@@ -9,7 +9,6 @@ import pluralize from "pluralize";
 
 import * as listsActions from 'features/lists/listsActions';
 import * as tabsActions from 'features/tabs/tabsActions';
-import { listLinksToLinksArray } from 'features/lists/entity/utils';
 
 import LinksPage from 'components/pages/LinksPage';
 import { OpenLinkButton } from 'components/buttons/ButtonWithTooltip';
@@ -44,12 +43,11 @@ const ListDetailsPage = ({
   useEffect(() => {
     fetchAllTabs();
   }, []);
+  const links = Object.values(list.links);
   return (
     <LinksPage
-      links={listLinksToLinksArray(list)}
-      renderBulkOperations={({ selectedIds }) => { 
-        const selectedLinks = selectedIds.map(id => ( list.links[id]));
-        return (
+      links={links}
+      renderBulkOperations={({ selectedLinks }) => (
         <>
           <BulkOpenUrlsButton
             urls={selectedLinks.map((link: TabsLater.Link) => link.url)}
@@ -66,7 +64,7 @@ const ListDetailsPage = ({
           <ImportLinksButton
             onImported={({ results }) => {
               importLinksToList(list, results).then(() => {
-                showSuccessMessage('Links imported successfully');
+                showSuccessMessage("Links imported successfully");
               });
             }}
           />
@@ -75,18 +73,20 @@ const ListDetailsPage = ({
             buttonText="Delete selected links"
             noItemsWarning="Please select links to delete."
             itemsWarning={`Going to delete following ${pluralize(
-              'link',
+              "link",
               selectedLinks.length,
               true
             )}`}
-            onConfirm={(links) => {
-              removeLinksFromList(list, links).then(() => showSuccessMessage(
-                `${pluralize('link', links.length, true)} deleted`
-              ));
+            onConfirm={links => {
+              removeLinksFromList(list, links).then(() =>
+                showSuccessMessage(
+                  `${pluralize("link", links.length, true)} deleted`
+                )
+              );
             }}
           />
         </>
-      )}}
+      )}
       renderItemOperations={({ link }) => (
         <>
           <DeleteButtonWithConfirmation
@@ -94,7 +94,9 @@ const ListDetailsPage = ({
             confirmButtonText="Yes, remove it"
             text="Are you sure to remove this link from list?"
             onConfirm={() => {
-              removeLinksFromList(list, [link]).then(() => showSuccessMessage(`Link removed: ${link.url}`));
+              removeLinksFromList(list, [link]).then(() =>
+                showSuccessMessage(`Link removed: ${link.url}`)
+              );
             }}
           />
           <OpenLinkButton

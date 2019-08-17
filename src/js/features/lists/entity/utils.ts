@@ -27,18 +27,16 @@ export const getUniqueLinks = (list: TabsLater.List, linksToAdd: TabsLater.Link[
   linksToAdd.filter(link => !list.links[link.url])
 );
 
-// This is a temp Id for UI displaying only. Not stored in db.
-export const assignIdToLink = (link: TabsLater.Link) => ({
-  ...link,
-  id: v4(),
-});
-
 export const pickListAttributes = (list: TabsLater.List): TabsLater.List => pick(list, [
   'id', 'links', 'name', '_id', '_rev',
 ]);
 
-export const pickLinkAttributes = (link: TabsLater.Link): TabsLater.Link => pick(link, [
-  'favIconUrl', 'title', 'url',
-]);
-
-export const listLinksToLinksArray = (list: TabsLater.List) => Object.values(list.links).map(assignIdToLink);
+export const buildLink = (tab: TabsLater.Tab): TabsLater.Link => {
+  const { favIconUrl, title, url } = tab;
+  return {
+    id: url,
+    title,
+    favIconUrl,
+    url
+  }
+}

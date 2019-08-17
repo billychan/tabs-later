@@ -40,7 +40,7 @@ import {
   addLinkArrToLinksObj,
   removeLinksArrFromLinksObj,
   pickListAttributes,
-  pickLinkAttributes,
+  buildLink,
 } from './entity/utils';
 
 export const createList = (
@@ -125,7 +125,7 @@ export const addTabsIntoList = (
   list: TabsLater.List,
   tabs: TabsLater.Tab[]
 ) => (
-  addLinksIntoList(list, tabs.map(pickLinkAttributes))
+  addLinksIntoList(list, tabs.map(buildLink))
 );
 
 export const moveTabsIntoList = (
@@ -133,7 +133,7 @@ export const moveTabsIntoList = (
   links: TabsLater.Link[],
   targetList: TabsLater.List
 ) => {
-  const cleanedLinks = links.map(pickLinkAttributes);
+  const cleanedLinks = links.map(buildLink);
   const lists = [
     { ...sourceList, links: removeLinksArrFromLinksObj(cleanedLinks, sourceList.links) },
     { ...targetList, links: addLinkArrToLinksObj(cleanedLinks, targetList.links) },

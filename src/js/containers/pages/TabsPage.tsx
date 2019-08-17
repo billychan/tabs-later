@@ -34,8 +34,7 @@ const TabsPage = ({ tabs, fetchAllTabs, closeTabs }: TabsPageProps) => {
     <LinksPage
       links={tabs}
       className="TabsPage"
-      renderBulkOperations={({ selectedIds }) => {
-        const selectedLinks = selectedIds.map(id => find(tabs, ['id', id]));
+      renderBulkOperations={({ selectedLinks }) => {
         return (
         <>
           <BulkAddToListButton
@@ -43,7 +42,7 @@ const TabsPage = ({ tabs, fetchAllTabs, closeTabs }: TabsPageProps) => {
             showCloseTabOption
           />
           <BulkCloseDuplicationsButton
-            tabs={selectedLinks}
+            tabs={selectedLinks as TabsLater.Tab[]}
             onConfirm={duplicatedLinks => {
               closeTabs(duplicatedLinks.map((tab: TabsLater.Tab) => tab.id));
             }}
