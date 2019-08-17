@@ -40,6 +40,12 @@ const options = {
         test: /.(scss|css)$/,
         use: [
           isDevEnv ? 'style-loader' : MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: isDevEnv,
+            },
+          },
           { loader: 'postcss-loader', ident: 'postcss' },
         ],
       },
@@ -114,12 +120,11 @@ const options = {
       filename: 'popup.html',
       chunks: ['popup'],
     }),
-    new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'src', 'js', 'pages', 'options', 'options.html'),
-      filename: 'options.html',
-      chunks: ['options'],
-    }),
     new WriteFilePlugin(),
+    new MiniCssExtractPlugin({
+      filename: isDevEnv ? '[hash].css' : '[name].[contenthash].css',
+      chunkFilename: isDevEnv ? '[hash].css' : '[name].[contenthash].css',
+    }),
   ],
   devServer: isDevEnv ? {
     hot: true,
