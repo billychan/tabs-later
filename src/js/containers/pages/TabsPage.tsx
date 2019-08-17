@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { cold } from 'react-hot-loader';
-import { sortBy } from 'lodash';
+import { sortBy, find } from 'lodash';
 
 import { AppState } from 'rootReducer';
 
@@ -34,7 +34,9 @@ const TabsPage = ({ tabs, fetchAllTabs, closeTabs }: TabsPageProps) => {
     <LinksPage
       links={tabs}
       className="TabsPage"
-      renderBulkOperations={({ selectedLinks }) => (
+      renderBulkOperations={({ selectedIds }) => {
+        const selectedLinks = selectedIds.map(id => find(tabs, ['id', id]));
+        return (
         <>
           <BulkAddToListButton
             links={selectedLinks as TabsLater.Link[]}
@@ -60,7 +62,7 @@ const TabsPage = ({ tabs, fetchAllTabs, closeTabs }: TabsPageProps) => {
             }}
           />
         </>
-      )}
+      )}}
       renderItemOperations={({ link }) => (
         <>
           <DeleteButton

@@ -17,7 +17,7 @@ const { useState, useEffect } = React;
 
 interface LinksPageProps {
   links: TabsLater.Link[];
-  renderBulkOperations: TabsLater.Renderer;
+  renderBulkOperations: TabsLater.Renderer<{ selectedIds: (number | string)[] }>
   renderItemOperations: TabsLater.Renderer;
   className?: string;
 }
@@ -68,9 +68,7 @@ const LinksPage = ({
           }}
         />
         {
-          renderBulkOperations({
-            selectedLinks: visibleLinks.filter(link => link.checked),
-          })
+          renderBulkOperations({ selectedIds: checkedIds })
         }
       </section>
       <ul className="LinksPage__links scrollable pt-2 -ml-1">

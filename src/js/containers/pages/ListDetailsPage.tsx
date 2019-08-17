@@ -47,7 +47,9 @@ const ListDetailsPage = ({
   return (
     <LinksPage
       links={listLinksToLinksArray(list)}
-      renderBulkOperations={({ selectedLinks }) => (
+      renderBulkOperations={({ selectedIds }) => { 
+        const selectedLinks = selectedIds.map(id => ( list.links[id]));
+        return (
         <>
           <BulkOpenUrlsButton
             urls={selectedLinks.map((link: TabsLater.Link) => link.url)}
@@ -84,7 +86,7 @@ const ListDetailsPage = ({
             }}
           />
         </>
-      )}
+      )}}
       renderItemOperations={({ link }) => (
         <>
           <DeleteButtonWithConfirmation

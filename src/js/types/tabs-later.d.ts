@@ -8,7 +8,7 @@ declare namespace TabsLater {
   type Id = string | number
 
   type EventHandler = (...args: any[]) => void
-  type Renderer = (...args: any[]) => React.ReactChild
+  type Renderer<T = any> = (...args: T[]) => React.ReactChild
 
   interface CustomAction extends Action{
     payload: any;
