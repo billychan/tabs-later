@@ -23,7 +23,6 @@ const options = {
   mode: isDevEnv ? 'development' : 'production',
   entry: {
     popup: path.join(__dirname, 'src', 'js', 'pages', 'popup', 'popup.tsx'),
-    options: path.join(__dirname, 'src', 'js', 'pages', 'options', 'options.ts'),
   },
   output: {
     path: path.join(__dirname, 'dist'),
