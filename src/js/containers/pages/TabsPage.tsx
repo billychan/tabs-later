@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { cold } from 'react-hot-loader';
-import { sortBy, find } from 'lodash';
+import sortBy from 'lodash/sortBy';
 
 import { AppState } from 'rootReducer';
 

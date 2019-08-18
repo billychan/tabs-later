@@ -1,4 +1,6 @@
-import { mapValues, get, omit } from 'lodash';
+import mapValues from 'lodash/mapValues';
+import get from 'lodash/get';
+import omit from 'lodash/omit';
 import {
   FETCH_TABS_SUCCESS,
   ADD_TAB,

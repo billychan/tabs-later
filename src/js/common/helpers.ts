@@ -1,4 +1,4 @@
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 
 /**
  * @description Turn array of objects to object with given key(default to 'id')

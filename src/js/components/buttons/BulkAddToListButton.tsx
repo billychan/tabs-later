@@ -3,7 +3,7 @@ import {
   PanelStack,
   Popover,
 } from '@blueprintjs/core';
-import { capitalize } from 'lodash';
+import capitalize from 'lodash/capitalize';
 import pluralize from "pluralize";
 
 import NoItemsWarningPopover from 'components/popovers/NoItemsWarningPopover';

@@ -7,6 +7,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WriteFilePlugin = require('write-file-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+
 const env = process.env.NODE_ENV || 'development';
 
 // load the secrets
@@ -26,7 +29,7 @@ const options = {
   },
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: '[name].bundle.js',
+    filename: '[name].[contenthash].bundle.js',
   },
   module: {
     rules: [
@@ -89,10 +92,6 @@ const options = {
     new CleanWebpackPlugin({
       cleanOnceBeforeBuildPatterns: ['**/*', '!resources*'],
     }),
-    // expose and write the allowed env vars on the compiled bundle
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(env),
-    }),
     new CopyWebpackPlugin([
       {
         from: 'src/manifest.json',
@@ -125,6 +124,12 @@ const options = {
       chunkFilename: isDevEnv ? '[hash].css' : '[name].[contenthash].css',
     }),
   ],
+  optimization: {
+    minimizer: [
+      new TerserPlugin({}),
+      new OptimizeCssAssetsPlugin({}),
+    ],
+  },
   devServer: isDevEnv ? {
     hot: true,
     contentBase: path.join(__dirname, '../build'),

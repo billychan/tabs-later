@@ -1,6 +1,7 @@
 import { v4 } from 'node-uuid';
 import { arrayToObjectWithKey } from 'common/helpers';
-import { omit, pick } from 'lodash';
+import omit from 'lodash/omit';
+import pick from 'lodash/pick';
 
 export const buildListFromName = (name: string) => ({
   // Timestamp for easier sorting at db side

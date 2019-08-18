@@ -16,6 +16,7 @@ const purgecss = require('@fullhuman/postcss-purgecss')({
 
   whitelist: [
     // Some dynamically composed Tailwind classes
+    'w-11/12',
     'w-12/12',
   ],
 });

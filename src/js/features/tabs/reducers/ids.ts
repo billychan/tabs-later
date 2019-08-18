@@ -1,4 +1,4 @@
-import { without } from 'lodash';
+import without from 'lodash/without';
 import { combineReducers } from 'redux';
 import {
   FETCH_TABS_SUCCESS,

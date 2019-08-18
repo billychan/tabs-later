@@ -1,5 +1,9 @@
 import * as React from 'react';
-import { without, map, intersection, find, compact } from 'lodash';
+import without from 'lodash/without';
+import map from 'lodash/map';
+import intersection from 'lodash/intersection';
+import find from 'lodash/find';
+import compact from 'lodash/compact';
 import { cold } from 'react-hot-loader';
 
 import { calculateCheckedStatus } from 'common/helpers';
