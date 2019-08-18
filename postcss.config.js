@@ -12,7 +12,7 @@ const purgecss = require('@fullhuman/postcss-purgecss')({
   defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || [],
 
   // Reserve all Blueprint global css rules
-  whitelistPatterns: [/^bp3/],
+  whitelistPatterns: [/bp3-/],
 
   whitelist: [
     // Some dynamically composed Tailwind classes

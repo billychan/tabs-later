@@ -1,4 +1,3 @@
-const webpack = require('webpack');
 const path = require('path');
 const fileSystem = require('fs');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
@@ -29,7 +28,7 @@ const options = {
   },
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: '[name].[contenthash].bundle.js',
+    filename: isDevEnv ? '[hash].js' : '[name].[contenthash].bundle.js',
   },
   module: {
     rules: [

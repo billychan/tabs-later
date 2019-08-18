@@ -105,7 +105,7 @@ const AddToListPanel = ({
         showCloseTabOption && (
           <div className="mb-4 pl-2 text-gray-600">
             <Checkbox
-              label="Close tab after adding"
+              label="Close selected tabs after adding"
               defaultChecked={closeTabAfterSaving}
               onChange={(event) => {
                 updatePreferences({
