@@ -7,6 +7,7 @@
     "build": "NODE_ENV=production ./node_modules/.bin/webpack",
     "start": "./node_modules/.bin/webpack-dev-server --content-base ./build",
     "test": "jest",
+    "postversion": "git push origin HEAD && git push --tags",
     "eslint": "node ./node_modules/.bin/eslint"
   },
   "dependencies": {
