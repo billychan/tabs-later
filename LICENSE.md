@@ -1,6 +1,7 @@
 MIT License
 
 Boilerplate: Copyright (c) 2016 Samuel Simões
+
 Application: Copyright (c) 2018 Billy Chan
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
