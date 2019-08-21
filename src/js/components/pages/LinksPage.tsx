@@ -40,12 +40,15 @@ const LinksPage = ({
 
   // Flag to decide if the links should be updated. In normal case they should, but if in search
   // then the title/urls are all changed to highlight and they should not be updated from outside.
-  const [hasQuery, setHasQuery] = useState(false);
+  const [currentQuery, setCurrentQuery] = useState('');
 
   useEffect(() => {
-    if (!hasQuery) {
+    if (!currentQuery) {
       setVisibleLinks(links);
+    } else {
+      setVisibleLinks(searchLinks(links, currentQuery));
     }
+
     // When links changed especially removed, update checkedIds to keep relevant values.
     setCheckedIds(
       intersection(
@@ -70,7 +73,7 @@ const LinksPage = ({
         />
         <SearchInput
           onSearch={(query) => {
-            setHasQuery(!!query);
+            setCurrentQuery(query);
             if (query) {
               setVisibleLinks(searchLinks(links, query));
             } else {

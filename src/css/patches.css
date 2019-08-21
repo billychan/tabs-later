@@ -1,0 +1,14 @@
+/* Workaround patches */
+
+/* workaround for fixing svg fill removed on purging */
+/* purgecss ignore */
+.bp3-icon>svg:not([fill]) {
+  fill: currentColor
+}
+
+/* This one lost on purge */
+/* purgecss ignore */
+textarea.bp3-input, textarea.bp3-input.bp3-large, textarea.bp3-input.bp3-small {
+  height: auto;
+  line-height: inherit;
+}

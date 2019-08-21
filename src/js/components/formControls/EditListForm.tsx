@@ -38,7 +38,7 @@ const EditListForm = ({
           { renderSecondaryButton() }
         </div>
         <Button
-          text={mode === 'add' ? 'Create List' : 'Edit List'}
+          text={mode === 'add' ? 'Create List' : 'Confirm Changes'}
           className={Classes.POPOVER_DISMISS}
           intent="primary"
           onClick={() => {

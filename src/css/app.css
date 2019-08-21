@@ -40,9 +40,3 @@ body {
     }
   }
 }
-
-/* workaround for fixing svg fill removed on purging */
-/* purgecss ignore */
-.bp3-icon>svg:not([fill]) {
-  fill: currentColor
-}

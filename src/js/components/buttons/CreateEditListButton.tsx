@@ -19,7 +19,7 @@ const CreateEditListButton = ({
     {
       mode === 'add' 
       ? <AddButton tooltip="Create New List" />
-      : <EditButton tooltip="Confirm Changes" />
+      : <EditButton tooltip="Edit" />
     }
     <section className="p-5 w-80">
       <EditListForm
