@@ -8,7 +8,7 @@
     "start": "./node_modules/.bin/webpack-dev-server --content-base ./build",
     "test": "jest",
     "postversion": "git push origin HEAD && git push --tags",
-    "zip": "version=$(node -p 'require(\"./package.json\").version'); zip -r ./tmp/package-\"${version}\".zip ./dist/*",
+    "prepare": "yarn build; version=$(node -p 'require(\"./package.json\").version'); zip -r ./tmp/package-\"${version}\".zip ./dist/*",
     "eslint": "node ./node_modules/.bin/eslint"
   },
   "dependencies": {
