@@ -11,12 +11,13 @@ import * as listsActions from 'features/lists/listsActions';
 import * as tabsActions from 'features/tabs/tabsActions';
 
 import LinksPage from 'components/pages/LinksPage';
-import { OpenLinkButton } from 'components/buttons/ButtonWithTooltip';
+import { OpenLinkButton, CopyButton } from 'components/buttons/ButtonWithTooltip';
 import BulkOpenUrlsButton from 'components/buttons/BulkOpenUrlsButton';
 import BulkDeleteButton from 'components/buttons/BulkDeleteButton';
 import BulkAddToListButton from 'components/buttons/BulkAddToListButton';
 import ExportLinksButton from 'components/buttons/ExportLinksButton';
 import ImportLinksButton from 'components/buttons/ImportLinksButton';
+import CopyTextButton from 'components/buttons/CopyTextButton';
 import { DeleteButtonWithConfirmation } from 'components/buttons/ButtonWithConfirmation';
 
 import { showSuccessMessage } from 'components/uiHelpers';
@@ -98,6 +99,10 @@ const ListDetailsPage = ({
                 showSuccessMessage(`Link removed: ${link.url}`)
               );
             }}
+          />
+          <CopyTextButton
+            itemName="URL"
+            text={link.url}
           />
           <OpenLinkButton
             tooltip="Open link in new tab"

@@ -31,7 +31,7 @@ const ButtonWithTooltip = ({
   return (
     <Tooltip
       content={tooltip}
-      hoverOpenDelay={0}
+      hoverOpenDelay={500}
       hoverCloseDelay={0}
       disabled={disabled}
       usePortal={false}
