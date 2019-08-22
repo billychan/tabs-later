@@ -63,6 +63,9 @@ export default cold(ButtonWithTooltip);
 export const DeleteButton = (props: ButtonWithTooltipProps) => (
   <ButtonWithTooltip icon="trash" tooltip="Close" {...props} />);
 
+export const CopyButton = (props: ButtonWithTooltipProps) => (
+  <ButtonWithTooltip icon="duplicate" tooltip="Copy" {...props} />);
+
 export const ConfirmButton = (props: ButtonWithTooltipProps) => (
   <ButtonWithTooltip icon="tick-circle" tooltip="yes" {...props} />);
 

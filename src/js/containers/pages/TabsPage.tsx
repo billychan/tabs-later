@@ -16,7 +16,9 @@ import pluralize from "pluralize";
 import BulkAddToListButton from 'components/buttons/BulkAddToListButton';
 import BulkCloseDuplicationsButton from 'components/buttons/BulkCloseDuplicationsButton';
 import BulkDeleteButton from 'components/buttons/BulkDeleteButton';
-import { DeleteButton, OpenLinkButton } from 'components/buttons/ButtonWithTooltip';
+import { DeleteButton, CopyButton, OpenLinkButton } from 'components/buttons/ButtonWithTooltip';
+
+import { showSuccessMessage } from 'components/uiHelpers';
 
 interface TabsPageProps {
   tabs: TabsLater.Tab[];
@@ -67,6 +69,14 @@ const TabsPage = ({ tabs, fetchAllTabs, closeTabs }: TabsPageProps) => {
           <DeleteButton
             tooltip="Close tab"
             onClick={() => closeTabs([link.id])}
+          />
+          <CopyButton
+            tooltip="Copy URL"
+            onClick={() => {
+              window.navigator.clipboard.writeText(link.url).then(() => {
+                showSuccessMessage('Url copied');
+              })
+            }}
           />
           <OpenLinkButton
             tooltip="Go to tab"
