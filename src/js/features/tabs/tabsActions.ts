@@ -6,14 +6,10 @@ import { arrayOfTabs } from './tabsSchema';
 import {
   FETCH_TABS_REQUEST,
   FETCH_TABS_SUCCESS,
-  REMOVE_TAB,
-  ADD_TAB,
   UPDATE_TAB,
 
   FetchTabsRequestAction,
   FetchTabsSuccessAction,
-  RemoveTabAction,
-  AddTabAction,
   UpdateTabAction,
 } from './types';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
@@ -52,18 +48,25 @@ export const openTabs = (urls: TabsLater.Url[]) =>
 };
 
 export const watchTabChanges = () => 
-(dispatch: ThunkDispatch<AppState, null, AddTabAction | RemoveTabAction | UpdateTabAction >) => {
+(dispatch: ThunkDispatch<AppState, null, FetchAllTabsAction | UpdateTabAction >) => {
   if (!tabsWatched) {
-    window.chrome.tabs.onCreated.addListener((tab: TabsLater.Tab) => {
-      dispatch({
-        type: ADD_TAB,
-        payload: { tab }
-      })
+    tabsWatched = true;
+    // Adding or removing need to fetch all tabs again because the tab indices will change in each
+    // tab after that. Updating all so that going to tab could work correctly.
+    window.chrome.tabs.onCreated.addListener(() => {
+      getAllTabsFromBrowser().then((tabs) => {
+        dispatch({
+          type: FETCH_TABS_SUCCESS,
+          payload: { tabs: normalize(tabs, arrayOfTabs) },
+        });
+      });
     })
-    window.chrome.tabs.onRemoved.addListener((id: number) => {
-      dispatch({
-        type: REMOVE_TAB,
-        payload: { id }
+    window.chrome.tabs.onRemoved.addListener(() => {
+      getAllTabsFromBrowser().then((tabs) => {
+        dispatch({
+          type: FETCH_TABS_SUCCESS,
+          payload: { tabs: normalize(tabs, arrayOfTabs) },
+        });
       });
     })
     window.chrome.tabs.onUpdated.addListener((id: number, changeInfo: TabsLater.TabChangeInfo) => {
@@ -74,8 +77,6 @@ export const watchTabChanges = () =>
           changeInfo
         }
       });
-
     })
-    tabsWatched = true;
   }
 }

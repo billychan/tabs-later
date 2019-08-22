@@ -3,17 +3,13 @@ import get from 'lodash/get';
 import omit from 'lodash/omit';
 import {
   FETCH_TABS_SUCCESS,
-  ADD_TAB,
-  REMOVE_TAB,
   UPDATE_TAB,
 
   FetchTabsSuccessAction,
-  AddTabAction,
-  RemoveTabAction,
   UpdateTabAction,
 } from '../types';
 
-type AllowedAction = FetchTabsSuccessAction | AddTabAction | RemoveTabAction | UpdateTabAction;
+type AllowedAction = FetchTabsSuccessAction | UpdateTabAction;
 
 const byId = (
   state = {}, action: AllowedAction
@@ -28,17 +24,6 @@ const byId = (
           checked: !!(get(state, val.id) || {}).checked
         }
       ));
-    case ADD_TAB: {
-      const { tab } = action.payload;
-      return {
-        ...state,
-        [tab.id]: tab,
-      }
-    }
-    case REMOVE_TAB: {
-      const { id } = action.payload;
-      return omit(state, id);
-    }
     case UPDATE_TAB: {
       const { changeInfo, id } = action.payload;
       const currentTab = get(state, id);

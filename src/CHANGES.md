@@ -1,5 +1,8 @@
 # Change Log
 
+### 0.1.2
+- [issue] Fix going to tab not behaving correctly after adding or removing tabs
+
 ### 0.1.1
 - [issue] Fix incorrect Edit list tooltip copy.
 - [issue] Fix incorrect height of textarea on import/export popover.
