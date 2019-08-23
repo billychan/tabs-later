@@ -24,6 +24,7 @@ interface LinksPageProps {
   renderBulkOperations: TabsLater.Renderer<{ selectedLinks: (TabsLater.Tab | TabsLater.Link)[] }>
   renderItemOperations: TabsLater.Renderer;
   className?: string;
+  itemName?: string;
 }
 
 const LinksPage = ({
@@ -31,6 +32,7 @@ const LinksPage = ({
   renderBulkOperations,
   renderItemOperations,
   className,
+  itemName = 'link',
 }: LinksPageProps) => {
   const linksCount = links.length;
 
@@ -112,6 +114,7 @@ const LinksPage = ({
           <SelectedItemsHints
             selectedCount={checkedIds.length}
             totalCount={linksCount}
+            itemName={itemName}
           />
         </span>
       </Footer>

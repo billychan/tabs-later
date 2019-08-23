@@ -35,6 +35,7 @@ const TabsPage = ({ tabs, fetchAllTabs, closeTabs }: TabsPageProps) => {
   return (
     <LinksPage
       links={tabs}
+      itemName="tab"
       className="TabsPage"
       renderBulkOperations={({ selectedLinks }) => {
         return (
